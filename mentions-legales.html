@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mentions légales — Codex</title>
+<meta name="description" content="Mentions légales, données personnelles, sources et base légale du domaine public pour Codex.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a1a1a;--ink-soft:#4a4a4a;--ink-mute:#8a8a8a;
+  --bg:#fafaf8;--surface:#fff;--warm:#f5f3ef;
+  --border:#e8e5e0;--borderc:#d0cbc4;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --accent:#7a6a58;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+
+/* TOPBAR */
+#topbar{position:fixed;top:0;left:0;right:0;height:48px;background:rgba(250,250,248,.94);backdrop-filter:blur(12px);border-bottom:.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;z-index:100}
+.tb-brand{font-family:var(--serif);font-size:1.1rem;font-weight:600;color:var(--ink);text-decoration:none}
+.tb-brand span{font-weight:400;font-style:italic;color:var(--ink-mute)}
+.tb-back{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;display:flex;align-items:center;gap:.4rem;transition:color .2s}
+.tb-back:hover{color:var(--ink)}
+
+/* CONTENU */
+.wrap{max-width:720px;margin:0 auto;padding:96px 2rem 6rem}
+.page-eyebrow{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:1rem}
+.page-title{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:400;line-height:1.2;letter-spacing:-.02em;margin-bottom:.5rem}
+.page-sub{font-size:.88rem;color:var(--ink-mute);margin-bottom:3rem;padding-bottom:2rem;border-bottom:.5px solid var(--border)}
+.last-update{font-size:.75rem;color:var(--ink-mute);font-style:italic}
+
+/* SECTIONS */
+.section{margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:.5px solid var(--border)}
+.section:last-child{border-bottom:none}
+.section-label{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:.75rem;display:flex;align-items:center;gap:.6rem}
+.section-label::after{content:'';flex:1;height:.5px;background:var(--border)}
+.section-title{font-family:var(--serif);font-size:1.2rem;font-weight:500;color:var(--ink);margin-bottom:.9rem}
+.section p{font-size:.92rem;color:var(--ink-soft);margin-bottom:.75rem;line-height:1.75}
+.section p:last-child{margin-bottom:0}
+strong{color:var(--ink);font-weight:500}
+a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--borderc);text-underline-offset:3px;transition:text-decoration-color .2s}
+a:hover{text-decoration-color:var(--ink)}
+code{font-family:monospace;font-size:.85em;background:var(--warm);padding:1px 5px;border-radius:3px;color:var(--ink-soft)}
+
+/* BLOC INFO */
+.info-bloc{background:var(--warm);border:.5px solid var(--border);border-radius:8px;padding:1.25rem 1.5rem;margin:1rem 0}
+.info-bloc p{font-size:.88rem;color:var(--ink-soft);margin-bottom:.5rem}
+.info-bloc p:last-child{margin-bottom:0}
+.info-bloc strong{color:var(--ink)}
+
+/* ALERTE */
+.alerte{background:#fff8f0;border:.5px solid #e8d5b0;border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:.85rem;color:#7a5a30}
+
+/* TABLE SOURCES */
+.sources-table{width:100%;border-collapse:collapse;font-size:.82rem;margin:.75rem 0}
+.sources-table th{text-align:left;font-weight:500;color:var(--ink-soft);padding:.5rem .75rem;border-bottom:.5px solid var(--borderc);font-size:.75rem;letter-spacing:.04em;text-transform:uppercase}
+.sources-table td{padding:.5rem .75rem;border-bottom:.5px solid var(--border);color:var(--ink-soft);vertical-align:top}
+.sources-table tr:last-child td{border-bottom:none}
+.sources-table a{font-size:.82rem}
+
+/* FOOTER */
+.page-footer{border-top:.5px solid var(--border);padding:1.5rem 2rem;max-width:720px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem}
+.pfc{font-size:.73rem;color:var(--ink-mute)}
+
+@media(max-width:600px){.wrap{padding:80px 1.25rem 4rem}.sources-table{font-size:.75rem}}
+</style>
+</head>
+<body>
+
+<header id="topbar">
+  <a href="index.html" class="tb-brand">Code<span>x</span></a>
+  <a href="index.html" class="tb-back">← Retour au catalogue</a>
+</header>
+
+<main class="wrap">
+
+  <p class="page-eyebrow">Informations légales</p>
+  <h1 class="page-title">Mentions légales</h1>
+  <p class="page-sub">
+    Conformément à la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique (LCEN).
+    <br><span class="last-update">Dernière mise à jour : juin 2025</span>
+  </p>
+
+  <!-- 1. ÉDITEUR -->
+  <section class="section">
+    <p class="section-label">01</p>
+    <h2 class="section-title">Éditeur du site</h2>
+    <div class="info-bloc">
+      <p><strong>Nom :</strong> Shams Guettaf</p>
+      <p><strong>Marque éditoriale :</strong> Anthropotech · Lab</p>
+      <p><strong>Contact :</strong> <a href="mailto:shamsetdean@gmail.com">shamsetdean@gmail.com</a></p>
+      <p><strong>GitHub :</strong> <a href="https://github.com/shamsetdean" target="_blank" rel="noopener">github.com/shamsetdean</a></p>
+      <p><strong>LinkedIn :</strong> <a href="https://linkedin.com/in/shamsguettaf/" target="_blank" rel="noopener">linkedin.com/in/shamsguettaf</a></p>
+    </div>
+    <p>Codex est un projet personnel à vocation culturelle et non commerciale, exploité dans le cadre de l'écosystème Anthropotech · Lab. Ce site ne génère aucun revenu publicitaire ni abonnement.</p>
+  </section>
+
+  <!-- 2. HÉBERGEMENT -->
+  <section class="section">
+    <p class="section-label">02</p>
+    <h2 class="section-title">Hébergement</h2>
+    <div class="info-bloc">
+      <p><strong>Hébergeur :</strong> GitHub, Inc.</p>
+      <p><strong>Service :</strong> GitHub Pages (pages.github.com)</p>
+      <p><strong>Adresse :</strong> 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis</p>
+      <p><strong>Site :</strong> <a href="https://pages.github.com" target="_blank" rel="noopener">pages.github.com</a></p>
+    </div>
+    <p>Les fichiers statiques du site (HTML, CSS, JavaScript) sont hébergés sur GitHub Pages, un service de GitHub, Inc. Ce service est soumis aux <a href="https://docs.github.com/fr/site-policy/github-terms/github-terms-of-service" target="_blank" rel="noopener">conditions d'utilisation de GitHub</a>. Le transfert de données vers les États-Unis est couvert par les clauses contractuelles types de la Commission européenne.</p>
+  </section>
+
+  <!-- 3. DOMAINE PUBLIC ET BASE LÉGALE -->
+  <section class="section">
+    <p class="section-label">03</p>
+    <h2 class="section-title">Domaine public — Base légale</h2>
+    <p>Toutes les œuvres présentées sur Codex sont dans le <strong>domaine public</strong> conformément à l'article <strong>L123-1 du Code de la propriété intellectuelle (CPI)</strong> français, qui prévoit l'extinction des droits patrimoniaux <strong>70 ans après le décès de l'auteur</strong> (post mortem auctoris, ou p.m.a.).</p>
+    <p>Pour les œuvres en collaboration, la protection expire 70 ans après le décès du dernier auteur survivant. Pour les œuvres anonymes ou pseudonymes, le délai court à compter de la publication.</p>
+    <div class="info-bloc">
+      <p><strong>Texte de référence :</strong> Art. L123-1 CPI — <em>"L'auteur jouit, sa vie durant, du droit exclusif d'exploiter son œuvre sous quelque forme que ce soit et d'en tirer un profit pécuniaire. Au décès de l'auteur, ce droit persiste au bénéfice de ses ayants droit pendant l'année civile en cours et les soixante-dix années qui suivent."</em></p>
+    </div>
+    <div class="alerte">
+      ⚠ <strong>Attention aux traductions et éditions récentes :</strong> une traduction récente d'une œuvre ancienne peut être protégée, même si l'œuvre originale est dans le domaine public. Codex utilise exclusivement des traductions elles-mêmes tombées dans le domaine public (ex. : traductions de François-Victor Hugo, Louis Viardot, Leconte de Lisle, Lamennais).
+    </div>
+    <p><strong>Domaine public aux États-Unis :</strong> Le Projet Gutenberg applique la législation américaine (œuvres publiées avant 1928). Toutes les œuvres référencées sur Codex sont libres de droits en France <em>et</em> aux États-Unis.</p>
+  </section>
+
+  <!-- 4. TEXTES — MODE DE CHARGEMENT -->
+  <section class="section">
+    <p class="section-label">04</p>
+    <h2 class="section-title">Accès aux textes — Modèle technique</h2>
+    <p><strong>Codex n'héberge aucun fichier de texte.</strong> Les textes affichés dans le lecteur intégré sont chargés en temps réel depuis le Projet Gutenberg (<a href="https://www.gutenberg.org" target="_blank" rel="noopener">gutenberg.org</a>) via un proxy CORS (<a href="https://corsproxy.io" target="_blank" rel="noopener">corsproxy.io</a>). Ce modèle est légalement propre : Codex agit comme un agrégateur de liens, non comme un hébergeur.</p>
+    <p>En cas d'indisponibilité du proxy ou de Gutenberg, l'utilisateur est redirigé directement vers la page source sur gutenberg.org. Les liens de téléchargement (EPUB, TXT) pointent également directement vers les serveurs de Gutenberg.</p>
+    <div class="info-bloc">
+      <p><strong>Source primaire :</strong> <a href="https://www.gutenberg.org" target="_blank" rel="noopener">Project Gutenberg</a> — organisation à but non lucratif fondée en 1971, plus de 70 000 livres libres de droits.</p>
+    </div>
+  </section>
+
+  <!-- 5. SOURCES DES TEXTES -->
+  <section class="section">
+    <p class="section-label">05</p>
+    <h2 class="section-title">Sources référencées</h2>
+    <p>Codex référence les sources suivantes, toutes proposant des textes en domaine public. Les liens de téléchargement pointent directement vers ces sources — Codex ne s'interpose pas dans la chaîne de distribution.</p>
+    <table class="sources-table">
+      <thead>
+        <tr>
+          <th>Source</th>
+          <th>Description</th>
+          <th>Lien</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Projet Gutenberg</td><td>Source principale — 70 000+ textes, organisation non lucrative américaine</td><td><a href="https://www.gutenberg.org" target="_blank" rel="noopener">gutenberg.org</a></td></tr>
+        <tr><td>Gallica — BnF</td><td>Bibliothèque numérique de la Bibliothèque nationale de France</td><td><a href="https://gallica.bnf.fr/ebooks" target="_blank" rel="noopener">gallica.bnf.fr</a></td></tr>
+        <tr><td>Wikisource (fr)</td><td>Bibliothèque libre collaborative de la Fondation Wikimédia</td><td><a href="https://fr.wikisource.org" target="_blank" rel="noopener">fr.wikisource.org</a></td></tr>
+        <tr><td>Noslivres.net</td><td>Bibliothèque numérique française, textes domaine public</td><td><a href="https://noslivres.net" target="_blank" rel="noopener">noslivres.net</a></td></tr>
+        <tr><td>Ebooks libres et gratuits</td><td>Association ELG — textes relus et formatés</td><td><a href="https://www.ebooksgratuits.com" target="_blank" rel="noopener">ebooksgratuits.com</a></td></tr>
+        <tr><td>Bibliothèque électronique du Québec</td><td>BEQ — littérature québécoise et française</td><td><a href="http://beq.ebooksgratuits.com" target="_blank" rel="noopener">beq.ebooksgratuits.com</a></td></tr>
+        <tr><td>Ebooks-bnr.com</td><td>Bibliothèque numérique romande</td><td><a href="https://www.ebooks-bnr.com" target="_blank" rel="noopener">ebooks-bnr.com</a></td></tr>
+        <tr><td>Bibliothèque russe et slave</td><td>Textes russes et slaves en traduction française</td><td><a href="http://bibliotheque-russe-et-slave.com" target="_blank" rel="noopener">brs</a></td></tr>
+        <tr><td>ÉFÉLÉ</td><td>Textes francophones libres de droits</td><td><a href="http://www.efele.net/ebooks/" target="_blank" rel="noopener">efele.net</a></td></tr>
+        <tr><td>Audiocite.net</td><td>Livres audio domaine public lus par des bénévoles</td><td><a href="https://www.audiocite.net" target="_blank" rel="noopener">audiocite.net</a></td></tr>
+        <tr><td>Littératureaudio.com</td><td>Livres audio gratuits et légaux</td><td><a href="https://www.litteratureaudio.com" target="_blank" rel="noopener">litteratureaudio.com</a></td></tr>
+        <tr><td>Académie de Toulouse</td><td>Réservoir pédagogique de livres numériques libres</td><td><a href="https://pedagogie.ac-toulouse.fr/documentation/reservoir-de-livres-numeriques-libres" target="_blank" rel="noopener">ac-toulouse.fr</a></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 6. PHOTOS AUTEURS -->
+  <section class="section">
+    <p class="section-label">06</p>
+    <h2 class="section-title">Photos des auteurs</h2>
+    <p>Codex affiche des photos d'auteurs <strong>uniquement lorsque leur licence est confirmée comme relevant du domaine public ou étant compatible avec une utilisation commerciale libre</strong>.</p>
+    <p>Les photos sont chargées en temps réel depuis <a href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia Commons</a> via l'API REST de Wikipédia. Avant affichage, le code vérifie la licence de chaque image via l'<a href="https://www.mediawiki.org/wiki/API:Main_page" target="_blank" rel="noopener">API MediaWiki</a> (champ <code>extmetadata.LicenseShortName</code>). Une image n'est affichée que si sa licence contient explicitement les termes <code>PD</code>, <code>Public Domain</code> ou <code>CC0</code>.</p>
+    <div class="alerte">
+      Codex n'héberge aucune image. Toutes les photos sont chargées directement depuis les serveurs de Wikimedia Commons. Si une image affichée vous semble incorrectement licenciée, contactez-nous à <a href="mailto:shamsetdean@gmail.com">shamsetdean@gmail.com</a>.
+    </div>
+    <p>Les portraits de personnalités décédées avant 1900 sont dans le domaine public en vertu de l'ancienneté des clichés photographiques. Certaines images proviennent de peintures ou gravures elles-mêmes dans le domaine public.</p>
+  </section>
+
+  <!-- 7. DONNÉES PERSONNELLES — RGPD -->
+  <section class="section">
+    <p class="section-label">07</p>
+    <h2 class="section-title">Données personnelles — RGPD</h2>
+    <p><strong>Codex ne collecte aucune donnée personnelle.</strong></p>
+    <p>Ce site ne dispose d'aucun formulaire d'inscription, d'aucun outil de mesure d'audience, d'aucun cookie de traçage et d'aucun système de commentaire. Aucune donnée n'est transmise à des tiers à des fins commerciales.</p>
+    <div class="info-bloc">
+      <p>✓ Aucun cookie de traçage</p>
+      <p>✓ Aucun formulaire, aucune inscription</p>
+      <p>✓ Aucun outil d'analyse (Google Analytics, Matomo, etc.)</p>
+      <p>✓ Aucune publicité, aucun réseau publicitaire</p>
+      <p>✓ Aucune donnée vendue ou transmise à des tiers</p>
+    </div>
+    <p>GitHub Pages peut collecter des métadonnées de connexion (adresse IP, user-agent) à des fins de sécurité et de débogage, conformément à sa <a href="https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">politique de confidentialité</a>. corsproxy.io peut également enregistrer des requêtes de manière temporaire.</p>
+    <p>Conformément au <strong>Règlement général sur la protection des données (RGPD)</strong> n° 2016/679 du 27 avril 2016, vous disposez d'un droit d'accès, de rectification et de suppression des données vous concernant. Pour toute demande : <a href="mailto:shamsetdean@gmail.com">shamsetdean@gmail.com</a>.</p>
+  </section>
+
+  <!-- 8. PROPRIÉTÉ INTELLECTUELLE DU SITE -->
+  <section class="section">
+    <p class="section-label">08</p>
+    <h2 class="section-title">Propriété intellectuelle du site</h2>
+    <p>Le <strong>code source, le design, la structure et les métadonnées éditoriales</strong> de Codex (descriptions des œuvres, organisation du catalogue, interface) sont la propriété de Shams Guettaf / Anthropotech · Lab, sauf mention contraire.</p>
+    <p>Les textes des œuvres littéraires référencés sont dans le domaine public et ne font l'objet d'aucune revendication de propriété de la part de Codex.</p>
+    <p>Le code source du site est disponible sur <a href="https://github.com/shamsetdean" target="_blank" rel="noopener">GitHub</a>.</p>
+  </section>
+
+  <!-- 9. LIENS EXTERNES -->
+  <section class="section">
+    <p class="section-label">09</p>
+    <h2 class="section-title">Liens externes — Limitation de responsabilité</h2>
+    <p>Codex contient des liens vers des sites tiers (Gutenberg, Gallica, Wikisource, etc.). Ces liens sont fournis à titre informatif. Codex n'exerce aucun contrôle sur le contenu de ces sites et décline toute responsabilité quant à leur disponibilité, exactitude ou contenu.</p>
+    <p>Les textes de ces sources sont soumis à leurs propres conditions d'utilisation. Certaines sources imposent des restrictions d'usage commercial dans leurs CGU, bien que les textes soient dans le domaine public — Codex ne garantit pas la conformité d'un usage commercial des textes téléchargés depuis ces sources.</p>
+  </section>
+
+  <!-- 10. CONTACT -->
+  <section class="section">
+    <p class="section-label">10</p>
+    <h2 class="section-title">Contact</h2>
+    <div class="info-bloc">
+      <p><strong>Email :</strong> <a href="mailto:shamsetdean@gmail.com">shamsetdean@gmail.com</a></p>
+      <p><strong>GitHub :</strong> <a href="https://github.com/shamsetdean" target="_blank" rel="noopener">github.com/shamsetdean</a></p>
+      <p><strong>LinkedIn :</strong> <a href="https://linkedin.com/in/shamsguettaf/" target="_blank" rel="noopener">linkedin.com/in/shamsguettaf</a></p>
+    </div>
+    <p>Pour tout signalement d'erreur (titre mal catégorisé, lien brisé, photo dont la licence pose question), merci d'utiliser le formulaire GitHub Issues ou de nous contacter par email.</p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="page-footer">
+    <p class="pfc">© 2025 Codex — Anthropotech · Lab</p>
+    <p class="pfc"><a href="index.html" style="color:inherit">← Retour au catalogue</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
