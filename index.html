@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Codex — Bibliothèque numérique du domaine public</title>
+<meta name="description" content="Codex — Bibliothèque numérique gratuite de livres du domaine public en français. Lisez en ligne ou téléchargez librement.">
+<meta property="og:title" content="Codex — Bibliothèque du domaine public">
+<meta property="og:description" content="Des milliers de classiques français à lire en ligne ou télécharger gratuitement.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --ink-soft: #4a4a4a;
+    --ink-mute: #8a8a8a;
+    --bg: #fafaf8;
+    --surface: #ffffff;
+    --surface-warm: #f5f3ef;
+    --border: #e8e5e0;
+    --border-strong: #d0cbc4;
+    --accent: #1a1a1a;
+    --accent-light: #f0ede8;
+    --reading-bg: #fdf9f3;
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'DM Sans', system-ui, sans-serif;
+    --radius: 4px;
+    --radius-lg: 8px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+    --shadow-lg: 0 12px 40px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.06);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── TOPBAR ── */
+  #topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 48px;
+    background: rgba(250,250,248,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    z-index: 100;
+  }
+
+  .topbar-brand {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .topbar-brand span {
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ink-mute);
+  }
+
+  .topbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .topbar-nav a {
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .topbar-nav a:hover { color: var(--ink); }
+
+  /* ── HERO ── */
+  #hero {
+    padding: 120px 2rem 80px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .hero-eyebrow::before,
+  .hero-eyebrow::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 0.5px;
+    background: var(--border-strong);
+  }
+
+  h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 1.25rem;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+  }
+
+  /* ── SEARCH ── */
+  .search-wrap {
+    max-width: 560px;
+    margin: 0 auto 1rem;
+    position: relative;
+  }
+
+  .search-wrap input {
+    width: 100%;
+    height: 52px;
+    padding: 0 52px 0 20px;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: 30px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-shadow: var(--shadow);
+  }
+
+  .search-wrap input::placeholder { color: var(--ink-mute); }
+
+  .search-wrap input:focus {
+    border-color: var(--ink);
+    box-shadow: 0 0 0 3px rgba(26,26,26,0.08);
+  }
+
+  .search-wrap button {
+    position: absolute;
+    right: 6px;
+    top: 6px;
+    width: 40px;
+    height: 40px;
+    background: var(--ink);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+  }
+
+  .search-wrap button:hover { opacity: 0.8; }
+
+  .search-hint {
+    font-size: 0.78rem;
+    color: var(--ink-mute);
+    text-align: center;
+  }
+
+  /* ── FILTERS ── */
+  #filters {
+    padding: 0 2rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .filter-btn {
+    padding: 6px 16px;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+    color: var(--ink-soft);
+    background: var(--surface);
+    border: 0.5px solid var(--border-strong);
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .filter-btn:hover { background: var(--accent-light); }
+
+  .filter-btn.active {
+    background: var(--ink);
+    color: #fff;
+    border-color: var(--ink);
+  }
+
+  /* ── CATALOGUE ── */
+  #catalogue {
+    padding: 0 2rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .book-card {
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .book-card:hover { transform: translateY(-3px); }
+
+  .book-cover {
+    width: 100%;
+    aspect-ratio: 2/3;
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: flex-end;
+    padding: 1.25rem;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+
+  .book-card:hover .book-cover {
+    box-shadow: var(--shadow-md);
+  }
+
+  .book-cover-inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.25rem;
+  }
+
+  .book-cover-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+  }
+
+  .cover-pattern-1 { background: repeating-linear-gradient(45deg, #1a1a1a 0, #1a1a1a 1px, transparent 0, transparent 50%) 0 0 / 12px 12px; }
+  .cover-pattern-2 { background: radial-gradient(circle at 30% 70%, #1a1a1a 1px, transparent 1px) 0 0 / 14px 14px; }
+  .cover-pattern-3 { background: repeating-linear-gradient(0deg, #1a1a1a 0, #1a1a1a 1px, transparent 0, transparent 16px); }
+  .cover-pattern-4 { background: repeating-linear-gradient(90deg, #1a1a1a 0, #1a1a1a 1px, transparent 0, transparent 16px); }
+  .cover-pattern-5 { background: repeating-linear-gradient(-45deg, #1a1a1a 0, #1a1a1a 1px, transparent 0, transparent 50%) 0 0 / 12px 12px; }
+  .cover-pattern-6 { background: radial-gradient(circle, #1a1a1a 1px, transparent 1px) 0 0 / 18px 18px; }
+
+  .cover-label {
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-genre {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 4px;
+  }
+
+  .cover-title {
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--ink);
+  }
+
+  .cover-author {
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    margin-top: 3px;
+    font-style: italic;
+  }
+
+  /* ── MODAL LIVRE ── */
+  #modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10,10,10,0.5);
+    z-index: 200;
+    backdrop-filter: blur(4px);
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  #modal-overlay.open { display: flex; }
+
+  #modal {
+    background: var(--surface);
+    border-radius: 12px;
+    max-width: 680px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+  }
+
+  .modal-header {
+    display: flex;
+    gap: 1.5rem;
+    padding: 2rem;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .modal-cover {
+    width: 100px;
+    flex-shrink: 0;
+    aspect-ratio: 2/3;
+    border-radius: 6px;
+    border: 0.5px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 0.75rem;
+  }
+
+  .modal-cover-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.07;
+  }
+
+  .modal-cover-title {
+    position: relative;
+    font-family: var(--font-serif);
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+
+  .modal-info { flex: 1; }
+
+  .modal-genre {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 0.5rem;
+  }
+
+  .modal-title {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  .modal-author {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+
+  .modal-meta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .meta-tag {
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    background: var(--surface-warm);
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 0.5px solid var(--border);
+  }
+
+  .modal-body {
+    padding: 1.5rem 2rem;
+  }
+
+  .modal-desc {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 500;
+    border-radius: 30px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.15s;
+    border: 1px solid transparent;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: #fff;
+  }
+
+  .btn-primary:hover { opacity: 0.85; }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--border-strong);
+  }
+
+  .btn-outline:hover { background: var(--accent-light); }
+
+  .modal-notice {
+    margin-top: 1.25rem;
+    padding: 0.75rem 1rem;
+    background: var(--surface-warm);
+    border-radius: var(--radius-lg);
+    border: 0.5px solid var(--border);
+    font-size: 0.78rem;
+    color: var(--ink-mute);
+    line-height: 1.5;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 32px;
+    height: 32px;
+    background: var(--surface-warm);
+    border: 0.5px solid var(--border);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: var(--ink-soft);
+    transition: background 0.15s;
+  }
+
+  .modal-close:hover { background: var(--border); }
+
+  /* ── LECTURE ── */
+  #reader-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--reading-bg);
+    z-index: 300;
+    flex-direction: column;
+  }
+
+  #reader-overlay.open { display: flex; }
+
+  #reader-topbar {
+    height: 52px;
+    background: rgba(253,249,243,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 0.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    flex-shrink: 0;
+  }
+
+  .reader-book-title {
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  .reader-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .reader-btn {
+    padding: 6px 14px;
+    font-size: 0.75rem;
+    font-family: var(--font-sans);
+    color: var(--ink-soft);
+    background: transparent;
+    border: 0.5px solid var(--border-strong);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .reader-btn:hover { background: var(--accent-light); color: var(--ink); }
+
+  .reader-btn.close-reader {
+    background: var(--ink);
+    color: #fff;
+    border-color: var(--ink);
+  }
+
+  .reader-btn.close-reader:hover { opacity: 0.8; }
+
+  #reader-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 4rem 2rem;
+  }
+
+  #reader-text {
+    max-width: 660px;
+    margin: 0 auto;
+    font-family: var(--font-serif);
+    font-size: 1.12rem;
+    line-height: 1.85;
+    color: var(--ink);
+  }
+
+  #reader-text h2 {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  #reader-text p {
+    margin-bottom: 1.2em;
+    text-align: justify;
+    text-indent: 1.5em;
+  }
+
+  #reader-text p:first-of-type { text-indent: 0; }
+
+  .reader-loading {
+    text-align: center;
+    color: var(--ink-mute);
+    font-style: italic;
+    padding: 4rem;
+  }
+
+  /* ── FOOTER ── */
+  #footer {
+    border-top: 0.5px solid var(--border);
+    padding: 3rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-brand {
+    flex: 1;
+    min-width: 220px;
+  }
+
+  .footer-logo {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-desc {
+    font-size: 0.82rem;
+    color: var(--ink-mute);
+    line-height: 1.6;
+    max-width: 240px;
+  }
+
+  .footer-section { min-width: 140px; }
+
+  .footer-heading {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 0.75rem;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .footer-links a {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .footer-links a:hover { color: var(--ink); }
+
+  .footer-bottom {
+    border-top: 0.5px solid var(--border);
+    padding: 1.25rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .footer-copy {
+    font-size: 0.75rem;
+    color: var(--ink-mute);
+  }
+
+  .footer-legal {
+    font-size: 0.72rem;
+    color: var(--ink-mute);
+    text-align: right;
+    max-width: 420px;
+    line-height: 1.5;
+  }
+
+  /* ── LOADER ── */
+  #loader {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 500;
+    transition: opacity 0.4s;
+  }
+
+  #loader.hidden { opacity: 0; pointer-events: none; }
+
+  .loader-text {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+
+  .loader-text span {
+    opacity: 0;
+    animation: fadeChar 0.5s forwards;
+  }
+
+  @keyframes fadeChar { to { opacity: 1; } }
+
+  /* ── NO RESULTS ── */
+  .no-results {
+    grid-column: 1/-1;
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--ink-mute);
+    font-style: italic;
+  }
+
+  @media (max-width: 640px) {
+    .topbar-nav { display: none; }
+    #hero { padding: 80px 1.25rem 60px; }
+    #filters { padding: 0 1.25rem 1.5rem; }
+    #catalogue { padding: 0 1.25rem 3rem; }
+    .books-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem; }
+    .modal-header { flex-direction: column; }
+    .modal-cover { width: 80px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="loader">
+  <div class="loader-text" id="loader-text"></div>
+</div>
+
+<!-- TOPBAR -->
+<header id="topbar">
+  <a href="#" class="topbar-brand">Code<span>x</span></a>
+  <nav>
+    <ul class="topbar-nav">
+      <li><a href="#catalogue">Catalogue</a></li>
+      <li><a href="#a-propos">À propos</a></li>
+      <li><a href="https://www.gutenberg.org/" target="_blank" rel="noopener">Gutenberg</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section id="hero">
+  <p class="hero-eyebrow">Bibliothèque numérique du domaine public</p>
+  <h1>Les grandes œuvres<br><em>enfin accessibles à tous</em></h1>
+  <p class="hero-sub">Des milliers de classiques français libres de droits — à lire en ligne ou à télécharger gratuitement, pour toujours.</p>
+  <div class="search-wrap">
+    <input type="text" id="search-input" placeholder="Rechercher un titre, un auteur…" autocomplete="off">
+    <button onclick="doSearch()" aria-label="Rechercher">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </button>
+  </div>
+  <p class="search-hint">Molière, Balzac, Zola, Hugo, Maupassant…</p>
+</section>
+
+<!-- FILTRES -->
+<div id="filters">
+  <button class="filter-btn active" onclick="filterBooks('all', this)">Tous</button>
+  <button class="filter-btn" onclick="filterBooks('roman', this)">Romans</button>
+  <button class="filter-btn" onclick="filterBooks('poesie', this)">Poésie</button>
+  <button class="filter-btn" onclick="filterBooks('theatre', this)">Théâtre</button>
+  <button class="filter-btn" onclick="filterBooks('conte', this)">Contes</button>
+  <button class="filter-btn" onclick="filterBooks('philosophie', this)">Philosophie</button>
+  <button class="filter-btn" onclick="filterBooks('nouvelles', this)">Nouvelles</button>
+</div>
+
+<!-- CATALOGUE -->
+<main id="catalogue">
+  <p class="section-label" id="catalogue-label">Catalogue — <span id="count">0</span> œuvres</p>
+  <div class="books-grid" id="books-grid"></div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div id="footer">
+    <div class="footer-brand">
+      <div class="footer-logo">Codex</div>
+      <p class="footer-desc">Bibliothèque numérique dédiée aux œuvres du domaine public en langue française, hébergée sur GitHub Pages.</p>
+    </div>
+    <div class="footer-section">
+      <p class="footer-heading">Explorer</p>
+      <ul class="footer-links">
+        <li><a href="#catalogue">Catalogue complet</a></li>
+        <li><a href="#" onclick="filterBooks('roman', document.querySelectorAll('.filter-btn')[1])">Romans</a></li>
+        <li><a href="#" onclick="filterBooks('poesie', document.querySelectorAll('.filter-btn')[2])">Poésie</a></li>
+        <li><a href="#" onclick="filterBooks('theatre', document.querySelectorAll('.filter-btn')[3])">Théâtre</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <p class="footer-heading">Informations</p>
+      <ul class="footer-links">
+        <li><a href="#a-propos">À propos</a></li>
+        <li><a href="#mentions">Mentions légales</a></li>
+        <li><a href="https://www.gutenberg.org/" target="_blank" rel="noopener">Projet Gutenberg</a></li>
+        <li><a href="https://www.legifrance.gouv.fr/" target="_blank" rel="noopener">Légifrance</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Codex — Domaine public</p>
+    <p class="footer-legal" id="a-propos">Tous les textes proposés sont dans le domaine public conformément au droit français (art. L123-1 CPI : 70 ans post mortem auctoris). Source&nbsp;: Projet Gutenberg. Aucune donnée personnelle collectée — conformité RGPD.</p>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div id="modal-overlay" role="dialog" aria-modal="true">
+  <div id="modal">
+    <button class="modal-close" onclick="closeModal()" aria-label="Fermer">✕</button>
+    <div class="modal-header">
+      <div class="modal-cover" id="modal-cover-el">
+        <div class="book-cover-bg modal-cover-bg" id="modal-cover-pattern"></div>
+        <div class="modal-cover-title" id="modal-cover-title"></div>
+      </div>
+      <div class="modal-info">
+        <p class="modal-genre" id="modal-genre"></p>
+        <h2 class="modal-title" id="modal-title"></h2>
+        <p class="modal-author" id="modal-author"></p>
+        <div class="modal-meta" id="modal-meta"></div>
+      </div>
+    </div>
+    <div class="modal-body">
+      <p class="modal-desc" id="modal-desc"></p>
+      <div class="modal-actions" id="modal-actions"></div>
+      <div class="modal-notice" id="mentions">
+        ℹ️ Cette œuvre est dans le domaine public en France. Elle est librement reproductible, diffusable et modifiable. Source&nbsp;: Projet Gutenberg (gutenberg.org). Aucune donnée personnelle n'est collectée lors du téléchargement. Conformité RGPD assurée.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- READER -->
+<div id="reader-overlay" role="dialog" aria-modal="true" aria-label="Lecteur">
+  <div id="reader-topbar">
+    <div class="reader-book-title" id="reader-book-title"></div>
+    <div class="reader-controls">
+      <button class="reader-btn" onclick="changeFontSize(-1)">A−</button>
+      <button class="reader-btn" onclick="changeFontSize(1)">A+</button>
+      <a id="reader-dl-link" class="reader-btn" href="#" target="_blank" rel="noopener">Télécharger</a>
+      <button class="reader-btn close-reader" onclick="closeReader()">Fermer</button>
+    </div>
+  </div>
+  <div id="reader-content">
+    <div id="reader-text">
+      <div class="reader-loading" id="reader-loading">Chargement en cours…</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const BOOKS = [
+  { id:1, title:"Les Misérables", author:"Victor Hugo", year:1862, genre:"roman", gutenberg_id:17489, desc:"L'épopée humaine de Jean Valjean, ancien forçat en quête de rédemption dans la France du XIXe siècle. Un monument de la littérature universelle.", pages:"~1900p", lang:"Français", pattern:"cover-pattern-1" },
+  { id:2, title:"Madame Bovary", author:"Gustave Flaubert", year:1857, genre:"roman", gutenberg_id:2413, desc:"Emma Bovary rêve d'une vie romantique que la réalité provinciale ne peut lui offrir. Le chef-d'œuvre du réalisme français.", pages:"~400p", lang:"Français", pattern:"cover-pattern-2" },
+  { id:3, title:"Le Père Goriot", author:"Honoré de Balzac", year:1835, genre:"roman", gutenberg_id:1237, desc:"Dans une pension parisienne, un père sacrifie tout pour ses filles ingrates. Balzac signe l'un des tableaux les plus sombres de l'ambition humaine.", pages:"~320p", lang:"Français", pattern:"cover-pattern-3" },
+  { id:4, title:"Germinal", author:"Émile Zola", year:1885, genre:"roman", gutenberg_id:5711, desc:"Dans les mines du Nord, Étienne Lantier mène les mineurs vers la révolte. Le roman social par excellence, entre naturalisme et épopée.", pages:"~580p", lang:"Français", pattern:"cover-pattern-4" },
+  { id:5, title:"Les Fleurs du Mal", author:"Charles Baudelaire", year:1857, genre:"poesie", gutenberg_id:6099, desc:"Spleen, idéal, amour et mort traversent ces poèmes fondateurs de la modernité lyrique. L'œuvre la plus influente de la poésie française.", pages:"~160p", lang:"Français", pattern:"cover-pattern-5" },
+  { id:6, title:"Dom Juan", author:"Molière", year:1665, genre:"theatre", gutenberg_id:6984, desc:"Le libertin par excellence affronte le Commandeur et défie les lois divines et humaines. La grande comédie morale de Molière.", pages:"~90p", lang:"Français", pattern:"cover-pattern-6" },
+  { id:7, title:"Contes de ma mère l'Oye", author:"Charles Perrault", year:1697, genre:"conte", gutenberg_id:13951, desc:"Cendrillon, le Petit Chaperon rouge, La Belle au bois dormant… Les contes fondateurs qui ont bercé l'enfance de toute une civilisation.", pages:"~80p", lang:"Français", pattern:"cover-pattern-1" },
+  { id:8, title:"Discours de la méthode", author:"René Descartes", year:1637, genre:"philosophie", gutenberg_id:59, desc:"« Je pense, donc je suis. » Le texte fondateur du rationalisme moderne, dans lequel Descartes pose les règles d'une pensée rigoureuse.", pages:"~90p", lang:"Français", pattern:"cover-pattern-2" },
+  { id:9, title:"Boule de Suif", author:"Guy de Maupassant", year:1880, genre:"nouvelles", gutenberg_id:3090, desc:"Lors d'un voyage en diligence pendant la guerre de 1870, une prostituée révèle l'hypocrisie de la bonne société normande.", pages:"~60p", lang:"Français", pattern:"cover-pattern-3" },
+  { id:10, title:"Notre-Dame de Paris", author:"Victor Hugo", year:1831, genre:"roman", gutenberg_id:2610, desc:"Quasimodo, Esmeralda et Frollo dans la cathédrale médiévale. Un roman foisonnant sur l'architecture, l'amour et la fatalité.", pages:"~660p", lang:"Français", pattern:"cover-pattern-4" },
+  { id:11, title:"L'Assommoir", author:"Émile Zola", year:1877, genre:"roman", gutenberg_id:6808, desc:"La déchéance de Gervaise Macquart dans les faubourgs ouvriers de Paris. Zola au sommet de son naturalisme implacable.", pages:"~500p", lang:"Français", pattern:"cover-pattern-5" },
+  { id:12, title:"Phèdre", author:"Jean Racine", year:1677, genre:"theatre", gutenberg_id:6603, desc:"Phèdre, consumée par un amour incestueux pour son beau-fils Hippolyte, précipite sa famille dans la tragédie. Le sommet de la tragédie classique française.", pages:"~80p", lang:"Français", pattern:"cover-pattern-6" },
+  { id:13, title:"Les Contemplations", author:"Victor Hugo", year:1856, genre:"poesie", gutenberg_id:8262, desc:"Méditation lyrique sur l'amour, la mort et l'infini. Hugo y pleure sa fille Léopoldine dans des vers d'une beauté déchirante.", pages:"~300p", lang:"Français", pattern:"cover-pattern-1" },
+  { id:14, title:"Candide", author:"Voltaire", year:1759, genre:"conte", gutenberg_id:4650, desc:"Candide traverse le monde absurde et cruel avec son optimisme naïf. Le conte philosophique le plus célèbre de la littérature française.", pages:"~110p", lang:"Français", pattern:"cover-pattern-2" },
+  { id:15, title:"Eugénie Grandet", author:"Honoré de Balzac", year:1833, genre:"roman", gutenberg_id:1414, desc:"Dans la province de Saumur, une jeune femme douce et généreuse est écrasée par la tyrannie paternelle et l'avarice. Balzac dans toute sa puissance.", pages:"~220p", lang:"Français", pattern:"cover-pattern-3" },
+  { id:16, title:"Une vie", author:"Guy de Maupassant", year:1883, genre:"roman", gutenberg_id:4765, desc:"La vie ordinaire et cruelle de Jeanne, jeune aristocrate normande dont tous les espoirs se brisent un à un. Le roman de l'illusion perdue.", pages:"~260p", lang:"Français", pattern:"cover-pattern-4" },
+];
+
+let currentFilter = 'all';
+let currentBook = null;
+let readerFontSize = 1.12;
+
+function renderBooks(list) {
+  const grid = document.getElementById('books-grid');
+  document.getElementById('count').textContent = list.length;
+  if (!list.length) {
+    grid.innerHTML = '<div class="no-results">Aucune œuvre trouvée.</div>';
+    return;
+  }
+  grid.innerHTML = list.map(b => `
+    <article class="book-card" onclick="openBook(${b.id})" tabindex="0" role="button" aria-label="${b.title} de ${b.author}">
+      <div class="book-cover">
+        <div class="book-cover-bg ${b.pattern}"></div>
+        <div class="cover-label">
+          <p class="cover-genre">${b.genre}</p>
+          <p class="cover-title">${b.title}</p>
+          <p class="cover-author">${b.author}</p>
+        </div>
+      </div>
+    </article>
+  `).join('');
+}
+
+function filterBooks(genre, btn) {
+  currentFilter = genre;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const q = document.getElementById('search-input').value.toLowerCase().trim();
+  applyFilters(q);
+  document.getElementById('catalogue').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+function doSearch() {
+  const q = document.getElementById('search-input').value.toLowerCase().trim();
+  applyFilters(q);
+}
+
+function applyFilters(q) {
+  let list = BOOKS;
+  if (currentFilter !== 'all') list = list.filter(b => b.genre === currentFilter);
+  if (q) list = list.filter(b => b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q));
+  renderBooks(list);
+}
+
+document.getElementById('search-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doSearch();
+});
+
+function openBook(id) {
+  currentBook = BOOKS.find(b => b.id === id);
+  if (!currentBook) return;
+  document.getElementById('modal-genre').textContent = currentBook.genre.charAt(0).toUpperCase() + currentBook.genre.slice(1);
+  document.getElementById('modal-title').textContent = currentBook.title;
+  document.getElementById('modal-author').textContent = currentBook.author;
+  document.getElementById('modal-cover-title').textContent = currentBook.title;
+  document.getElementById('modal-cover-pattern').className = 'book-cover-bg modal-cover-bg ' + currentBook.pattern;
+  document.getElementById('modal-meta').innerHTML = `
+    <span class="meta-tag">📅 ${currentBook.year}</span>
+    <span class="meta-tag">📄 ${currentBook.pages}</span>
+    <span class="meta-tag">🌐 ${currentBook.lang}</span>
+    <span class="meta-tag">✓ Domaine public</span>
+  `;
+  document.getElementById('modal-desc').textContent = currentBook.desc;
+  const baseUrl = `https://www.gutenberg.org/ebooks/${currentBook.gutenberg_id}`;
+  const txtUrl = `https://www.gutenberg.org/cache/epub/${currentBook.gutenberg_id}/pg${currentBook.gutenberg_id}.txt`;
+  const epubUrl = `https://www.gutenberg.org/ebooks/${currentBook.gutenberg_id}.epub3.noimages`;
+  document.getElementById('modal-actions').innerHTML = `
+    <button class="btn btn-primary" onclick="openReader(${currentBook.id})">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      Lire en ligne
+    </button>
+    <a class="btn btn-outline" href="${epubUrl}" target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      EPUB
+    </a>
+    <a class="btn btn-outline" href="${txtUrl}" target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      TXT
+    </a>
+    <a class="btn btn-outline" href="${baseUrl}" target="_blank" rel="noopener noreferrer">
+      Gutenberg ↗
+    </a>
+  `;
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('modal-overlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('modal-overlay')) closeModal();
+});
+
+async function openReader(id) {
+  closeModal();
+  const book = BOOKS.find(b => b.id === id);
+  if (!book) return;
+  const overlay = document.getElementById('reader-overlay');
+  const textEl = document.getElementById('reader-text');
+  document.getElementById('reader-book-title').textContent = `${book.title} — ${book.author}`;
+  const dlUrl = `https://www.gutenberg.org/ebooks/${book.gutenberg_id}.epub3.noimages`;
+  document.getElementById('reader-dl-link').href = dlUrl;
+  textEl.innerHTML = '<div class="reader-loading">Chargement du texte…</div>';
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  try {
+    const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(`https://www.gutenberg.org/cache/epub/${book.gutenberg_id}/pg${book.gutenberg_id}.txt`)}`;
+    const res = await fetch(proxyUrl);
+    if (!res.ok) throw new Error();
+    let text = await res.text();
+    const startMatch = text.match(/\*\*\* ?START OF (THE|THIS) PROJECT GUTENBERG/i);
+    const endMatch = text.match(/\*\*\* ?END OF (THE|THIS) PROJECT GUTENBERG/i);
+    if (startMatch) text = text.slice(text.indexOf(startMatch[0]) + startMatch[0].length);
+    if (endMatch) text = text.slice(0, text.indexOf(endMatch[0]));
+    text = text.trim();
+    const paragraphs = text.split(/\n\n+/).slice(0, 80).map(p => p.trim()).filter(p => p.length > 20);
+    textEl.innerHTML = `<h2>${book.title}</h2>` + paragraphs.map(p => `<p>${p.replace(/\n/g, ' ')}</p>`).join('');
+  } catch {
+    textEl.innerHTML = `
+      <h2>${book.title}</h2>
+      <p style="color:var(--ink-mute); font-style:italic;">Le texte intégral est disponible directement sur le Projet Gutenberg.</p>
+      <p style="margin-top:1.5rem;"><a href="https://www.gutenberg.org/ebooks/${book.gutenberg_id}" target="_blank" rel="noopener" style="color:var(--ink); text-decoration:underline;">Lire sur Gutenberg →</a></p>
+    `;
+  }
+}
+
+function closeReader() {
+  document.getElementById('reader-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function changeFontSize(delta) {
+  readerFontSize = Math.max(0.9, Math.min(1.5, readerFontSize + delta * 0.1));
+  document.getElementById('reader-text').style.fontSize = readerFontSize + 'rem';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeModal(); closeReader(); }
+});
+
+// Loader
+window.addEventListener('load', () => {
+  const letters = 'Codex'.split('');
+  const el = document.getElementById('loader-text');
+  el.innerHTML = letters.map((c, i) => `<span style="animation-delay:${i*80}ms">${c}</span>`).join('');
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+    setTimeout(() => document.getElementById('loader').remove(), 500);
+  }, 900);
+});
+
+renderBooks(BOOKS);
+</script>
+</body>
+</html>
