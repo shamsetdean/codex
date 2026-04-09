@@ -3,778 +3,679 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Codex — Bibliothèque du domaine public</title>
-<meta name="description" content="80+ classiques du domaine public à lire et télécharger gratuitement.">
+<title>Codex — Bibliothèque numérique du domaine public</title>
+<meta name="description" content="203 classiques français du domaine public à lire gratuitement en ligne.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --noir:#0a0a0c;--n2:#111115;--n3:#1a1a20;--n4:#252530;
-  --verre:rgba(255,255,255,.05);--vh:rgba(255,255,255,.09);
-  --or:#c8a96e;--orc:#e8c98e;--orp:rgba(200,169,110,.15);
-  --blanc:#f0ece4;--bs:#c8c0b4;--gris:#6a6460;
-  --sf:'Cormorant Garamond',Georgia,serif;
-  --ss:'Outfit',system-ui,sans-serif;
-  --rp:100px;--r:16px;--rs:10px;
-  --sh:0 8px 32px rgba(0,0,0,.6);
-  --shl:0 20px 60px rgba(0,0,0,.8);
-  --tr:.35s cubic-bezier(.4,0,.2,1);
+  --ink:#1a1a1a;--ink-soft:#4a4a4a;--ink-mute:#8a8a8a;
+  --bg:#fafaf8;--surface:#fff;--warm:#f5f3ef;
+  --border:#e8e5e0;--borderc:#d0cbc4;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --sh:0 1px 3px rgba(0,0,0,.06);
+  --shm:0 4px 12px rgba(0,0,0,.08);
+  --shl:0 12px 40px rgba(0,0,0,.10);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:var(--ss);background:var(--noir);color:var(--blanc);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-a{text-decoration:none;color:inherit}
-button{cursor:pointer;border:none;background:none;font-family:var(--ss)}
-::selection{background:var(--or);color:var(--noir)}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
 
-/* NAV */
-#nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:64px;padding:0 2.5rem;display:flex;align-items:center;gap:1.5rem;background:linear-gradient(to bottom,rgba(10,10,12,.96),rgba(10,10,12,0));transition:background var(--tr)}
-#nav.sc{background:rgba(10,10,12,.94);backdrop-filter:blur(20px);border-bottom:.5px solid rgba(200,169,110,.1)}
-.nl{font-family:var(--sf);font-size:1.5rem;font-weight:300;letter-spacing:.08em;color:var(--or);white-space:nowrap;flex-shrink:0}
-.nl em{font-style:italic;color:var(--blanc);font-weight:300}
-.nls{display:flex;align-items:center;gap:.2rem;list-style:none;flex:1}
-.nls a,.nls span{padding:7px 13px;font-size:.82rem;font-weight:400;color:var(--bs);border-radius:var(--rp);transition:all var(--tr);white-space:nowrap;cursor:pointer;display:block}
-.nls a:hover,.nls span:hover,.nls a.on{color:var(--blanc);background:var(--vh)}
-.ni{position:relative}
-.nd{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%) translateY(-8px);min-width:520px;background:rgba(16,16,20,.98);backdrop-filter:blur(24px);border:.5px solid rgba(200,169,110,.14);border-radius:var(--r);padding:1.25rem;opacity:0;pointer-events:none;transition:all .22s;box-shadow:var(--shl);display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;z-index:200}
-.ni:hover .nd{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
-.dh{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--or);margin-bottom:.45rem;font-weight:500}
-.di{display:flex;align-items:center;gap:.6rem;padding:.4rem .7rem;border-radius:8px;font-size:.8rem;color:var(--bs);transition:all .18s;cursor:pointer}
-.di:hover{background:var(--vh);color:var(--blanc)}
-.ns{display:flex;align-items:center;gap:.5rem;background:var(--verre);border:.5px solid rgba(255,255,255,.07);border-radius:var(--rp);padding:6px 14px 6px 12px;max-width:190px;flex:1;transition:all var(--tr)}
-.ns:focus-within{border-color:var(--or);max-width:260px}
-.ns input{background:none;border:none;outline:none;font-family:var(--ss);font-size:.82rem;color:var(--blanc);width:100%;min-width:0}
-.ns input::placeholder{color:var(--gris)}
-.nb{display:none;flex-direction:column;gap:5px;padding:8px;border-radius:8px;transition:background .2s}
-.nb span{width:22px;height:1.5px;background:var(--blanc);display:block}
-.nb:hover{background:var(--verre)}
+/* TOPBAR */
+#topbar{position:fixed;top:0;left:0;right:0;height:48px;background:rgba(250,250,248,.94);backdrop-filter:blur(12px);border-bottom:.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;z-index:100}
+.tb-brand{font-family:var(--serif);font-size:1.1rem;font-weight:600;color:var(--ink);text-decoration:none}
+.tb-brand span{font-weight:400;font-style:italic;color:var(--ink-mute)}
+.tb-nav{display:flex;gap:1.5rem;list-style:none}
+.tb-nav a{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;transition:color .2s}
+.tb-nav a:hover{color:var(--ink)}
 
 /* HERO */
-#hero{height:100vh;min-height:600px;position:relative;display:flex;align-items:flex-end;padding-bottom:9vh}
-.hbg{position:absolute;inset:0;z-index:0;background:linear-gradient(135deg,#0d0c14 0%,#1a1218 45%,#0d1018 100%);overflow:hidden}
-.ho{position:absolute;border-radius:50%;filter:blur(80px);opacity:.22}
-.ho1{width:620px;height:620px;background:radial-gradient(circle,#3d2a0e,transparent);top:-120px;right:8%}
-.ho2{width:420px;height:420px;background:radial-gradient(circle,#1a0d1a,transparent);bottom:0;left:18%}
-.hg{position:absolute;bottom:0;left:0;right:0;height:72%;background:linear-gradient(to top,var(--noir) 0%,rgba(10,10,12,.55) 60%,transparent 100%);z-index:1}
-.hgl{position:absolute;top:0;left:0;bottom:0;width:65%;background:linear-gradient(to right,rgba(10,10,12,.78),transparent);z-index:1}
-.hc{position:relative;z-index:2;max-width:1400px;margin:0 auto;padding:0 3rem;width:100%;display:flex;align-items:flex-end;gap:2.5rem}
-.hbk{width:175px;flex-shrink:0;border-radius:12px;overflow:hidden;box-shadow:-4px 8px 40px rgba(0,0,0,.8);transform:perspective(800px) rotateY(8deg);transition:transform .4s;cursor:pointer}
-.hbk:hover{transform:perspective(800px) rotateY(0)}
-.hbk img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block}
-.hbk-p{width:100%;aspect-ratio:2/3;display:flex;align-items:center;justify-content:center;background:var(--n3);font-family:var(--sf);font-size:4rem;color:rgba(255,255,255,.14)}
-.ht{flex:1;min-width:0}
-.hba{display:inline-flex;align-items:center;gap:.5rem;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--or);border:.5px solid var(--or);padding:4px 13px;border-radius:var(--rp);margin-bottom:.9rem}
-.htl{font-family:var(--sf);font-size:clamp(2.6rem,5.5vw,4.8rem);font-weight:300;line-height:1.06;letter-spacing:-.01em;margin-bottom:.7rem}
-.htl em{font-style:italic;color:var(--orc)}
-.hau{font-size:.92rem;color:var(--bs);margin-bottom:1.25rem;font-weight:300}
-.hd{font-size:.88rem;color:rgba(200,192,180,.72);line-height:1.72;max-width:510px;margin-bottom:1.9rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.hact{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap}
-.bp{display:inline-flex;align-items:center;gap:.55rem;padding:12px 26px;border-radius:var(--rp);background:var(--blanc);color:var(--noir);font-family:var(--ss);font-size:.86rem;font-weight:600;transition:all var(--tr)}
-.bp:hover{background:var(--or);transform:scale(1.03)}
-.bs2{display:inline-flex;align-items:center;gap:.55rem;padding:12px 26px;border-radius:var(--rp);background:rgba(255,255,255,.11);color:var(--blanc);font-family:var(--ss);font-size:.86rem;font-weight:400;transition:all var(--tr);border:.5px solid rgba(255,255,255,.18)}
-.bs2:hover{background:rgba(255,255,255,.18)}
+#hero{padding:110px 2rem 60px;max-width:860px;margin:0 auto;text-align:center}
+.eyebrow{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:1.25rem;display:flex;align-items:center;justify-content:center;gap:.75rem}
+.eyebrow::before,.eyebrow::after{content:'';display:block;width:36px;height:.5px;background:var(--borderc)}
+h1{font-family:var(--serif);font-size:clamp(2.2rem,5vw,3.4rem);font-weight:400;line-height:1.15;letter-spacing:-.02em;margin-bottom:1rem}
+h1 em{font-style:italic;color:var(--ink-soft)}
+.hero-sub{font-size:1rem;color:var(--ink-soft);max-width:500px;margin:0 auto 2.25rem;line-height:1.7}
+.stats{display:flex;justify-content:center;gap:2.5rem;margin-bottom:2.5rem;flex-wrap:wrap}
+.stat-n{font-family:var(--serif);font-size:1.6rem;font-weight:500}
+.stat-l{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-mute)}
+.search-wrap{max-width:540px;margin:0 auto;position:relative}
+.search-wrap input{width:100%;height:50px;padding:0 52px 0 18px;font-family:var(--sans);font-size:.95rem;color:var(--ink);background:var(--surface);border:1px solid var(--borderc);border-radius:30px;outline:none;transition:border-color .2s,box-shadow .2s;box-shadow:var(--sh)}
+.search-wrap input::placeholder{color:var(--ink-mute)}
+.search-wrap input:focus{border-color:var(--ink);box-shadow:0 0 0 3px rgba(26,26,26,.08)}
+.search-wrap button{position:absolute;right:5px;top:5px;width:40px;height:40px;background:var(--ink);color:#fff;border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:opacity .2s}
+.search-wrap button:hover{opacity:.8}
 
-/* SECTIONS */
-.sec{padding:2.5rem 0;position:relative;z-index:1}
-.sh{display:flex;align-items:center;justify-content:space-between;padding:0 3rem;margin-bottom:1.4rem}
-.stl{font-family:var(--sf);font-size:1.5rem;font-weight:400;color:var(--blanc)}
-.stl em{font-style:italic;color:var(--orc)}
-.sm{font-size:.76rem;color:var(--or);letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:.4rem;cursor:pointer;transition:gap var(--tr)}
-.sm:hover{gap:.7rem}
+/* FILTRES */
+#filter-bar{padding:0 2rem 1.5rem;max-width:1200px;margin:0 auto}
+.frow{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.5rem;align-items:center}
+.flabel{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-mute);min-width:64px}
+.fb{padding:5px 14px;font-family:var(--sans);font-size:.78rem;color:var(--ink-soft);background:var(--surface);border:.5px solid var(--borderc);border-radius:30px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.fb:hover{background:var(--warm)}
+.fb.on{background:var(--ink);color:#fff;border-color:var(--ink)}
 
-/* SCROLL ROW */
-.sr{position:relative;overflow:hidden}
-.st{display:flex;gap:.9rem;padding:0 3rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;cursor:grab}
-.st::-webkit-scrollbar{display:none}
-.st.g{cursor:grabbing}
-.sa{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:80px;background:rgba(10,10,12,.92);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;transition:all .2s;opacity:0}
-.sr:hover .sa{opacity:1}
-.sa.l{left:0;border-radius:0 var(--rs) var(--rs) 0}
-.sa.r{right:0;border-radius:var(--rs) 0 0 var(--rs)}
-.sa:hover{width:56px}
+/* CATALOGUE */
+#catalogue{padding:0 2rem 4rem;max-width:1200px;margin:0 auto}
+.cat-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:.5px solid var(--border);flex-wrap:wrap;gap:.5rem}
+.cat-lbl{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute)}
+.sort-sel{font-family:var(--sans);font-size:.78rem;color:var(--ink-soft);background:var(--surface);border:.5px solid var(--borderc);border-radius:20px;padding:4px 10px;cursor:pointer;outline:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:1.5rem}
 
 /* BOOK CARD */
-.bc{flex-shrink:0;width:162px;scroll-snap-align:start;cursor:pointer;position:relative;transition:transform var(--tr)}
-.bc:hover{transform:scale(1.07) translateY(-4px);z-index:10}
-.bco{width:100%;aspect-ratio:2/3;border-radius:11px;overflow:hidden;position:relative;box-shadow:0 4px 20px rgba(0,0,0,.5);background:var(--n3);transition:box-shadow var(--tr)}
-.bc:hover .bco{box-shadow:0 12px 40px rgba(0,0,0,.8)}
-.bco img{width:100%;height:100%;object-fit:cover;transition:transform .4s;position:absolute;inset:0}
-.bc:hover .bco img{transform:scale(1.06)}
-.bcp{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--sf);font-size:3rem;color:rgba(255,255,255,.12)}
-.bov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,12,.95) 0%,rgba(10,10,12,.25) 45%,transparent 70%);opacity:0;transition:opacity var(--tr)}
-.bc:hover .bov{opacity:1}
-.bca{position:absolute;bottom:0;left:0;right:0;padding:.7rem;opacity:0;transform:translateY(7px);transition:all var(--tr);display:flex;gap:.35rem}
-.bc:hover .bca{opacity:1;transform:none}
-.bca-p{flex:1;padding:7px;border-radius:8px;background:var(--blanc);color:var(--noir);font-family:var(--ss);font-size:.68rem;font-weight:600;transition:background .2s}
-.bca-p:hover{background:var(--or)}
-.bca-i{width:32px;padding:7px;border-radius:8px;background:rgba(255,255,255,.18);color:var(--blanc);border:.5px solid rgba(255,255,255,.28);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s}
-.bca-i:hover{background:rgba(255,255,255,.32)}
-.bm{padding:.65rem .15rem .15rem}
-.bt{font-family:var(--sf);font-size:.9rem;font-weight:400;color:var(--blanc);line-height:1.22;margin-bottom:.22rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.ba{font-size:.7rem;color:var(--gris);font-weight:300}
-.bb{display:inline-block;font-size:.58rem;letter-spacing:.07em;padding:2px 7px;border-radius:4px;margin-bottom:.28rem;font-weight:500;text-transform:uppercase}
-.gr{background:rgba(80,100,160,.2);color:#a0b4e0}
-.gp{background:rgba(160,80,120,.2);color:#d4a0c0}
-.gt{background:rgba(80,160,120,.2);color:#a0d4b4}
-.gph{background:rgba(160,120,80,.2);color:#d4c0a0}
-.gn{background:rgba(120,80,160,.2);color:#c0a0d4}
-.gc{background:var(--orp);color:var(--or)}
-
-/* AUTHOR CARD */
-.ac{flex-shrink:0;width:116px;text-align:center;cursor:pointer;transition:transform var(--tr)}
-.ac:hover{transform:translateY(-4px)}
-.aav{width:96px;height:96px;border-radius:50%;margin:0 auto .55rem;overflow:hidden;border:2px solid var(--n4);background:var(--n3);position:relative;transition:border-color var(--tr),box-shadow var(--tr)}
-.ac:hover .aav{border-color:var(--or);box-shadow:0 0 20px var(--orp)}
-.aav img{width:100%;height:100%;object-fit:cover}
-.aav-f{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--sf);font-size:2rem;color:var(--gris)}
-.an{font-family:var(--sf);font-size:.8rem;color:var(--bs);line-height:1.28}
-.aco{font-size:.65rem;color:var(--gris);margin-top:.18rem}
-
-/* CAT GRID */
-.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;padding:0 3rem}
-.cc{position:relative;border-radius:var(--r);overflow:hidden;padding:1.4rem;min-height:115px;display:flex;flex-direction:column;justify-content:flex-end;cursor:pointer;transition:transform var(--tr);border:.5px solid rgba(255,255,255,.05)}
-.cc:hover{transform:scale(1.02)}
-.cc::before{content:'';position:absolute;inset:0;z-index:0}
-.cro::before{background:linear-gradient(135deg,#1a0a14,#2d1525)}
-.ccl::before{background:linear-gradient(135deg,#0a100a,#152015)}
-.cre::before{background:linear-gradient(135deg,#100c0a,#201810)}
-.cna::before{background:linear-gradient(135deg,#0a0c10,#101820)}
-.csy::before{background:linear-gradient(135deg,#0c0a14,#18102a)}
-.clu::before{background:linear-gradient(135deg,#100e08,#201c10)}
-.cci{position:absolute;top:.9rem;right:1rem;font-size:1.8rem;opacity:.28;z-index:1}
-.ccn{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--or);margin-bottom:.3rem;position:relative;z-index:1}
-.cct{font-family:var(--sf);font-size:1.25rem;font-weight:400;position:relative;z-index:1;color:var(--blanc)}
-.ccd{font-size:.72rem;color:var(--bs);position:relative;z-index:1;margin-top:.25rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.bcard{cursor:pointer;transition:transform .2s}
+.bcard:hover{transform:translateY(-3px)}
+.bcover{width:100%;aspect-ratio:2/3;background:var(--surface);border:.5px solid var(--border);border-radius:8px;box-shadow:var(--sh);display:flex;align-items:flex-end;position:relative;overflow:hidden;transition:box-shadow .2s}
+.bcard:hover .bcover{box-shadow:var(--shm)}
+.cbg{position:absolute;inset:0;opacity:.055}
+.p1{background:repeating-linear-gradient(45deg,#1a1a1a 0,#1a1a1a 1px,transparent 0,transparent 50%) 0 0/12px 12px}
+.p2{background:radial-gradient(circle at 30% 70%,#1a1a1a 1px,transparent 1px) 0 0/14px 14px}
+.p3{background:repeating-linear-gradient(0deg,#1a1a1a 0,#1a1a1a 1px,transparent 0,transparent 16px)}
+.p4{background:repeating-linear-gradient(90deg,#1a1a1a 0,#1a1a1a 1px,transparent 0,transparent 16px)}
+.p5{background:repeating-linear-gradient(-45deg,#1a1a1a 0,#1a1a1a 1px,transparent 0,transparent 50%) 0 0/12px 12px}
+.p6{background:radial-gradient(circle,#1a1a1a 1px,transparent 1px) 0 0/18px 18px}
+.p7{background:repeating-conic-gradient(#1a1a1a 0 1deg,transparent 1deg 6deg) 0 0/14px 14px}
+.p8{background:linear-gradient(135deg,#1a1a1a 25%,transparent 25%) -10px 0/20px 20px,linear-gradient(225deg,#1a1a1a 25%,transparent 25%) -10px 0/20px 20px}
+.cinn{position:relative;z-index:1;padding:1rem}
+.cmouv{font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:3px}
+.ctitle{font-family:var(--serif);font-size:.85rem;font-weight:600;line-height:1.25;color:var(--ink)}
+.cauthor{font-size:.7rem;color:var(--ink-soft);margin-top:2px;font-style:italic}
+.csiecle{position:absolute;top:10px;right:10px;font-size:.6rem;color:var(--ink-mute);background:rgba(255,255,255,.8);padding:2px 6px;border-radius:10px;border:.5px solid var(--border)}
+.no-res{grid-column:1/-1;text-align:center;padding:4rem;color:var(--ink-mute);font-style:italic}
 
 /* MODAL */
-#mo{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.86);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:1rem}
-#mo.open{display:flex}
-#mb{background:var(--n2);border:.5px solid rgba(255,255,255,.07);border-radius:20px;max-width:840px;width:100%;max-height:90vh;overflow-y:auto;position:relative;box-shadow:var(--shl);animation:mIn .28s cubic-bezier(.4,0,.2,1)}
-@keyframes mIn{from{opacity:0;transform:scale(.96) translateY(14px)}to{opacity:1;transform:none}}
-#mb::-webkit-scrollbar{width:3px}
-#mb::-webkit-scrollbar-thumb{background:var(--gris);border-radius:2px}
-.mh{position:relative;height:290px;overflow:hidden;border-radius:20px 20px 0 0;background:var(--n3)}
-.mhb{position:absolute;inset:0;filter:blur(40px) saturate(1.2);transform:scale(1.2);opacity:.38}
-.mhb img{width:100%;height:100%;object-fit:cover}
-.mhg{position:absolute;inset:0;background:linear-gradient(to top,var(--n2) 0%,rgba(17,17,21,.38) 60%,transparent 100%)}
-.mhc{position:absolute;bottom:0;left:0;right:0;padding:1.75rem;display:flex;gap:1.4rem;align-items:flex-end}
-.mcv{width:115px;flex-shrink:0;border-radius:9px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.8);border:.5px solid rgba(255,255,255,.09)}
-.mcv img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block}
-.mcv-p{width:100%;aspect-ratio:2/3;display:flex;align-items:center;justify-content:center;background:var(--n3);font-family:var(--sf);font-size:2.8rem;color:rgba(255,255,255,.14)}
-.mi{flex:1;min-width:0}
-.mm{font-size:.66rem;letter-spacing:.13em;text-transform:uppercase;color:var(--or);margin-bottom:.45rem}
-.mt{font-family:var(--sf);font-size:1.85rem;font-weight:300;line-height:1.12;margin-bottom:.35rem;color:var(--blanc)}
-.mal{font-size:.86rem;color:var(--bs);margin-bottom:.7rem}
-.mtg{display:flex;gap:.38rem;flex-wrap:wrap}
-.mtg span{padding:3px 11px;border-radius:var(--rp);font-size:.68rem;background:var(--verre);border:.5px solid rgba(255,255,255,.09);color:var(--bs)}
-.mcl{position:absolute;top:.85rem;right:.85rem;z-index:10;width:34px;height:34px;border-radius:50%;background:rgba(10,10,12,.9);border:.5px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;color:var(--blanc);font-size:.9rem;transition:all .18s;cursor:pointer}
-.mcl:hover{background:var(--vh)}
-.mbd{padding:1.75rem}
-.mss{display:flex;gap:1.75rem}
-.mmn{flex:1;min-width:0}
-.msd{width:230px;flex-shrink:0}
-.mst{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--or);margin-bottom:.8rem}
-.mds{font-size:.88rem;color:rgba(200,192,180,.82);line-height:1.8;margin-bottom:1.4rem}
-.mac{display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.4rem}
-.mbtn{display:flex;align-items:center;justify-content:center;gap:.55rem;padding:10px 18px;border-radius:var(--rp);font-family:var(--ss);font-size:.8rem;font-weight:500;transition:all var(--tr);cursor:pointer;text-decoration:none}
-.mbp{background:var(--blanc);color:var(--noir)}
-.mbp:hover{background:var(--or);transform:scale(1.02)}
-.mbs{background:var(--verre);color:var(--blanc);border:.5px solid rgba(255,255,255,.11)}
-.mbs:hover{background:var(--vh)}
-.mbd2{background:var(--orp);color:var(--or);border:.5px solid rgba(200,169,110,.22)}
-.mbd2:hover{background:rgba(200,169,110,.2)}
-.mapc{background:var(--n3);border-radius:var(--r);padding:1.2rem;border:.5px solid rgba(255,255,255,.05);margin-bottom:.9rem}
-.maph{width:60px;height:60px;border-radius:50%;overflow:hidden;margin:0 auto .7rem;background:var(--n4)}
-.maph img{width:100%;height:100%;object-fit:cover}
-.mapn{font-family:var(--sf);font-size:.95rem;text-align:center;color:var(--blanc);margin-bottom:.2rem}
-.mapd{font-size:.7rem;color:var(--gris);text-align:center;margin-bottom:.7rem}
-.mapb{font-size:.76rem;color:rgba(200,192,180,.72);line-height:1.68}
-.mnt{padding:.7rem 1rem;background:var(--orp);border:.5px solid rgba(200,169,110,.14);border-radius:var(--rs);font-size:.7rem;color:rgba(200,192,180,.58);line-height:1.6}
-.mnt strong{color:var(--or)}
+#moverlay{display:none;position:fixed;inset:0;background:rgba(10,10,10,.5);z-index:200;backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:1rem}
+#moverlay.open{display:flex}
+#modal{background:var(--surface);border-radius:12px;max-width:700px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shl);position:relative}
+.mhead{display:flex;gap:1.5rem;padding:1.75rem;border-bottom:.5px solid var(--border)}
+.mcover{width:90px;flex-shrink:0;aspect-ratio:2/3;border-radius:6px;border:.5px solid var(--border);position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:.75rem}
+.mcover .cbg{opacity:.08}
+.mcover-t{position:relative;font-family:var(--serif);font-size:.65rem;font-weight:600;color:var(--ink);line-height:1.2}
+.minfo{flex:1;min-width:0}
+.mm{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:.4rem}
+.mt{font-family:var(--serif);font-size:1.35rem;font-weight:500;line-height:1.2;margin-bottom:.35rem}
+.ma-wrap{display:flex;align-items:center;gap:.75rem;margin-bottom:.9rem}
+.ma-photo{width:56px;height:56px;border-radius:50%;object-fit:cover;border:.5px solid var(--border);flex-shrink:0}
+.ma-name{font-family:var(--serif);font-size:.88rem;font-style:italic;color:var(--ink-soft)}
+.ma-noimg{font-family:var(--serif);font-size:.88rem;font-style:italic;color:var(--ink-soft);margin-bottom:.9rem}
+.mmeta{display:flex;gap:.5rem;flex-wrap:wrap}
+.mtag{font-size:.72rem;color:var(--ink-soft);background:var(--warm);padding:3px 10px;border-radius:20px;border:.5px solid var(--border)}
+.mbody{padding:1.5rem 1.75rem}
+.mdesc{font-size:.92rem;color:var(--ink-soft);line-height:1.7;margin-bottom:1.25rem}
+.mactions{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.25rem}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;font-family:var(--sans);font-size:.83rem;font-weight:500;border-radius:30px;cursor:pointer;text-decoration:none;transition:all .15s;border:1px solid transparent}
+.btn-p{background:var(--ink);color:#fff}
+.btn-p:hover{opacity:.82}
+.btn-o{background:transparent;color:var(--ink);border-color:var(--borderc)}
+.btn-o:hover{background:var(--warm)}
+.mnotice{padding:.75rem 1rem;background:var(--warm);border-radius:8px;border:.5px solid var(--border);font-size:.75rem;color:var(--ink-mute);line-height:1.6}
+.mnotice strong{color:var(--ink-soft)}
+.mclose{position:absolute;top:.9rem;right:.9rem;width:30px;height:30px;background:var(--warm);border:.5px solid var(--border);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;color:var(--ink-soft);transition:background .15s}
+.mclose:hover{background:var(--border)}
 
-/* READER MODAL */
-.ra{display:none}
-.ra.open{display:block}
-.rct{display:flex;align-items:center;justify-content:space-between;padding:.7rem 1rem;background:var(--n3);border-radius:var(--rs);margin-bottom:.9rem;border:.5px solid rgba(255,255,255,.05);flex-wrap:wrap;gap:.45rem}
-.rcb2{display:flex;align-items:center;gap:.35rem}
-.rb{padding:5px 11px;border-radius:var(--rp);font-family:var(--ss);font-size:.72rem;background:var(--verre);color:var(--bs);border:.5px solid rgba(255,255,255,.07);transition:all .18s;cursor:pointer}
-.rb:hover{background:var(--vh);color:var(--blanc)}
-.rb.on{background:var(--or);color:var(--noir);border-color:transparent}
-.rpw{font-size:.7rem;color:var(--gris)}
-.rbar{height:2px;background:var(--n4);border-radius:1px;margin-bottom:.9rem;overflow:hidden}
-.rbf{height:100%;background:linear-gradient(to right,var(--or),var(--orc));transition:width .3s}
-.rtx{font-family:var(--sf);font-size:1.04rem;line-height:1.9;color:rgba(218,208,192,.9);max-height:52vh;overflow-y:auto;padding-right:.4rem}
-.rtx::-webkit-scrollbar{width:3px}
-.rtx::-webkit-scrollbar-thumb{background:var(--gris);border-radius:2px}
-.rtx p{margin-bottom:.95em;text-align:justify;text-indent:1.4em}
-.rtx p:first-of-type{text-indent:0}
-.rtx h3{font-family:var(--sf);font-size:1.05rem;font-weight:400;color:var(--orc);margin:1.4em 0 .7em}
-.rtx.sep{color:#c4a870}
-.rld{text-align:center;padding:3rem;color:var(--gris);font-style:italic}
-.rsc{font-size:.68rem;color:var(--gris);text-align:center;margin-top:.9rem;font-style:italic}
-
-/* FULL READER */
-#fr{display:none;position:fixed;inset:0;z-index:3000;background:var(--noir);flex-direction:column}
-#fr.open{display:flex}
-.frt{height:56px;padding:0 2rem;background:rgba(10,10,12,.97);backdrop-filter:blur(16px);border-bottom:.5px solid rgba(200,169,110,.09);display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-shrink:0}
-.frtt{font-family:var(--sf);font-size:.88rem;color:var(--bs);font-style:italic;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.frc{display:flex;align-items:center;gap:.35rem}
-.frb{padding:5px 11px;border-radius:var(--rp);font-family:var(--ss);font-size:.72rem;color:var(--bs);background:var(--verre);border:.5px solid rgba(255,255,255,.07);transition:all .18s;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
-.frb:hover{background:var(--vh);color:var(--blanc)}
-.frb.cl{background:rgba(139,38,53,.18);color:#e08a96;border-color:rgba(139,38,53,.28)}
-.frb.cl:hover{background:rgba(139,38,53,.35)}
-.frb.on{background:var(--or);color:var(--noir)}
-.frp{position:fixed;top:56px;left:0;height:2px;background:linear-gradient(to right,var(--or),var(--orc));transition:width .18s;z-index:3001}
-.frcnt{flex:1;overflow-y:auto;padding:4rem 2rem}
-.frtx{max-width:650px;margin:0 auto;font-family:var(--sf);font-size:1.1rem;line-height:1.95;color:rgba(218,208,192,.9)}
-.frtx h2{font-family:var(--sf);font-size:1.75rem;font-weight:300;font-style:italic;color:var(--orc);margin-bottom:2rem;text-align:center;padding-bottom:1.5rem;border-bottom:.5px solid rgba(200,169,110,.14)}
-.frtx p{margin-bottom:1.05em;text-align:justify;text-indent:1.4em}
-.frtx p:first-of-type{text-indent:0}
-.frtx.sep{color:#c4a870}
-.frsrc{font-size:.7rem;color:var(--gris);text-align:center;margin-top:2rem;padding-top:1.5rem;border-top:.5px solid rgba(255,255,255,.05)}
-
-/* SEARCH */
-#srch{display:none;position:fixed;inset:0;z-index:1500;background:rgba(10,10,12,.98);backdrop-filter:blur(24px);padding:5.5rem 2rem 2rem;overflow-y:auto}
-#srch.open{display:block}
-.siw{max-width:620px;margin:0 auto 2.5rem;display:flex;align-items:center;gap:.9rem}
-.sinw{flex:1;background:var(--n3);border:1px solid rgba(200,169,110,.18);border-radius:var(--rp);padding:13px 22px;display:flex;align-items:center;gap:.7rem}
-.sinw:focus-within{border-color:var(--or);box-shadow:0 0 0 3px var(--orp)}
-.sinp{flex:1;background:none;border:none;outline:none;font-family:var(--sf);font-size:1.2rem;color:var(--blanc)}
-.sinp::placeholder{color:var(--gris)}
-.scl{padding:6px 12px;border-radius:var(--rp);background:var(--verre);color:var(--bs);border:.5px solid rgba(255,255,255,.09);font-size:.76rem;transition:all .18s;white-space:nowrap;cursor:pointer}
-.scl:hover{background:var(--vh)}
-.sres{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:1.2rem}
-.sinfo{text-align:center;color:var(--gris);font-family:var(--sf);font-size:1.05rem;padding:4rem 0}
-
-/* PAGES */
-.pg{display:none}
-.pg.on{display:block}
-.cpg{padding:100px 3rem 3rem}
-.cpg h1{font-family:var(--sf);font-size:2rem;font-weight:300;color:var(--blanc);margin-bottom:.35rem}
-.cgm{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:1.2rem}
-.apg{padding:100px 3rem 3rem}
-.apg h1{font-family:var(--sf);font-size:2.1rem;font-weight:300;color:var(--blanc);margin-bottom:.4rem}
-.agr{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:1.1rem}
-.ait{background:var(--n3);border:.5px solid rgba(255,255,255,.05);border-radius:var(--r);padding:1.15rem;display:flex;align-items:center;gap:.9rem;cursor:pointer;transition:border-color var(--tr)}
-.ait:hover{border-color:rgba(200,169,110,.22)}
-.aiav{width:52px;height:52px;border-radius:50%;overflow:hidden;background:var(--n4);flex-shrink:0}
-.aiav img{width:100%;height:100%;object-fit:cover}
-.aiavf{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--sf);font-size:1.4rem;color:var(--gris)}
-.ain{font-family:var(--sf);font-size:.95rem;color:var(--blanc);margin-bottom:.18rem}
-.aic{font-size:.7rem;color:var(--gris)}
-
-/* MOBILE */
-#mn{display:none;position:fixed;inset:0;z-index:1800;background:rgba(0,0,0,.68);backdrop-filter:blur(4px)}
-#mn.open{display:block}
-.mnd{position:absolute;top:0;right:0;bottom:0;width:min(310px,85vw);background:var(--n2);border-left:.5px solid rgba(255,255,255,.07);padding:1.5rem;overflow-y:auto;transform:translateX(100%);transition:transform .32s}
-#mn.open .mnd{transform:none}
-.mnc{float:right;color:var(--gris);font-size:1.1rem;padding:.5rem;cursor:pointer}
-.mnl{list-style:none;margin-top:2.5rem;display:flex;flex-direction:column;gap:.2rem}
-.mnl a,.mnl span{display:block;padding:.7rem 1rem;border-radius:var(--rs);color:var(--bs);font-size:.9rem;transition:all .18s;cursor:pointer}
-.mnl a:hover,.mnl span:hover{background:var(--verre);color:var(--blanc)}
+/* READER */
+#roverlay{display:none;position:fixed;inset:0;background:#fdf9f3;z-index:300;flex-direction:column}
+#roverlay.open{display:flex}
+#rtopbar{height:52px;background:rgba(253,249,243,.95);backdrop-filter:blur(8px);border-bottom:.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;flex-shrink:0;gap:1rem}
+.rtitle{font-family:var(--serif);font-size:.88rem;color:var(--ink-soft);font-style:italic;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
+.rctrls{display:flex;align-items:center;gap:.35rem;flex-shrink:0}
+.rbtn{padding:5px 11px;font-size:.73rem;font-family:var(--sans);color:var(--ink-soft);background:transparent;border:.5px solid var(--borderc);border-radius:20px;cursor:pointer;transition:all .15s;text-decoration:none;display:inline-flex;align-items:center}
+.rbtn:hover{background:var(--warm);color:var(--ink)}
+.rbtn.rc{background:var(--ink);color:#fff;border-color:var(--ink)}
+.rbtn.rc:hover{opacity:.8}
+#rcontent{flex:1;overflow-y:auto;padding:3.5rem 2rem}
+#rtext{max-width:640px;margin:0 auto;font-family:var(--serif);font-size:1.1rem;line-height:1.9;color:var(--ink)}
+#rtext h2{font-family:var(--serif);font-size:1.5rem;font-weight:400;margin-bottom:1.75rem;color:var(--ink-soft);font-style:italic;border-bottom:.5px solid var(--border);padding-bottom:1rem}
+#rtext p{margin-bottom:1em;text-align:justify;text-indent:1.5em}
+#rtext p:first-of-type{text-indent:0}
+.rsource{font-family:var(--sans);font-size:.74rem;color:var(--ink-mute);text-align:center;margin-top:2rem;padding-top:1rem;border-top:.5px solid var(--border)}
+.rloading{text-align:center;color:var(--ink-mute);font-style:italic;padding:4rem 1rem}
+.rprog{position:fixed;top:52px;left:0;height:2px;background:var(--ink);transition:width .2s;z-index:301}
 
 /* FOOTER */
-.ft{padding:3rem;border-top:.5px solid rgba(255,255,255,.05);display:grid;grid-template-columns:1.6fr repeat(3,1fr);gap:2rem;max-width:1400px;margin:0 auto}
-.ftb{font-family:var(--sf);font-size:1.25rem;font-weight:300;color:var(--or);margin-bottom:.7rem}
-.ftd{font-size:.78rem;color:var(--gris);line-height:1.6;max-width:240px}
-.fth{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--or);margin-bottom:.7rem}
-.ftl{list-style:none;display:flex;flex-direction:column;gap:.38rem}
-.ftl a{font-size:.78rem;color:var(--bs);transition:color .18s}
-.ftl a:hover{color:var(--or)}
-.ftbo{border-top:.5px solid rgba(255,255,255,.05);padding:1.25rem 3rem;display:flex;justify-content:space-between;align-items:center;font-size:.7rem;color:var(--gris);flex-wrap:wrap;gap:.5rem;max-width:1400px;margin:0 auto}
-.ftbo a{color:var(--gris);transition:color .18s}
-.ftbo a:hover{color:var(--or)}
+.footer-grid{border-top:.5px solid var(--border);padding:2.5rem 2rem;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.5fr repeat(4,1fr);gap:2rem}
+.fl{font-family:var(--serif);font-size:1.1rem;font-weight:600;margin-bottom:.4rem}
+.fd{font-size:.8rem;color:var(--ink-mute);line-height:1.6;max-width:200px}
+.fh{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:.6rem}
+.flinks{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.flinks a{font-size:.8rem;color:var(--ink-soft);text-decoration:none;transition:color .15s}
+.flinks a:hover{color:var(--ink)}
+.footer-bot{border-top:.5px solid var(--border);padding:1.25rem 2rem;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.75rem}
+.fc{font-size:.73rem;color:var(--ink-mute)}
 
-/* TOAST */
-.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--n3);border:.5px solid rgba(200,169,110,.18);border-radius:var(--rp);padding:.7rem 1.4rem;font-size:.8rem;color:var(--bs);z-index:5000;transition:transform .28s;pointer-events:none}
-.toast.on{transform:translateX(-50%) translateY(0)}
+/* LOADER */
+#loader{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:500;transition:opacity .4s}
+#loader.hidden{opacity:0;pointer-events:none}
+.lt span{opacity:0;animation:lf .5s forwards;font-family:var(--serif);font-size:1.4rem}
+@keyframes lf{to{opacity:1}}
 
-@media(max-width:1024px){.cg{grid-template-columns:repeat(2,1fr)}.ft{grid-template-columns:1fr 1fr}.mss{flex-direction:column}.msd{width:100%}}
-@media(max-width:768px){#nav{padding:0 1.2rem}.nls,.ns{display:none}.nb{display:flex}.sh,.st,.cg,.cpg,.apg{padding-left:1.25rem;padding-right:1.25rem}.hc{padding:0 1.25rem;flex-direction:column;align-items:flex-start;gap:1rem}.hbk{width:110px}.htl{font-size:2.1rem}.cg{grid-template-columns:1fr}.ft{grid-template-columns:1fr;padding:1.5rem}.ftbo{padding:1.2rem 1.5rem}.mhc{flex-direction:column;align-items:flex-start}.mbd{padding:1.2rem}.frc{gap:.2rem}.frb{padding:4px 8px;font-size:.68rem}}
+/* PHOTO NOTICE */
+.photo-lic{font-size:.6rem;color:var(--ink-mute);margin-top:2px;text-align:center}
+
+@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.tb-nav{display:none};#hero{padding:80px 1.25rem 50px}#filter-bar,#catalogue{padding-left:1.25rem;padding-right:1.25rem}.grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem}.mhead{flex-direction:column}.rctrls{gap:.2rem}.rbtn{padding:4px 8px;font-size:.7rem}.footer-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
-<nav id="nav">
-  <a class="nl" href="#" onclick="showPg('home')">CODE<em>x</em></a>
-  <ul class="nls">
-    <li><a id="nl-home" class="on" onclick="showPg('home')">Accueil</a></li>
-    <li class="ni">
-      <span id="nl-cat">Catégories</span>
-      <div class="nd">
-        <div>
-          <p class="dh">Genres</p>
-          <div class="di" onclick="filShow('g','roman')"><span>📖</span>Romans</div>
-          <div class="di" onclick="filShow('g','poesie')"><span>✦</span>Poésie</div>
-          <div class="di" onclick="filShow('g','theatre')"><span>🎭</span>Théâtre</div>
-          <div class="di" onclick="filShow('g','nouvelles')"><span>📜</span>Nouvelles</div>
-          <div class="di" onclick="filShow('g','philosophie')"><span>💡</span>Philosophie</div>
-          <div class="di" onclick="filShow('g','conte')"><span>🌙</span>Contes</div>
-        </div>
-        <div>
-          <p class="dh">Mouvements</p>
-          <div class="di" onclick="filShow('m','Romantisme')"><span>🌹</span>Romantisme</div>
-          <div class="di" onclick="filShow('m','Réalisme')"><span>🔍</span>Réalisme</div>
-          <div class="di" onclick="filShow('m','Naturalisme')"><span>🌱</span>Naturalisme</div>
-          <div class="di" onclick="filShow('m','Symbolisme')"><span>✨</span>Symbolisme</div>
-          <div class="di" onclick="filShow('m','Classicisme')"><span>🏛</span>Classicisme</div>
-          <div class="di" onclick="filShow('m','Lumières')"><span>☀️</span>Lumières</div>
-        </div>
-        <div>
-          <p class="dh">Siècles</p>
-          <div class="di" onclick="filShow('s','XVIe')"><span>⚜</span>XVIe siècle</div>
-          <div class="di" onclick="filShow('s','XVIIe')"><span>🕯</span>XVIIe siècle</div>
-          <div class="di" onclick="filShow('s','XVIIIe')"><span>⚡</span>XVIIIe siècle</div>
-          <div class="di" onclick="filShow('s','XIXe')"><span>🏭</span>XIXe siècle</div>
-          <div class="di" onclick="filShow('s','XXe')"><span>🎬</span>XXe siècle</div>
-          <div class="di" onclick="filShow('s','Antiquité')"><span>🏺</span>Antiquité</div>
-        </div>
-      </div>
-    </li>
-    <li><a id="nl-aut" onclick="showPg('aut')">Auteurs</a></li>
-    <li><a onclick="filShow('sort','pop')">Populaires</a></li>
-    <li><a onclick="filShow('sort','rec')">Récents</a></li>
-    <li><a href="mentions-legales.html">Légal</a></li>
-  </ul>
-  <div class="ns">
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    <input type="text" id="nq" placeholder="Titre, auteur…" oninput="onLS(this.value)" onfocus="openSrch()">
-  </div>
-  <button class="nb" onclick="togMob()" aria-label="Menu"><span></span><span></span><span></span></button>
-</nav>
+<div id="loader"><div class="lt" id="lt"></div></div>
 
-<div id="mn" onclick="if(event.target===this)this.classList.remove('open')">
-  <div class="mnd">
-    <button class="mnc" onclick="document.getElementById('mn').classList.remove('open')">✕</button>
-    <ul class="mnl">
-      <li><a onclick="showPg('home');togMob()">Accueil</a></li>
-      <li><span onclick="filShow('g','roman');togMob()">Romans</span></li>
-      <li><span onclick="filShow('g','poesie');togMob()">Poésie</span></li>
-      <li><span onclick="filShow('g','theatre');togMob()">Théâtre</span></li>
-      <li><span onclick="filShow('g','philosophie');togMob()">Philosophie</span></li>
-      <li><a onclick="showPg('aut');togMob()">Auteurs</a></li>
-      <li><span onclick="filShow('sort','pop');togMob()">Populaires</span></li>
-      <li><a href="mentions-legales.html">Mentions légales</a></li>
-    </ul>
+<header id="topbar">
+  <a href="index.html" class="tb-brand">Code<span>x</span></a>
+  <nav><ul class="tb-nav">
+    <li><a href="#catalogue">Catalogue</a></li>
+    <li><a href="mentions-legales.html">Mentions légales</a></li>
+    <li><a href="https://www.gutenberg.org/" target="_blank" rel="noopener">Gutenberg</a></li>
+  </ul></nav>
+</header>
+
+<section id="hero">
+  <p class="eyebrow">Bibliothèque numérique du domaine public</p>
+  <h1>Les grandes œuvres,<br><em>libres pour toujours</em></h1>
+  <p class="hero-sub">203 classiques de la littérature française et mondiale à lire gratuitement — textes chargés depuis le Projet Gutenberg.</p>
+  <div class="stats">
+    <div class="stat"><div class="stat-n">203</div><div class="stat-l">Œuvres</div></div>
+    <div class="stat"><div class="stat-n">80+</div><div class="stat-l">Auteurs</div></div>
+    <div class="stat"><div class="stat-n">8</div><div class="stat-l">Siècles</div></div>
+    <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Gratuit</div></div>
+  </div>
+  <div class="search-wrap">
+    <input type="text" id="q" placeholder="Titre, auteur, mouvement…" autocomplete="off">
+    <button onclick="applyAll()" aria-label="Rechercher">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </button>
+  </div>
+</section>
+
+<div id="filter-bar">
+  <div class="frow">
+    <span class="flabel">Genre</span>
+    <button class="fb on" data-f="genre" data-v="all" onclick="sf('genre','all',this)">Tous</button>
+    <button class="fb" data-f="genre" data-v="roman" onclick="sf('genre','roman',this)">Romans</button>
+    <button class="fb" data-f="genre" data-v="poesie" onclick="sf('genre','poesie',this)">Poésie</button>
+    <button class="fb" data-f="genre" data-v="theatre" onclick="sf('genre','theatre',this)">Théâtre</button>
+    <button class="fb" data-f="genre" data-v="nouvelles" onclick="sf('genre','nouvelles',this)">Nouvelles</button>
+    <button class="fb" data-f="genre" data-v="conte" onclick="sf('genre','conte',this)">Contes</button>
+    <button class="fb" data-f="genre" data-v="philosophie" onclick="sf('genre','philosophie',this)">Philosophie</button>
+  </div>
+  <div class="frow">
+    <span class="flabel">Siècle</span>
+    <button class="fb on" data-f="siecle" data-v="all" onclick="sf('siecle','all',this)">Tous</button>
+    <button class="fb" data-f="siecle" data-v="Antiquité" onclick="sf('siecle','Antiquité',this)">Antiquité</button>
+    <button class="fb" data-f="siecle" data-v="Moyen Âge" onclick="sf('siecle','Moyen Âge',this)">Moyen Âge</button>
+    <button class="fb" data-f="siecle" data-v="XIVe" onclick="sf('siecle','XIVe',this)">XIVe</button>
+    <button class="fb" data-f="siecle" data-v="XVIe" onclick="sf('siecle','XVIe',this)">XVIe</button>
+    <button class="fb" data-f="siecle" data-v="XVIIe" onclick="sf('siecle','XVIIe',this)">XVIIe</button>
+    <button class="fb" data-f="siecle" data-v="XVIIIe" onclick="sf('siecle','XVIIIe',this)">XVIIIe</button>
+    <button class="fb" data-f="siecle" data-v="XIXe" onclick="sf('siecle','XIXe',this)">XIXe</button>
+    <button class="fb" data-f="siecle" data-v="XXe" onclick="sf('siecle','XXe',this)">XXe</button>
+  </div>
+  <div class="frow">
+    <span class="flabel">Mouvement</span>
+    <button class="fb on" data-f="mouvement" data-v="all" onclick="sf('mouvement','all',this)">Tous</button>
+    <button class="fb" data-f="mouvement" data-v="Humanisme" onclick="sf('mouvement','Humanisme',this)">Humanisme</button>
+    <button class="fb" data-f="mouvement" data-v="Classicisme" onclick="sf('mouvement','Classicisme',this)">Classicisme</button>
+    <button class="fb" data-f="mouvement" data-v="Lumières" onclick="sf('mouvement','Lumières',this)">Lumières</button>
+    <button class="fb" data-f="mouvement" data-v="Romantisme" onclick="sf('mouvement','Romantisme',this)">Romantisme</button>
+    <button class="fb" data-f="mouvement" data-v="Réalisme" onclick="sf('mouvement','Réalisme',this)">Réalisme</button>
+    <button class="fb" data-f="mouvement" data-v="Naturalisme" onclick="sf('mouvement','Naturalisme',this)">Naturalisme</button>
+    <button class="fb" data-f="mouvement" data-v="Parnasse" onclick="sf('mouvement','Parnasse',this)">Parnasse</button>
+    <button class="fb" data-f="mouvement" data-v="Symbolisme" onclick="sf('mouvement','Symbolisme',this)">Symbolisme</button>
+    <button class="fb" data-f="mouvement" data-v="Modernisme" onclick="sf('mouvement','Modernisme',this)">Modernisme</button>
+    <button class="fb" data-f="mouvement" data-v="Positivisme" onclick="sf('mouvement','Positivisme',this)">Positivisme</button>
   </div>
 </div>
 
-<div id="srch">
-  <div class="siw">
-    <div class="sinw">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gris);flex-shrink:0"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" class="sinp" id="sq" placeholder="Titre, auteur, mouvement…" oninput="doSearch(this.value)">
+<main id="catalogue">
+  <div class="cat-hdr">
+    <span class="cat-lbl">— <span id="cnt">203</span> œuvres</span>
+    <select class="sort-sel" id="sort" onchange="applyAll()">
+      <option value="titre">Trier par titre</option>
+      <option value="auteur">Trier par auteur</option>
+      <option value="annee">Trier par année</option>
+      <option value="mouvement">Trier par mouvement</option>
+    </select>
+  </div>
+  <div class="grid" id="grid"></div>
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="fl">Codex</div>
+      <p class="fd">Bibliothèque numérique du domaine public en langue française. GitHub Pages. Zéro collecte.</p>
     </div>
-    <button class="scl" onclick="closeSrch()">Fermer ✕</button>
-  </div>
-  <p class="sinfo" id="si">Commencez à taper pour chercher</p>
-  <div class="sres" id="sr"></div>
-</div>
-
-<div id="pg-home" class="pg on">
-  <section id="hero">
-    <div class="hbg"><div class="ho ho1"></div><div class="ho ho2"></div></div>
-    <div class="hg"></div><div class="hgl"></div>
-    <div class="hc">
-      <div class="hbk" onclick="openModal(1)">
-        <img id="heri" src="" alt="Les Misérables" onerror="this.style.display='none';document.getElementById('herp').style.display='flex'">
-        <div class="hbk-p" id="herp" style="display:none">M</div>
-      </div>
-      <div class="ht">
-        <div class="hba">✦ Livre à la une</div>
-        <h1 class="htl">Les <em>Misérables</em></h1>
-        <p class="hau">Victor Hugo — 1862 · Romantisme · XIXe siècle</p>
-        <p class="hd">L'épopée de Jean Valjean, ancien forçat en quête de rédemption dans la France du XIXe siècle. Une fresque humaniste sur la misère, la justice et la grâce.</p>
-        <div class="hact">
-          <button class="bp" onclick="openModal(1)"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Lire maintenant</button>
-          <button class="bs2" onclick="openModal(1)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Plus d'infos</button>
-        </div>
-      </div>
+    <div>
+      <p class="fh">Explorer</p>
+      <ul class="flinks">
+        <li><a href="#" onclick="sf('genre','roman',document.querySelector('[data-f=genre][data-v=roman]'));return false">Romans</a></li>
+        <li><a href="#" onclick="sf('genre','poesie',document.querySelector('[data-f=genre][data-v=poesie]'));return false">Poésie</a></li>
+        <li><a href="#" onclick="sf('genre','theatre',document.querySelector('[data-f=genre][data-v=theatre]'));return false">Théâtre</a></li>
+        <li><a href="#" onclick="sf('genre','philosophie',document.querySelector('[data-f=genre][data-v=philosophie]'));return false">Philosophie</a></li>
+      </ul>
     </div>
-  </section>
-  <div id="hsecs"></div>
-</div>
-
-<div id="pg-cat" class="pg">
-  <div class="cpg">
-    <h1 id="ctit">Catalogue</h1>
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem;flex-wrap:wrap;gap:.7rem">
-      <p id="csub" style="color:var(--gris);font-size:.8rem"></p>
-      <select id="csort" onchange="renderCat()" style="background:var(--n3);color:var(--blanc);border:.5px solid rgba(255,255,255,.11);border-radius:var(--rp);padding:7px 15px;font-family:var(--ss);font-size:.78rem;outline:none;cursor:pointer">
-        <option value="t">Titre A→Z</option><option value="a">Auteur</option><option value="y">Année</option><option value="pop">Popularité</option>
-      </select>
+    <div>
+      <p class="fh">Siècles</p>
+      <ul class="flinks">
+        <li><a href="#" onclick="sf('siecle','XVIIe',document.querySelector('[data-f=siecle][data-v=XVIIe]'));return false">XVIIe</a></li>
+        <li><a href="#" onclick="sf('siecle','XVIIIe',document.querySelector('[data-f=siecle][data-v=XVIIIe]'));return false">XVIIIe</a></li>
+        <li><a href="#" onclick="sf('siecle','XIXe',document.querySelector('[data-f=siecle][data-v=XIXe]'));return false">XIXe</a></li>
+        <li><a href="#" onclick="sf('siecle','XXe',document.querySelector('[data-f=siecle][data-v=XXe]'));return false">XXe</a></li>
+      </ul>
     </div>
-    <div class="cgm" id="cgr"></div>
+    <div>
+      <p class="fh">Sources textes</p>
+      <ul class="flinks">
+        <li><a href="https://www.gutenberg.org/" target="_blank" rel="noopener">Projet Gutenberg</a></li>
+        <li><a href="https://gallica.bnf.fr/ebooks" target="_blank" rel="noopener">Gallica — BnF</a></li>
+        <li><a href="https://fr.wikisource.org/" target="_blank" rel="noopener">Wikisource</a></li>
+        <li><a href="https://noslivres.net/" target="_blank" rel="noopener">Noslivres.net</a></li>
+        <li><a href="https://www.ebooksgratuits.com/" target="_blank" rel="noopener">ELG</a></li>
+        <li><a href="http://beq.ebooksgratuits.com/" target="_blank" rel="noopener">BEQ</a></li>
+        <li><a href="https://www.ebooks-bnr.com/" target="_blank" rel="noopener">BNR</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="fh">Infos</p>
+      <ul class="flinks">
+        <li><a href="mentions-legales.html">Mentions légales</a></li>
+        <li><a href="https://commons.wikimedia.org/" target="_blank" rel="noopener">Wikimedia Commons</a></li>
+        <li><a href="https://www.audiocite.net/" target="_blank" rel="noopener">Audiocite</a></li>
+        <li><a href="https://www.litteratureaudio.com/" target="_blank" rel="noopener">Littératureaudio</a></li>
+      </ul>
+    </div>
   </div>
-</div>
-
-<div id="pg-aut" class="pg">
-  <div class="apg">
-    <h1>Les <em style="font-style:italic;color:var(--orc)">Auteurs</em></h1>
-    <p style="color:var(--gris);font-size:.8rem;margin-bottom:1.75rem">Explorez le catalogue par auteur</p>
-    <div class="agr" id="agr"></div>
+  <div class="footer-bot">
+    <p class="fc">© 2025 Codex — Domaine public</p>
+    <p class="fc">Tous les textes sont dans le domaine public (art. L123-1 CPI). Codex n'héberge aucun fichier. Aucune donnée personnelle collectée. <a href="mentions-legales.html" style="color:inherit">Mentions légales →</a></p>
   </div>
-</div>
+</footer>
 
-<div id="mo" onclick="if(event.target===this)closeModal()">
-  <div id="mb">
-    <button class="mcl" onclick="closeModal()">✕</button>
-    <div class="mh">
-      <div class="mhb"><img id="mbgi" src="" alt=""></div>
-      <div class="mhg"></div>
-      <div class="mhc">
-        <div class="mcv">
-          <img id="mci" src="" alt="" onerror="this.style.display='none';document.getElementById('mcp').style.display='flex'">
-          <div class="mcv-p" id="mcp" style="display:none">📖</div>
-        </div>
-        <div class="mi">
-          <p class="mm" id="mmm"></p>
-          <h2 class="mt" id="mtt"></h2>
-          <p class="mal" id="mal2"></p>
-          <div class="mtg" id="mtg"></div>
-        </div>
+<!-- MODAL -->
+<div id="moverlay" role="dialog" aria-modal="true">
+  <div id="modal">
+    <button class="mclose" onclick="closeModal()" aria-label="Fermer">✕</button>
+    <div class="mhead">
+      <div class="mcover" id="mcover">
+        <div class="cbg" id="mcover-pat"></div>
+        <div class="mcover-t" id="mcover-t"></div>
+      </div>
+      <div class="minfo">
+        <p class="mm" id="mm"></p>
+        <h2 class="mt" id="mt"></h2>
+        <div id="ma-zone"></div>
+        <div class="mmeta" id="mmeta"></div>
       </div>
     </div>
-    <div class="mbd">
-      <div class="mss">
-        <div class="mmn">
-          <p class="mst">À propos</p>
-          <p class="mds" id="mds"></p>
-          <p class="mst">Lire l'œuvre</p>
-          <div class="mac" id="mac"></div>
-          <div class="ra" id="ra">
-            <div class="rct">
-              <div class="rcb2">
-                <button class="rb" onclick="rfont(-1)">A−</button>
-                <button class="rb" onclick="rfont(1)">A+</button>
-                <button class="rb" id="sepb" onclick="togSepia()">Sépia</button>
-                <button class="rb" onclick="openFR()">⤢ Plein écran</button>
-              </div>
-              <span class="rpw" id="rpw">Chargement…</span>
-            </div>
-            <div class="rbar"><div class="rbf" id="rbf" style="width:0%"></div></div>
-            <div class="rtx" id="rtx" onscroll="upMP()"><div class="rld">Chargement depuis Gutenberg…</div></div>
-            <p class="rsc" id="rsc"></p>
-          </div>
-        </div>
-        <div class="msd">
-          <div class="mapc">
-            <div class="maph"><img src="" alt="" onerror="this.parentElement.style.display='none'"></div>
-            <p class="mapn" id="mapn"></p>
-            <p class="mapd" id="mapd"></p>
-            <p class="mapb" id="mapb"></p>
-          </div>
-          <div class="mnt"><strong>Domaine public</strong> — Art. L123-1 CPI · 70 ans p.m.a. · Textes chargés depuis Gutenberg. <a href="mentions-legales.html" style="color:var(--or)">Mentions légales →</a></div>
-        </div>
+    <div class="mbody">
+      <p class="mdesc" id="mdesc"></p>
+      <div class="mactions" id="mactions"></div>
+      <div class="mnotice">
+        <strong>Domaine public</strong> — Œuvre libre de droits (art. L123-1 CPI, 70 ans post mortem). Texte chargé depuis Gutenberg — Codex n'héberge aucun fichier. Aucune collecte de données. <a href="mentions-legales.html" style="color:inherit;text-decoration:underline">Mentions légales →</a>
       </div>
     </div>
   </div>
 </div>
 
-<div id="fr">
-  <div id="frprog" class="frp" style="width:0%"></div>
-  <div class="frt">
-    <span class="frtt" id="frt2"></span>
-    <div class="frc">
-      <button class="frb" onclick="frFont(-1)">A−</button>
-      <button class="frb" onclick="frFont(1)">A+</button>
-      <button class="frb" id="frsb" onclick="togFRS()">Sépia</button>
-      <a id="frepub" class="frb" href="#" target="_blank" rel="noopener">↓ EPUB</a>
-      <a id="frpdf" class="frb" href="#" target="_blank" rel="noopener">↓ PDF</a>
-      <button class="frb cl" onclick="closeFR()">✕ Fermer</button>
+<!-- READER -->
+<div id="roverlay" role="dialog" aria-label="Lecteur">
+  <div id="rprog" class="rprog" style="width:0%"></div>
+  <div id="rtopbar">
+    <div class="rtitle" id="rtitle"></div>
+    <div class="rctrls">
+      <button class="rbtn" onclick="rfs(-1)">A−</button>
+      <button class="rbtn" onclick="rfs(1)">A+</button>
+      <button class="rbtn" onclick="toggleSepia()" id="sepiabtn">Sépia</button>
+      <a id="rdl" class="rbtn" href="#" target="_blank" rel="noopener">↓ EPUB</a>
+      <a id="rgut" class="rbtn" href="#" target="_blank" rel="noopener">Gutenberg ↗</a>
+      <button class="rbtn rc" onclick="closeReader()">Fermer</button>
     </div>
   </div>
-  <div id="frcnt" onscroll="upFRP()">
-    <div class="frtx" id="frtx"></div>
+  <div id="rcontent" onscroll="updateProg()">
+    <div id="rtext"><div class="rloading">Chargement depuis Gutenberg…</div></div>
   </div>
 </div>
-
-<div class="toast" id="tst"></div>
 
 <script>
-
-const C=[
- {id:1,t:"Les Misérables",a:"Victor Hugo",y:1862,g:"roman",s:"XIXe",m:"Romantisme",gid:17489,d:"L'épopée de Jean Valjean, ancien forçat en quête de rédemption dans la France du XIXe siècle.",w:"Victor_Hugo",pop:100},
- {id:2,t:"Notre-Dame de Paris",a:"Victor Hugo",y:1831,g:"roman",s:"XIXe",m:"Romantisme",gid:2610,d:"Quasimodo, Esmeralda et Frollo dans la cathédrale médiévale.",w:"Victor_Hugo",pop:92},
- {id:3,t:"Les Contemplations",a:"Victor Hugo",y:1856,g:"poesie",s:"XIXe",m:"Romantisme",gid:8262,d:"Méditation lyrique sur l'amour, la mort et l'infini.",w:"Victor_Hugo",pop:78},
- {id:4,t:"Hernani",a:"Victor Hugo",y:1830,g:"theatre",s:"XIXe",m:"Romantisme",gid:6538,d:"La bataille d'Hernani marqua le triomphe du romantisme au théâtre.",w:"Victor_Hugo",pop:65},
- {id:5,t:"Madame Bovary",a:"Gustave Flaubert",y:1857,g:"roman",s:"XIXe",m:"Réalisme",gid:2413,d:"Emma rêve d'une vie romantique que la réalité provinciale ne peut lui offrir.",w:"Gustave_Flaubert",pop:98},
- {id:6,t:"L'Éducation sentimentale",a:"Gustave Flaubert",y:1869,g:"roman",s:"XIXe",m:"Réalisme",gid:8804,d:"Frédéric Moreau et ses illusions perdues dans le Paris de 1848.",w:"Gustave_Flaubert",pop:82},
- {id:7,t:"Trois Contes",a:"Gustave Flaubert",y:1877,g:"nouvelles",s:"XIXe",m:"Réalisme",gid:6982,d:"Un cœur simple, Saint Julien, Hérodias. Trois chefs-d'œuvre.",w:"Gustave_Flaubert",pop:72},
- {id:8,t:"Le Père Goriot",a:"Honoré de Balzac",y:1835,g:"roman",s:"XIXe",m:"Réalisme",gid:1237,d:"Dans une pension parisienne, un père sacrifie tout pour ses filles ingrates.",w:"Honoré_de_Balzac",pop:95},
- {id:9,t:"Eugénie Grandet",a:"Honoré de Balzac",y:1833,g:"roman",s:"XIXe",m:"Réalisme",gid:1414,d:"Générosité écrasée par l'avarice paternelle provinciale.",w:"Honoré_de_Balzac",pop:88},
- {id:10,t:"La Peau de chagrin",a:"Honoré de Balzac",y:1831,g:"roman",s:"XIXe",m:"Réalisme",gid:1305,d:"Un talisman exauce les désirs en réduisant la vie de son possesseur.",w:"Honoré_de_Balzac",pop:86},
- {id:11,t:"Les Illusions perdues",a:"Honoré de Balzac",y:1843,g:"roman",s:"XIXe",m:"Réalisme",gid:13159,d:"Lucien de Rubempré face au Paris littéraire et ses compromissions.",w:"Honoré_de_Balzac",pop:80},
- {id:12,t:"Germinal",a:"Émile Zola",y:1885,g:"roman",s:"XIXe",m:"Naturalisme",gid:5711,d:"Dans les mines du Nord, Étienne Lantier mène les mineurs vers la révolte.",w:"Émile_Zola",pop:97},
- {id:13,t:"L'Assommoir",a:"Émile Zola",y:1877,g:"roman",s:"XIXe",m:"Naturalisme",gid:6808,d:"La déchéance de Gervaise Macquart dans les faubourgs parisiens.",w:"Émile_Zola",pop:90},
- {id:14,t:"Nana",a:"Émile Zola",y:1880,g:"roman",s:"XIXe",m:"Naturalisme",gid:6220,d:"L'ascension d'une courtisane qui dévore les hommes du Second Empire.",w:"Émile_Zola",pop:85},
- {id:15,t:"Thérèse Raquin",a:"Émile Zola",y:1867,g:"roman",s:"XIXe",m:"Naturalisme",gid:6626,d:"Adultère, meurtre et culpabilité. Le roman sombre qui lança Zola.",w:"Émile_Zola",pop:84},
- {id:16,t:"La Bête humaine",a:"Émile Zola",y:1890,g:"roman",s:"XIXe",m:"Naturalisme",gid:11852,d:"Jacques Lantier lutte contre ses pulsions meurtrières sur sa locomotive.",w:"Émile_Zola",pop:79},
- {id:17,t:"Au Bonheur des Dames",a:"Émile Zola",y:1883,g:"roman",s:"XIXe",m:"Naturalisme",gid:3012,d:"L'essor du grand magasin moderne et la destruction du petit commerce.",w:"Émile_Zola",pop:82},
- {id:18,t:"Boule de Suif",a:"Guy de Maupassant",y:1880,g:"nouvelles",s:"XIXe",m:"Naturalisme",gid:3090,d:"Une prostituée révèle l'hypocrisie de la bonne société normande.",w:"Guy_de_Maupassant",pop:88},
- {id:19,t:"Bel-Ami",a:"Guy de Maupassant",y:1885,g:"roman",s:"XIXe",m:"Naturalisme",gid:4378,d:"Georges Duroy gravit les échelons parisiens par le charme et le cynisme.",w:"Guy_de_Maupassant",pop:91},
- {id:20,t:"Le Horla",a:"Guy de Maupassant",y:1887,g:"nouvelles",s:"XIXe",m:"Naturalisme",gid:25489,d:"Un narrateur sombre dans la paranoïa. Chef-d'œuvre du fantastique.",w:"Guy_de_Maupassant",pop:87},
- {id:21,t:"Une vie",a:"Guy de Maupassant",y:1883,g:"roman",s:"XIXe",m:"Naturalisme",gid:4765,d:"La vie ordinaire et cruelle d'une jeune aristocrate normande.",w:"Guy_de_Maupassant",pop:76},
- {id:22,t:"Les Fleurs du Mal",a:"Charles Baudelaire",y:1857,g:"poesie",s:"XIXe",m:"Symbolisme",gid:6099,d:"Spleen, idéal, amour et mort. L'œuvre fondatrice de la poésie moderne.",w:"Charles_Baudelaire",pop:99},
- {id:23,t:"Le Spleen de Paris",a:"Charles Baudelaire",y:1869,g:"poesie",s:"XIXe",m:"Symbolisme",gid:14867,d:"Petits poèmes en prose. La mélancolie urbaine selon Baudelaire.",w:"Charles_Baudelaire",pop:82},
- {id:24,t:"Une saison en enfer",a:"Arthur Rimbaud",y:1873,g:"poesie",s:"XIXe",m:"Symbolisme",gid:2873,d:"Rimbaud règle ses comptes avec la poésie et avec lui-même.",w:"Arthur_Rimbaud",pop:89},
- {id:25,t:"Illuminations",a:"Arthur Rimbaud",y:1886,g:"poesie",s:"XIXe",m:"Symbolisme",gid:2873,d:"Proses poétiques visionnaires. Le livre qui inventa la modernité.",w:"Arthur_Rimbaud",pop:85},
- {id:26,t:"Les Chants de Maldoror",a:"Lautréamont",y:1869,g:"poesie",s:"XIXe",m:"Symbolisme",gid:12005,d:"Les six chants de la révolte absolue. L'œuvre la plus radicale.",w:"Comte_de_Lautréamont",pop:72},
- {id:27,t:"Poèmes saturniens",a:"Paul Verlaine",y:1866,g:"poesie",s:"XIXe",m:"Symbolisme",gid:12287,d:"Premier recueil de Verlaine. Mélancolie et musique intérieure.",w:"Paul_Verlaine",pop:75},
- {id:28,t:"Fêtes galantes",a:"Paul Verlaine",y:1869,g:"poesie",s:"XIXe",m:"Symbolisme",gid:5108,d:"Masques et arlequins. La grâce mélancolique de Verlaine.",w:"Paul_Verlaine",pop:78},
- {id:29,t:"Dom Juan",a:"Molière",y:1665,g:"theatre",s:"XVIIe",m:"Classicisme",gid:6984,d:"Le libertin défie les lois divines jusqu'à la damnation.",w:"Molière",pop:88},
- {id:30,t:"Tartuffe",a:"Molière",y:1664,g:"theatre",s:"XVIIe",m:"Classicisme",gid:6728,d:"Un faux dévot s'installe chez Orgon. La comédie de l'hypocrisie.",w:"Molière",pop:90},
- {id:31,t:"L'Avare",a:"Molière",y:1668,g:"theatre",s:"XVIIe",m:"Classicisme",gid:6545,d:"Harpagon et sa cassette. L'avarice poussée jusqu'à l'absurde.",w:"Molière",pop:92},
- {id:32,t:"Phèdre",a:"Jean Racine",y:1677,g:"theatre",s:"XVIIe",m:"Classicisme",gid:6603,d:"Phèdre consumée par un amour interdit. Le sommet de la tragédie.",w:"Jean_Racine",pop:87},
- {id:33,t:"Le Cid",a:"Pierre Corneille",y:1637,g:"theatre",s:"XVIIe",m:"Classicisme",gid:7212,d:"Rodrigue entre l'amour de Chimène et l'honneur de son père.",w:"Pierre_Corneille",pop:89},
- {id:34,t:"Fables",a:"Jean de La Fontaine",y:1668,g:"poesie",s:"XVIIe",m:"Classicisme",gid:7241,d:"Le Corbeau et le Renard, La Cigale et la Fourmi. La sagesse en vers.",w:"Jean_de_La_Fontaine",pop:91},
- {id:35,t:"Pensées",a:"Blaise Pascal",y:1670,g:"philosophie",s:"XVIIe",m:"Classicisme",gid:18269,d:"La condition humaine, le divertissement, le roseau pensant.",w:"Blaise_Pascal",pop:85},
- {id:36,t:"Discours de la méthode",a:"René Descartes",y:1637,g:"philosophie",s:"XVIIe",m:"Classicisme",gid:59,d:"Je pense donc je suis. Le texte fondateur du rationalisme.",w:"René_Descartes",pop:82},
- {id:37,t:"Contes de ma mère l'Oye",a:"Charles Perrault",y:1697,g:"conte",s:"XVIIe",m:"Classicisme",gid:13951,d:"Cendrillon, Le Petit Chaperon rouge, La Belle au bois dormant.",w:"Charles_Perrault",pop:89},
- {id:38,t:"Candide",a:"Voltaire",y:1759,g:"conte",s:"XVIIIe",m:"Lumières",gid:4650,d:"Candide traverse le monde absurde avec son optimisme naïf.",w:"Voltaire",pop:96},
- {id:39,t:"Zadig",a:"Voltaire",y:1747,g:"conte",s:"XVIIIe",m:"Lumières",gid:5765,d:"Zadig, sage babylonien, subit les caprices d'un destin absurde.",w:"Voltaire",pop:84},
- {id:40,t:"Les Confessions",a:"Jean-Jacques Rousseau",y:1782,g:"roman",s:"XVIIIe",m:"Lumières",gid:3913,d:"La première autobiographie moderne. Rousseau se met à nu.",w:"Jean-Jacques_Rousseau",pop:82},
- {id:41,t:"Les Liaisons dangereuses",a:"Choderlos de Laclos",y:1782,g:"roman",s:"XVIIIe",m:"Lumières",gid:5058,d:"Valmont et Merteuil manœuvrent pour séduire et détruire.",w:"Pierre_Choderlos_de_Laclos",pop:93},
- {id:42,t:"Manon Lescaut",a:"Abbé Prévost",y:1731,g:"roman",s:"XVIIIe",m:"Lumières",gid:7975,d:"Le chevalier des Grieux sacrifie tout pour Manon Lescaut.",w:"Abbé_Prévost",pop:86},
- {id:43,t:"Le Mariage de Figaro",a:"Beaumarchais",y:1784,g:"theatre",s:"XVIIIe",m:"Lumières",gid:8085,d:"Figaro contre le comte. La comédie révolutionnaire qui préfigura 1789.",w:"Pierre-Augustin_Caron_de_Beaumarchais",pop:88},
- {id:44,t:"Les Trois Mousquetaires",a:"Alexandre Dumas",y:1844,g:"roman",s:"XIXe",m:"Romantisme",gid:1257,d:"D'Artagnan et ses amis contre le cardinal Richelieu.",w:"Alexandre_Dumas",pop:97},
- {id:45,t:"Le Comte de Monte-Cristo",a:"Alexandre Dumas",y:1844,g:"roman",s:"XIXe",m:"Romantisme",gid:1184,d:"Edmond Dantès, trahi et emprisonné, prépare une vengeance implacable.",w:"Alexandre_Dumas",pop:98},
- {id:46,t:"La Reine Margot",a:"Alexandre Dumas",y:1845,g:"roman",s:"XIXe",m:"Romantisme",gid:1256,d:"La Saint-Barthélemy et les intrigues de la cour des Valois.",w:"Alexandre_Dumas",pop:84},
- {id:47,t:"Le Rouge et le Noir",a:"Stendhal",y:1830,g:"roman",s:"XIXe",m:"Réalisme",gid:798,d:"Julien Sorel veut conquérir le monde par l'intelligence et le calcul.",w:"Stendhal",pop:94},
- {id:48,t:"La Chartreuse de Parme",a:"Stendhal",y:1839,g:"roman",s:"XIXe",m:"Réalisme",gid:2933,d:"Fabrice del Dongo à Waterloo puis dans les intrigues de Parme.",w:"Stendhal",pop:82},
- {id:49,t:"Cyrano de Bergerac",a:"Edmond Rostand",y:1897,g:"theatre",s:"XIXe",m:"Romantisme",gid:1254,d:"Cyrano, bretteur génial au grand nez, aime Roxane en silence.",w:"Edmond_Rostand",pop:95},
- {id:50,t:"Du côté de chez Swann",a:"Marcel Proust",y:1913,g:"roman",s:"XXe",m:"Modernisme",gid:7178,d:"La madeleine, Combray, l'amour de Swann. Le début de la grande œuvre.",w:"Marcel_Proust",pop:89},
- {id:51,t:"Alcools",a:"Guillaume Apollinaire",y:1913,g:"poesie",s:"XXe",m:"Modernisme",gid:4271,d:"Zone, Le Pont Mirabeau. Apollinaire invente la poésie moderne.",w:"Guillaume_Apollinaire",pop:84},
- {id:52,t:"Le Fantôme de l'Opéra",a:"Gaston Leroux",y:1910,g:"roman",s:"XXe",m:"Modernisme",gid:175,d:"Erik, le fantôme masqué, hante l'Opéra de Paris.",w:"Gaston_Leroux",pop:88},
- {id:53,t:"Arsène Lupin",a:"Maurice Leblanc",y:1907,g:"roman",s:"XXe",m:"Modernisme",gid:6133,d:"Les aventures du gentleman cambrioleur le plus célèbre.",w:"Maurice_Leblanc",pop:86},
- {id:54,t:"Méditations poétiques",a:"Alphonse de Lamartine",y:1820,g:"poesie",s:"XIXe",m:"Romantisme",gid:13024,d:"Le Lac, L'Isolement. Les premiers grands poèmes romantiques.",w:"Alphonse_de_Lamartine",pop:80},
- {id:55,t:"Essais",a:"Michel de Montaigne",y:1580,g:"philosophie",s:"XVIe",m:"Humanisme",gid:3600,d:"Que sais-je ? Montaigne invente l'essai et l'introspection.",w:"Michel_de_Montaigne",pop:79},
- {id:56,t:"Gargantua",a:"François Rabelais",y:1534,g:"roman",s:"XVIe",m:"Humanisme",gid:1200,d:"L'humanisme rabelaisien : savoir, liberté et joie de vivre.",w:"François_Rabelais",pop:74},
- {id:57,t:"Don Quichotte",a:"Miguel de Cervantes",y:1605,g:"roman",s:"XVIIe",m:"Humanisme",gid:2000,d:"L'hidalgo qui prend les moulins pour des géants. Trad. Viardot.",w:"Miguel_de_Cervantes",pop:90},
- {id:58,t:"Hamlet",a:"William Shakespeare",y:1603,g:"theatre",s:"XVIIe",m:"Humanisme",gid:1524,d:"Être ou ne pas être. Hamlet venge son père. Trad. F.-V. Hugo.",w:"William_Shakespeare",pop:93},
- {id:59,t:"L'Iliade",a:"Homère",y:-800,g:"poesie",s:"Antiquité",m:"Antiquité",gid:12243,d:"La guerre de Troie. La colère d'Achille. Trad. Leconte de Lisle.",w:"Homer",pop:85},
- {id:60,t:"L'Odyssée",a:"Homère",y:-800,g:"poesie",s:"Antiquité",m:"Antiquité",gid:3160,d:"Le retour d'Ulysse. Dix ans d'aventures et de ruse.",w:"Homer",pop:87},
- {id:61,t:"La Divine Comédie",a:"Dante Alighieri",y:1320,g:"poesie",s:"XIVe",m:"Moyen Âge",gid:1004,d:"L'Enfer, le Purgatoire, le Paradis. Trad. Lamennais.",w:"Dante_Alighieri",pop:88},
- {id:62,t:"Anna Karénine",a:"Léon Tolstoï",y:1878,g:"roman",s:"XIXe",m:"Réalisme",gid:1399,d:"Anna quitte son mari pour Vronski. Destin et passion.",w:"Leo_Tolstoy",pop:92},
- {id:63,t:"Crime et Châtiment",a:"Fiodor Dostoïevski",y:1866,g:"roman",s:"XIXe",m:"Réalisme",gid:2554,d:"Raskolnikov tue une usurière. Culpabilité et rédemption.",w:"Fyodor_Dostoevsky",pop:93},
- {id:64,t:"Vingt mille lieues sous les mers",a:"Jules Verne",y:1870,g:"roman",s:"XIXe",m:"Réalisme",gid:164,d:"Le capitaine Nemo et le Nautilus dans les profondeurs océaniques.",w:"Jules_Verne",pop:94},
- {id:65,t:"Le Tour du monde en 80 jours",a:"Jules Verne",y:1872,g:"roman",s:"XIXe",m:"Réalisme",gid:103,d:"Phileas Fogg parie de faire le tour du monde en 80 jours.",w:"Jules_Verne",pop:92},
- {id:66,t:"Voyage au centre de la Terre",a:"Jules Verne",y:1864,g:"roman",s:"XIXe",m:"Réalisme",gid:3748,d:"Le professeur Lidenbrock descend vers le centre de la Terre.",w:"Jules_Verne",pop:89},
- {id:67,t:"Carmen",a:"Prosper Mérimée",y:1845,g:"nouvelles",s:"XIXe",m:"Réalisme",gid:2465,d:"Don José envoûté par Carmen. La nouvelle qui inspira Bizet.",w:"Prosper_Mérimée",pop:88},
- {id:68,t:"Lettres de mon moulin",a:"Alphonse Daudet",y:1869,g:"nouvelles",s:"XIXe",m:"Réalisme",gid:2406,d:"La Provence lumineuse de Daudet. Nouvelles tendres et ironiques.",w:"Alphonse_Daudet",pop:82},
- {id:69,t:"Sans famille",a:"Hector Malot",y:1878,g:"roman",s:"XIXe",m:"Réalisme",gid:3700,d:"Rémi, enfant abandonné, parcourt la France avec Vitalis.",w:"Hector_Malot",pop:84},
- {id:70,t:"Les Malheurs de Sophie",a:"Comtesse de Ségur",y:1858,g:"conte",s:"XIXe",m:"Réalisme",gid:3763,d:"Les bêtises et punitions de Sophie. La littérature jeunesse classique.",w:"Comtesse_de_Ségur",pop:82},
- {id:71,t:"La Dame aux camélias",a:"Alexandre Dumas fils",y:1848,g:"roman",s:"XIXe",m:"Réalisme",gid:2611,d:"Marguerite Gautier aime Armand Duval. Inspira La Traviata.",w:"Alexandre_Dumas_fils",pop:86},
- {id:72,t:"Le Bossu",a:"Paul Féval",y:1857,g:"roman",s:"XIXe",m:"Romantisme",gid:13842,d:"Lagardère protège la fille de son ami tué.",w:"Paul_Féval",pop:78},
- {id:73,t:"Poil de Carotte",a:"Jules Renard",y:1894,g:"roman",s:"XIXe",m:"Naturalisme",gid:1303,d:"Un enfant roux et mal-aimé résiste à la cruauté familiale.",w:"Jules_Renard",pop:80},
- {id:74,t:"La Mare au diable",a:"George Sand",y:1846,g:"roman",s:"XIXe",m:"Romantisme",gid:2489,d:"Paysan veuf rencontre une jeune bergère. Roman champêtre idyllique.",w:"George_Sand",pop:76},
- {id:75,t:"Pêcheur d'Islande",a:"Pierre Loti",y:1886,g:"roman",s:"XIXe",m:"Naturalisme",gid:3260,d:"Les pêcheurs bretons partent vers l'Islande. Amour, mer et mort.",w:"Pierre_Loti",pop:70},
- {id:76,t:"À rebours",a:"Joris-Karl Huysmans",y:1884,g:"roman",s:"XIXe",m:"Symbolisme",gid:12341,d:"Des Esseintes pousse l'art de vivre à l'extrême. La bible du décadentisme.",w:"Joris-Karl_Huysmans",pop:72},
- {id:77,t:"Les Diaboliques",a:"Barbey d'Aurevilly",y:1874,g:"nouvelles",s:"XIXe",m:"Romantisme",gid:10422,d:"Six nouvelles de passion et de crime. Le romantisme noir.",w:"Jules_Barbey_d'Aurevilly",pop:74},
- {id:78,t:"Lorenzaccio",a:"Alfred de Musset",y:1834,g:"theatre",s:"XIXe",m:"Romantisme",gid:6547,d:"Lorenzo prépare l'assassinat d'Alexandre de Médicis.",w:"Alfred_de_Musset",pop:76},
- {id:79,t:"Les Croix de bois",a:"Roland Dorgelès",y:1919,g:"roman",s:"XXe",m:"Modernisme",gid:29888,d:"La Grande Guerre vue de l'intérieur des tranchées.",w:"Roland_Dorgelès",pop:74},
- {id:80,t:"Colline",a:"Jean Giono",y:1929,g:"roman",s:"XXe",m:"Modernisme",gid:22781,d:"Dans la Haute-Provence, la nature reprend ses droits.",w:"Jean_Giono",pop:68},
+// ── CATALOGUE (203 livres dédupliqués) ────────────────────────────────────
+const BOOKS = [
+ {id:1,t:"Les Misérables",a:"Victor Hugo",y:1862,g:"roman",s:"XIXe",m:"Romantisme",gid:17489,d:"L'épopée de Jean Valjean, ancien forçat en quête de rédemption.",w:"Victor_Hugo"},
+ {id:2,t:"Notre-Dame de Paris",a:"Victor Hugo",y:1831,g:"roman",s:"XIXe",m:"Romantisme",gid:2610,d:"Quasimodo, Esmeralda et Frollo dans la cathédrale médiévale.",w:"Victor_Hugo"},
+ {id:3,t:"Les Contemplations",a:"Victor Hugo",y:1856,g:"poesie",s:"XIXe",m:"Romantisme",gid:8262,d:"Méditation lyrique sur l'amour, la mort et l'infini.",w:"Victor_Hugo"},
+ {id:4,t:"Hernani",a:"Victor Hugo",y:1830,g:"theatre",s:"XIXe",m:"Romantisme",gid:6538,d:"Le drame romantique fondateur. La bataille d'Hernani.",w:"Victor_Hugo"},
+ {id:5,t:"L'Homme qui rit",a:"Victor Hugo",y:1869,g:"roman",s:"XIXe",m:"Romantisme",gid:12587,d:"Gwynplaine, enfant défiguré, découvre sa noblesse.",w:"Victor_Hugo"},
+ {id:6,t:"Quatrevingt-treize",a:"Victor Hugo",y:1874,g:"roman",s:"XIXe",m:"Romantisme",gid:1941,d:"La Vendée contre-révolutionnaire face à la Terreur.",w:"Victor_Hugo"},
+ {id:7,t:"Madame Bovary",a:"Gustave Flaubert",y:1857,g:"roman",s:"XIXe",m:"Réalisme",gid:2413,d:"Emma rêve d'une vie romantique que la réalité ne peut offrir.",w:"Gustave_Flaubert"},
+ {id:8,t:"L'Éducation sentimentale",a:"Gustave Flaubert",y:1869,g:"roman",s:"XIXe",m:"Réalisme",gid:8804,d:"Frédéric Moreau et ses illusions perdues dans le Paris de 1848.",w:"Gustave_Flaubert"},
+ {id:9,t:"Salammbô",a:"Gustave Flaubert",y:1862,g:"roman",s:"XIXe",m:"Réalisme",gid:1290,d:"Carthage antique, guerre des mercenaires et amour interdit.",w:"Gustave_Flaubert"},
+ {id:10,t:"Trois Contes",a:"Gustave Flaubert",y:1877,g:"nouvelles",s:"XIXe",m:"Réalisme",gid:6982,d:"Un cœur simple, Saint Julien, Hérodias. Trois chefs-d'œuvre.",w:"Gustave_Flaubert"},
+ {id:11,t:"Bouvard et Pécuchet",a:"Gustave Flaubert",y:1881,g:"roman",s:"XIXe",m:"Réalisme",gid:4657,d:"Deux copistes s'essaient à toutes les sciences et échouent.",w:"Gustave_Flaubert"},
+ {id:12,t:"Le Père Goriot",a:"Honoré de Balzac",y:1835,g:"roman",s:"XIXe",m:"Réalisme",gid:1237,d:"Un père sacrifie tout pour ses filles ingrates.",w:"Honoré_de_Balzac"},
+ {id:13,t:"Eugénie Grandet",a:"Honoré de Balzac",y:1833,g:"roman",s:"XIXe",m:"Réalisme",gid:1414,d:"Générosité écrasée par l'avarice paternelle provinciale.",w:"Honoré_de_Balzac"},
+ {id:14,t:"La Cousine Bette",a:"Honoré de Balzac",y:1846,g:"roman",s:"XIXe",m:"Réalisme",gid:1177,d:"Lisbeth Fischer tisse sa vengeance contre une famille ingrate.",w:"Honoré_de_Balzac"},
+ {id:15,t:"Le Colonel Chabert",a:"Honoré de Balzac",y:1832,g:"nouvelles",s:"XIXe",m:"Réalisme",gid:1954,d:"Un colonel cru mort revient réclamer son identité.",w:"Honoré_de_Balzac"},
+ {id:16,t:"La Peau de chagrin",a:"Honoré de Balzac",y:1831,g:"roman",s:"XIXe",m:"Réalisme",gid:1305,d:"Un talisman exauce les désirs en réduisant la vie de son possesseur.",w:"Honoré_de_Balzac"},
+ {id:17,t:"Les Illusions perdues",a:"Honoré de Balzac",y:1843,g:"roman",s:"XIXe",m:"Réalisme",gid:13159,d:"Lucien de Rubempré face au Paris littéraire et ses compromissions.",w:"Honoré_de_Balzac"},
+ {id:18,t:"César Birotteau",a:"Honoré de Balzac",y:1837,g:"roman",s:"XIXe",m:"Réalisme",gid:1570,d:"L'ascension et la chute d'un parfumeur parisien.",w:"Honoré_de_Balzac"},
+ {id:19,t:"Germinal",a:"Émile Zola",y:1885,g:"roman",s:"XIXe",m:"Naturalisme",gid:5711,d:"Dans les mines du Nord, Étienne Lantier mène les mineurs vers la révolte.",w:"Émile_Zola"},
+ {id:20,t:"L'Assommoir",a:"Émile Zola",y:1877,g:"roman",s:"XIXe",m:"Naturalisme",gid:6808,d:"La déchéance de Gervaise Macquart dans les faubourgs parisiens.",w:"Émile_Zola"},
+ {id:21,t:"Nana",a:"Émile Zola",y:1880,g:"roman",s:"XIXe",m:"Naturalisme",gid:6220,d:"L'ascension d'une courtisane qui dévore les hommes du Second Empire.",w:"Émile_Zola"},
+ {id:22,t:"Au Bonheur des Dames",a:"Émile Zola",y:1883,g:"roman",s:"XIXe",m:"Naturalisme",gid:3012,d:"L'essor du grand magasin moderne et la destruction du petit commerce.",w:"Émile_Zola"},
+ {id:23,t:"La Bête humaine",a:"Émile Zola",y:1890,g:"roman",s:"XIXe",m:"Naturalisme",gid:11852,d:"Jacques Lantier lutte contre ses pulsions meurtrières.",w:"Émile_Zola"},
+ {id:24,t:"Thérèse Raquin",a:"Émile Zola",y:1867,g:"roman",s:"XIXe",m:"Naturalisme",gid:6626,d:"Adultère, meurtre et culpabilité. Le roman sombre qui lança Zola.",w:"Émile_Zola"},
+ {id:25,t:"La Terre",a:"Émile Zola",y:1887,g:"roman",s:"XIXe",m:"Naturalisme",gid:5003,d:"La violence des paysans beaucerains pour la possession de la terre.",w:"Émile_Zola"},
+ {id:26,t:"La Débâcle",a:"Émile Zola",y:1892,g:"roman",s:"XIXe",m:"Naturalisme",gid:7063,d:"La guerre de 1870 et la défaite de Sedan vue de l'intérieur.",w:"Émile_Zola"},
+ {id:27,t:"Boule de Suif",a:"Guy de Maupassant",y:1880,g:"nouvelles",s:"XIXe",m:"Naturalisme",gid:3090,d:"Une prostituée révèle l'hypocrisie de la bonne société normande.",w:"Guy_de_Maupassant"},
+ {id:28,t:"Une vie",a:"Guy de Maupassant",y:1883,g:"roman",s:"XIXe",m:"Naturalisme",gid:4765,d:"La vie ordinaire et cruelle de Jeanne, aristocrate normande.",w:"Guy_de_Maupassant"},
+ {id:29,t:"Bel-Ami",a:"Guy de Maupassant",y:1885,g:"roman",s:"XIXe",m:"Naturalisme",gid:4378,d:"Georges Duroy gravit les échelons parisiens par le charme et le cynisme.",w:"Guy_de_Maupassant"},
+ {id:30,t:"Le Horla",a:"Guy de Maupassant",y:1887,g:"nouvelles",s:"XIXe",m:"Naturalisme",gid:25489,d:"Un narrateur sombre dans la paranoïa. Chef-d'œuvre du fantastique.",w:"Guy_de_Maupassant"},
+ {id:31,t:"La Maison Tellier",a:"Guy de Maupassant",y:1881,g:"nouvelles",s:"XIXe",m:"Naturalisme",gid:21327,d:"Nouvelles normandes avec ironie grinçante et tendresse.",w:"Guy_de_Maupassant"},
+ {id:32,t:"Les Fleurs du Mal",a:"Charles Baudelaire",y:1857,g:"poesie",s:"XIXe",m:"Symbolisme",gid:6099,d:"Spleen, idéal, amour et mort. L'œuvre fondatrice de la poésie moderne.",w:"Charles_Baudelaire"},
+ {id:33,t:"Le Spleen de Paris",a:"Charles Baudelaire",y:1869,g:"poesie",s:"XIXe",m:"Symbolisme",gid:14867,d:"Petits poèmes en prose. La mélancolie urbaine selon Baudelaire.",w:"Charles_Baudelaire"},
+ {id:34,t:"Poèmes saturniens",a:"Paul Verlaine",y:1866,g:"poesie",s:"XIXe",m:"Symbolisme",gid:12287,d:"Premier recueil. Mélancolie, musique intérieure et nostalgie.",w:"Paul_Verlaine"},
+ {id:35,t:"Fêtes galantes",a:"Paul Verlaine",y:1869,g:"poesie",s:"XIXe",m:"Symbolisme",gid:5108,d:"Masques et arlequins. La grâce mélancolique de Verlaine au sommet.",w:"Paul_Verlaine"},
+ {id:36,t:"Romances sans paroles",a:"Paul Verlaine",y:1874,g:"poesie",s:"XIXe",m:"Symbolisme",gid:16512,d:"La musique avant toute chose. Poèmes de l'errance.",w:"Paul_Verlaine"},
+ {id:37,t:"Sagesse",a:"Paul Verlaine",y:1880,g:"poesie",s:"XIXe",m:"Symbolisme",gid:14473,d:"Verlaine après la prison, reconverti. Poèmes de paix intérieure.",w:"Paul_Verlaine"},
+ {id:38,t:"Une saison en enfer",a:"Arthur Rimbaud",y:1873,g:"poesie",s:"XIXe",m:"Symbolisme",gid:2873,d:"Rimbaud règle ses comptes avec la poésie et avec lui-même.",w:"Arthur_Rimbaud"},
+ {id:39,t:"Illuminations",a:"Arthur Rimbaud",y:1886,g:"poesie",s:"XIXe",m:"Symbolisme",gid:2873,d:"Proses poétiques visionnaires. Le livre qui inventa la modernité.",w:"Arthur_Rimbaud"},
+ {id:40,t:"Poésies",a:"Stéphane Mallarmé",y:1887,g:"poesie",s:"XIXe",m:"Symbolisme",gid:13921,d:"L'Après-midi d'un faune. La langue poussée à l'extrême densité.",w:"Stéphane_Mallarmé"},
+ {id:41,t:"Les Chants de Maldoror",a:"Lautréamont",y:1869,g:"poesie",s:"XIXe",m:"Symbolisme",gid:12005,d:"Les six chants de la révolte absolue. L'œuvre la plus radicale.",w:"Comte_de_Lautréamont"},
+ {id:42,t:"Dom Juan",a:"Molière",y:1665,g:"theatre",s:"XVIIe",m:"Classicisme",gid:6984,d:"Le libertin défie les lois divines jusqu'à la damnation.",w:"Molière"},
+ {id:43,t:"Le Misanthrope",a:"Molière",y:1666,g:"theatre",s:"XVIIe",m:"Classicisme",gid:7992,d:"Alceste ne supporte pas la fausseté de la société.",w:"Molière"},
+ {id:44,t:"Tartuffe",a:"Molière",y:1664,g:"theatre",s:"XVIIe",m:"Classicisme",gid:6728,d:"Un faux dévot s'installe chez Orgon. La comédie de l'hypocrisie.",w:"Molière"},
+ {id:45,t:"L'Avare",a:"Molière",y:1668,g:"theatre",s:"XVIIe",m:"Classicisme",gid:6545,d:"Harpagon et sa cassette. L'avarice poussée jusqu'à l'absurde.",w:"Molière"},
+ {id:46,t:"Le Bourgeois gentilhomme",a:"Molière",y:1670,g:"theatre",s:"XVIIe",m:"Classicisme",gid:2992,d:"M. Jourdain veut à tout prix devenir gentilhomme.",w:"Molière"},
+ {id:47,t:"Le Malade imaginaire",a:"Molière",y:1673,g:"theatre",s:"XVIIe",m:"Classicisme",gid:8060,d:"Argan se croit mourant. La dernière pièce de Molière.",w:"Molière"},
+ {id:48,t:"Phèdre",a:"Jean Racine",y:1677,g:"theatre",s:"XVIIe",m:"Classicisme",gid:6603,d:"Phèdre consumée par un amour interdit. Le sommet de la tragédie.",w:"Jean_Racine"},
+ {id:49,t:"Andromaque",a:"Jean Racine",y:1667,g:"theatre",s:"XVIIe",m:"Classicisme",gid:6838,d:"Chaîne de passions non partagées. La mécanique raciniènne.",w:"Jean_Racine"},
+ {id:50,t:"Britannicus",a:"Jean Racine",y:1669,g:"theatre",s:"XVIIe",m:"Classicisme",gid:6833,d:"Néron révèle sa nature tyrannique. La pièce politique.",w:"Jean_Racine"},
+ {id:51,t:"Bérénice",a:"Jean Racine",y:1670,g:"theatre",s:"XVIIe",m:"Classicisme",gid:6836,d:"Titus renonce à Bérénice pour la raison d'État.",w:"Jean_Racine"},
+ {id:52,t:"Esther",a:"Jean Racine",y:1689,g:"theatre",s:"XVIIe",m:"Classicisme",gid:6842,d:"Esther sauve son peuple. Tragédie biblique avec chœurs.",w:"Jean_Racine"},
+ {id:53,t:"Le Cid",a:"Pierre Corneille",y:1637,g:"theatre",s:"XVIIe",m:"Classicisme",gid:7212,d:"Rodrigue entre l'amour de Chimène et l'honneur de son père.",w:"Pierre_Corneille"},
+ {id:54,t:"Horace",a:"Pierre Corneille",y:1640,g:"theatre",s:"XVIIe",m:"Classicisme",gid:6840,d:"Rome contre Albe, fratrie contre amour.",w:"Pierre_Corneille"},
+ {id:55,t:"Polyeucte",a:"Pierre Corneille",y:1642,g:"theatre",s:"XVIIe",m:"Classicisme",gid:6839,d:"Martyr chrétien dans l'empire romain. Grâce et sacrifice.",w:"Pierre_Corneille"},
+ {id:56,t:"Candide",a:"Voltaire",y:1759,g:"conte",s:"XVIIIe",m:"Lumières",gid:4650,d:"Candide traverse le monde absurde avec son optimisme naïf.",w:"Voltaire"},
+ {id:57,t:"Zadig",a:"Voltaire",y:1747,g:"conte",s:"XVIIIe",m:"Lumières",gid:5765,d:"Zadig, sage babylonien, subit les caprices d'un destin absurde.",w:"Voltaire"},
+ {id:58,t:"Micromégas",a:"Voltaire",y:1752,g:"conte",s:"XVIIIe",m:"Lumières",gid:30708,d:"Deux géants extraterrestres observent la prétention des hommes.",w:"Voltaire"},
+ {id:59,t:"Les Confessions",a:"Jean-Jacques Rousseau",y:1782,g:"roman",s:"XVIIIe",m:"Lumières",gid:3913,d:"La première autobiographie moderne. Rousseau se met à nu.",w:"Jean-Jacques_Rousseau"},
+ {id:60,t:"Julie ou la Nouvelle Héloïse",a:"Jean-Jacques Rousseau",y:1761,g:"roman",s:"XVIIIe",m:"Lumières",gid:40508,d:"L'amour impossible entre Julie et Saint-Preux. Précurseur du romantisme.",w:"Jean-Jacques_Rousseau"},
+ {id:61,t:"Jacques le Fataliste",a:"Denis Diderot",y:1796,g:"roman",s:"XVIIIe",m:"Lumières",gid:6559,d:"Roman expérimental sur le libre arbitre. Narration réflexive.",w:"Denis_Diderot"},
+ {id:62,t:"Le Neveu de Rameau",a:"Denis Diderot",y:1805,g:"roman",s:"XVIIIe",m:"Lumières",gid:6761,d:"Dialogue avec le neveu de Rameau, génie raté et parasite cynique.",w:"Denis_Diderot"},
+ {id:63,t:"Le Jeu de l'amour et du hasard",a:"Marivaux",y:1730,g:"theatre",s:"XVIIIe",m:"Lumières",gid:7879,d:"Silvia et Dorante se déguisent pour s'observer. La comédie des masques.",w:"Pierre_de_Marivaux"},
+ {id:64,t:"Le Mariage de Figaro",a:"Beaumarchais",y:1784,g:"theatre",s:"XVIIIe",m:"Lumières",gid:8085,d:"Figaro contre le comte. La comédie révolutionnaire qui préfigura 1789.",w:"Pierre-Augustin_Caron_de_Beaumarchais"},
+ {id:65,t:"Le Barbier de Séville",a:"Beaumarchais",y:1775,g:"theatre",s:"XVIIIe",m:"Lumières",gid:8739,d:"Figaro aide le comte à conquérir Rosine sous le nez du tuteur.",w:"Pierre-Augustin_Caron_de_Beaumarchais"},
+ {id:66,t:"Les Liaisons dangereuses",a:"Choderlos de Laclos",y:1782,g:"roman",s:"XVIIIe",m:"Lumières",gid:5058,d:"Valmont et Merteuil manœuvrent pour séduire et détruire.",w:"Pierre_Choderlos_de_Laclos"},
+ {id:67,t:"Manon Lescaut",a:"Abbé Prévost",y:1731,g:"roman",s:"XVIIIe",m:"Lumières",gid:7975,d:"Le chevalier des Grieux sacrifie tout pour Manon Lescaut.",w:"Abbé_Prévost"},
+ {id:68,t:"Voyage autour de ma chambre",a:"Xavier de Maistre",y:1794,g:"roman",s:"XVIIIe",m:"Lumières",gid:1906,d:"Confiné dans sa chambre, l'auteur voyage par l'imagination.",w:"Xavier_de_Maistre"},
+ {id:69,t:"Contes de ma mère l'Oye",a:"Charles Perrault",y:1697,g:"conte",s:"XVIIe",m:"Classicisme",gid:13951,d:"Cendrillon, Le Petit Chaperon rouge, La Belle au bois dormant.",w:"Charles_Perrault"},
+ {id:70,t:"Fables",a:"Jean de La Fontaine",y:1668,g:"poesie",s:"XVIIe",m:"Classicisme",gid:7241,d:"Le Corbeau et le Renard, La Cigale et la Fourmi. La sagesse en vers.",w:"Jean_de_La_Fontaine"},
+ {id:71,t:"Discours de la méthode",a:"René Descartes",y:1637,g:"philosophie",s:"XVIIe",m:"Classicisme",gid:59,d:"Je pense donc je suis. Le texte fondateur du rationalisme.",w:"René_Descartes"},
+ {id:72,t:"Pensées",a:"Blaise Pascal",y:1670,g:"philosophie",s:"XVIIe",m:"Classicisme",gid:18269,d:"La condition humaine, le divertissement, le roseau pensant.",w:"Blaise_Pascal"},
+ {id:73,t:"Les Caractères",a:"Jean de La Bruyère",y:1688,g:"philosophie",s:"XVIIe",m:"Classicisme",gid:2283,d:"Portraits au vitriol de la société du Grand Siècle.",w:"Jean_de_La_Bruyère"},
+ {id:74,t:"L'Art poétique",a:"Nicolas Boileau",y:1674,g:"poesie",s:"XVIIe",m:"Classicisme",gid:7148,d:"Les règles du bon goût classique en vers. Le manifeste du classicisme.",w:"Nicolas_Boileau"},
+ {id:75,t:"Les Aventures de Télémaque",a:"Fénelon",y:1699,g:"roman",s:"XVIIe",m:"Classicisme",gid:1161,d:"Télémaque cherche son père. Roman pédagogique critique du pouvoir absolu.",w:"François_Fénelon"},
+ {id:76,t:"Les Trois Mousquetaires",a:"Alexandre Dumas",y:1844,g:"roman",s:"XIXe",m:"Romantisme",gid:1257,d:"D'Artagnan et Athos, Porthos, Aramis contre Richelieu.",w:"Alexandre_Dumas"},
+ {id:77,t:"Le Comte de Monte-Cristo",a:"Alexandre Dumas",y:1844,g:"roman",s:"XIXe",m:"Romantisme",gid:1184,d:"Edmond Dantès, trahi et emprisonné, prépare une vengeance implacable.",w:"Alexandre_Dumas"},
+ {id:78,t:"Vingt ans après",a:"Alexandre Dumas",y:1845,g:"roman",s:"XIXe",m:"Romantisme",gid:1259,d:"La suite des Trois Mousquetaires. Les quatre amis dans la Fronde.",w:"Alexandre_Dumas"},
+ {id:79,t:"La Reine Margot",a:"Alexandre Dumas",y:1845,g:"roman",s:"XIXe",m:"Romantisme",gid:1256,d:"La Saint-Barthélemy et les intrigues de la cour des Valois.",w:"Alexandre_Dumas"},
+ {id:80,t:"Le Rouge et le Noir",a:"Stendhal",y:1830,g:"roman",s:"XIXe",m:"Réalisme",gid:798,d:"Julien Sorel veut conquérir le monde par l'intelligence et le calcul.",w:"Stendhal"},
+ {id:81,t:"La Chartreuse de Parme",a:"Stendhal",y:1839,g:"roman",s:"XIXe",m:"Réalisme",gid:2933,d:"Fabrice del Dongo à Waterloo puis dans les intrigues de Parme.",w:"Stendhal"},
+ {id:82,t:"Lettres de mon moulin",a:"Alphonse Daudet",y:1869,g:"nouvelles",s:"XIXe",m:"Réalisme",gid:2406,d:"La Provence, ses paysages, ses habitants. Nouvelles lumineuses.",w:"Alphonse_Daudet"},
+ {id:83,t:"Tartarin de Tarascon",a:"Alphonse Daudet",y:1872,g:"roman",s:"XIXe",m:"Réalisme",gid:926,d:"Tartarin, fanfaron méridional, part chasser le lion en Afrique.",w:"Alphonse_Daudet"},
+ {id:84,t:"Le Petit Chose",a:"Alphonse Daudet",y:1868,g:"roman",s:"XIXe",m:"Réalisme",gid:3344,d:"Roman autobiographique de la misère et de la lutte pour s'en sortir.",w:"Alphonse_Daudet"},
+ {id:85,t:"Vingt mille lieues sous les mers",a:"Jules Verne",y:1870,g:"roman",s:"XIXe",m:"Réalisme",gid:164,d:"Le capitaine Nemo et le Nautilus dans les profondeurs océaniques.",w:"Jules_Verne"},
+ {id:86,t:"Le Tour du monde en quatre-vingts jours",a:"Jules Verne",y:1872,g:"roman",s:"XIXe",m:"Réalisme",gid:103,d:"Phileas Fogg parie de faire le tour du monde en 80 jours.",w:"Jules_Verne"},
+ {id:87,t:"De la Terre à la Lune",a:"Jules Verne",y:1865,g:"roman",s:"XIXe",m:"Réalisme",gid:83,d:"Le Gun Club envoie un projectile habité vers la Lune.",w:"Jules_Verne"},
+ {id:88,t:"Voyage au centre de la Terre",a:"Jules Verne",y:1864,g:"roman",s:"XIXe",m:"Réalisme",gid:3748,d:"Le professeur Lidenbrock descend vers le centre de la Terre.",w:"Jules_Verne"},
+ {id:89,t:"Michel Strogoff",a:"Jules Verne",y:1876,g:"roman",s:"XIXe",m:"Réalisme",gid:2083,d:"Un courrier du tsar traverse la Sibérie envahie.",w:"Jules_Verne"},
+ {id:90,t:"Méditations poétiques",a:"Alphonse de Lamartine",y:1820,g:"poesie",s:"XIXe",m:"Romantisme",gid:13024,d:"Le Lac, L'Isolement. Les premiers grands poèmes romantiques français.",w:"Alphonse_de_Lamartine"},
+ {id:91,t:"Lorenzaccio",a:"Alfred de Musset",y:1834,g:"theatre",s:"XIXe",m:"Romantisme",gid:6547,d:"Lorenzo prépare l'assassinat d'Alexandre de Médicis. Drame romantique.",w:"Alfred_de_Musset"},
+ {id:92,t:"Les Nuits",a:"Alfred de Musset",y:1837,g:"poesie",s:"XIXe",m:"Romantisme",gid:12404,d:"Dialogues entre le poète et sa muse sur la souffrance et l'art.",w:"Alfred_de_Musset"},
+ {id:93,t:"Les Destinées",a:"Alfred de Vigny",y:1864,g:"poesie",s:"XIXe",m:"Romantisme",gid:7387,d:"La Mort du loup, Moïse. Vigny stoïque face au silence des dieux.",w:"Alfred_de_Vigny"},
+ {id:94,t:"Mademoiselle de Maupin",a:"Théophile Gautier",y:1835,g:"roman",s:"XIXe",m:"Romantisme",gid:5124,d:"Une femme se travestit pour connaître la vérité sur les hommes.",w:"Théophile_Gautier"},
+ {id:95,t:"Émaux et Camées",a:"Théophile Gautier",y:1852,g:"poesie",s:"XIXe",m:"Parnasse",gid:5282,d:"Poésie sculptée, travail de joaillier. L'idéal parnassien.",w:"Théophile_Gautier"},
+ {id:96,t:"Poèmes barbares",a:"Leconte de Lisle",y:1862,g:"poesie",s:"XIXe",m:"Parnasse",gid:8905,d:"La poésie comme sculpture froide et parfaite. Le Parnasse au sommet.",w:"Leconte_de_Lisle"},
+ {id:97,t:"Odes funambulesques",a:"Théodore de Banville",y:1857,g:"poesie",s:"XIXe",m:"Parnasse",gid:10290,d:"Virtuosité formelle et humour. Banville jongleur de rimes.",w:"Théodore_de_Banville"},
+ {id:98,t:"La Mare au diable",a:"George Sand",y:1846,g:"roman",s:"XIXe",m:"Romantisme",gid:2489,d:"Paysan veuf rencontre une jeune bergère. Roman champêtre idyllique.",w:"George_Sand"},
+ {id:99,t:"Indiana",a:"George Sand",y:1832,g:"roman",s:"XIXe",m:"Romantisme",gid:2551,d:"Indiana fuit un mari autoritaire. Le premier roman féministe français.",w:"George_Sand"},
+ {id:100,t:"Aurélia",a:"Gérard de Nerval",y:1855,g:"roman",s:"XIXe",m:"Romantisme",gid:26554,d:"Le récit de la folie comme voyage initiatique. Nerval entre rêve et réalité.",w:"Gérard_de_Nerval"},
+ {id:101,t:"Les Chimères",a:"Gérard de Nerval",y:1854,g:"poesie",s:"XIXe",m:"Romantisme",gid:26554,d:"El Desdichado, Artémis. Sonnets hermétiques et sublimes.",w:"Gérard_de_Nerval"},
+ {id:102,t:"Carmen",a:"Prosper Mérimée",y:1845,g:"nouvelles",s:"XIXe",m:"Réalisme",gid:2465,d:"Don José envoûté par Carmen. La nouvelle qui inspira l'opéra de Bizet.",w:"Prosper_Mérimée"},
+ {id:103,t:"Colomba",a:"Prosper Mérimée",y:1840,g:"nouvelles",s:"XIXe",m:"Réalisme",gid:6818,d:"La vendetta corse à travers le personnage de Colomba, farouche et déterminée.",w:"Prosper_Mérimée"},
+ {id:104,t:"Les Diaboliques",a:"Barbey d'Aurevilly",y:1874,g:"nouvelles",s:"XIXe",m:"Romantisme",gid:10422,d:"Six nouvelles de passion et de crime. Le romantisme noir.",w:"Jules_Barbey_d'Aurevilly"},
+ {id:105,t:"Gaspard de la Nuit",a:"Aloysius Bertrand",y:1842,g:"poesie",s:"XIXe",m:"Romantisme",gid:10668,d:"Fantaisies à la manière de Rembrandt. Le premier recueil de poèmes en prose.",w:"Aloysius_Bertrand"},
+ {id:106,t:"Poil de Carotte",a:"Jules Renard",y:1894,g:"roman",s:"XIXe",m:"Naturalisme",gid:1303,d:"Un enfant roux et mal-aimé résiste à la cruauté familiale.",w:"Jules_Renard"},
+ {id:107,t:"Le Journal d'une femme de chambre",a:"Octave Mirbeau",y:1900,g:"roman",s:"XXe",m:"Naturalisme",gid:13987,d:"Célestine raconte ses employeurs bourgeois avec ironie cinglante.",w:"Octave_Mirbeau"},
+ {id:108,t:"Pêcheur d'Islande",a:"Pierre Loti",y:1886,g:"roman",s:"XIXe",m:"Naturalisme",gid:3260,d:"Les pêcheurs bretons partent vers l'Islande. Amour, mer et mort.",w:"Pierre_Loti"},
+ {id:109,t:"Germinie Lacerteux",a:"Edmond de Goncourt",y:1865,g:"roman",s:"XIXe",m:"Naturalisme",gid:5199,d:"La double vie d'une servante. Le roman naturaliste qui précéda Zola.",w:"Edmond_de_Goncourt"},
+ {id:110,t:"L'Enfant",a:"Jules Vallès",y:1879,g:"roman",s:"XIXe",m:"Naturalisme",gid:13168,d:"Jacques Vingtras raconte son enfance misérable et sa révolte.",w:"Jules_Vallès"},
+ {id:111,t:"À rebours",a:"Joris-Karl Huysmans",y:1884,g:"roman",s:"XIXe",m:"Symbolisme",gid:12341,d:"Des Esseintes pousse l'art de vivre à l'extrême. La bible du décadentisme.",w:"Joris-Karl_Huysmans"},
+ {id:112,t:"Contes cruels",a:"Villiers de l'Isle-Adam",y:1883,g:"nouvelles",s:"XIXe",m:"Symbolisme",gid:10668,d:"Nouvelles fantastiques et ironiques. La cruauté du monde moderne.",w:"Auguste_de_Villiers_de_l'Isle-Adam"},
+ {id:113,t:"Les Complaintes",a:"Jules Laforgue",y:1885,g:"poesie",s:"XIXe",m:"Symbolisme",gid:13013,d:"Ironie, spleen et modernité. Laforgue invente le vers libre.",w:"Jules_Laforgue"},
+ {id:114,t:"Les Amours jaunes",a:"Tristan Corbière",y:1873,g:"poesie",s:"XIXe",m:"Symbolisme",gid:15509,d:"Ironie et tendresse bretonne. Poète maudit selon Verlaine.",w:"Tristan_Corbière"},
+ {id:115,t:"Le Désespéré",a:"Léon Bloy",y:1886,g:"roman",s:"XIXe",m:"Symbolisme",gid:26219,d:"Roman autobiographique violent. Bloy contre la médiocrité catholique.",w:"Léon_Bloy"},
+ {id:116,t:"Sixtine",a:"Rémy de Gourmont",y:1890,g:"roman",s:"XIXe",m:"Symbolisme",gid:27916,d:"Roman idéiste. Un écrivain aime une femme inaccessible et sublime.",w:"Rémy_de_Gourmont"},
+ {id:117,t:"Cyrano de Bergerac",a:"Edmond Rostand",y:1897,g:"theatre",s:"XIXe",m:"Romantisme",gid:1254,d:"Cyrano, bretteur génial au grand nez, aime Roxane en silence.",w:"Edmond_Rostand"},
+ {id:118,t:"Du côté de chez Swann",a:"Marcel Proust",y:1913,g:"roman",s:"XXe",m:"Modernisme",gid:7178,d:"La madeleine, Combray, l'amour de Swann. Le début de Proust.",w:"Marcel_Proust"},
+ {id:119,t:"Alcools",a:"Guillaume Apollinaire",y:1913,g:"poesie",s:"XXe",m:"Modernisme",gid:4271,d:"Zone, Le Pont Mirabeau. Apollinaire invente la poésie moderne.",w:"Guillaume_Apollinaire"},
+ {id:120,t:"Calligrammes",a:"Guillaume Apollinaire",y:1918,g:"poesie",s:"XXe",m:"Modernisme",gid:4271,d:"Poèmes-tableaux inspirés par la guerre. La poésie devient image.",w:"Guillaume_Apollinaire"},
+ {id:121,t:"L'Île des pingouins",a:"Anatole France",y:1908,g:"roman",s:"XXe",m:"Modernisme",gid:1930,d:"Satire de l'histoire de France sous forme de chronique de pingouins.",w:"Anatole_France"},
+ {id:122,t:"Thaïs",a:"Anatole France",y:1890,g:"roman",s:"XIXe",m:"Symbolisme",gid:3958,d:"Un moine veut convertir la courtisane Thaïs et perd lui-même la foi.",w:"Anatole_France"},
+ {id:123,t:"Le Fantôme de l'Opéra",a:"Gaston Leroux",y:1910,g:"roman",s:"XXe",m:"Modernisme",gid:175,d:"Erik, le fantôme masqué, hante l'Opéra de Paris.",w:"Gaston_Leroux"},
+ {id:124,t:"Le Mystère de la chambre jaune",a:"Gaston Leroux",y:1907,g:"roman",s:"XXe",m:"Modernisme",gid:1967,d:"Comment a-t-on agressé Mlle Stangerson dans une chambre fermée ?",w:"Gaston_Leroux"},
+ {id:125,t:"Arsène Lupin, gentleman cambrioleur",a:"Maurice Leblanc",y:1907,g:"roman",s:"XXe",m:"Modernisme",gid:6133,d:"Les aventures du gentleman cambrioleur le plus célèbre.",w:"Maurice_Leblanc"},
+ {id:126,t:"Les Croix de bois",a:"Roland Dorgelès",y:1919,g:"roman",s:"XXe",m:"Modernisme",gid:29888,d:"La Grande Guerre vue de l'intérieur des tranchées.",w:"Roland_Dorgelès"},
+ {id:127,t:"Jean-Christophe",a:"Romain Rolland",y:1904,g:"roman",s:"XXe",m:"Modernisme",gid:5765,d:"L'enfance du musicien Jean-Christophe. Le roman-fleuve humaniste.",w:"Romain_Rolland"},
+ {id:128,t:"Le Rire",a:"Henri Bergson",y:1900,g:"philosophie",s:"XXe",m:"Modernisme",gid:9554,d:"Bergson analyse le comique comme mécanique plaquée sur le vivant.",w:"Henri_Bergson"},
+ {id:129,t:"L'Annonce faite à Marie",a:"Paul Claudel",y:1912,g:"theatre",s:"XXe",m:"Modernisme",gid:14871,d:"Mystère en quatre actes. Foi, sacrifice et grâce.",w:"Paul_Claudel"},
+ {id:130,t:"Gargantua",a:"François Rabelais",y:1534,g:"roman",s:"XVIe",m:"Humanisme",gid:1200,d:"Gargantua. L'humanisme rabelaisien : savoir, liberté et joie.",w:"François_Rabelais"},
+ {id:131,t:"Pantagruel",a:"François Rabelais",y:1532,g:"roman",s:"XVIe",m:"Humanisme",gid:1200,d:"Le fils de Gargantua. Satire des pédants, éloge de la connaissance.",w:"François_Rabelais"},
+ {id:132,t:"Essais",a:"Michel de Montaigne",y:1580,g:"philosophie",s:"XVIe",m:"Humanisme",gid:3600,d:"Que sais-je ? Montaigne invente l'essai et l'introspection.",w:"Michel_de_Montaigne"},
+ {id:133,t:"Les Amours",a:"Pierre de Ronsard",y:1552,g:"poesie",s:"XVIe",m:"Humanisme",gid:6755,d:"Mignonne, allons voir si la rose. Les sonnets fondateurs de la Pléiade.",w:"Pierre_de_Ronsard"},
+ {id:134,t:"Les Antiquités de Rome",a:"Joachim du Bellay",y:1558,g:"poesie",s:"XVIe",m:"Humanisme",gid:11554,d:"Heureux qui comme Ulysse. Sonnets sur Rome et la nostalgie.",w:"Joachim_du_Bellay"},
+ {id:135,t:"Don Quichotte",a:"Miguel de Cervantes",y:1605,g:"roman",s:"XVIIe",m:"Humanisme",gid:2000,d:"L'hidalgo qui prend les moulins pour des géants. Trad. Viardot.",w:"Miguel_de_Cervantes"},
+ {id:136,t:"Nouvelles exemplaires",a:"Miguel de Cervantes",y:1613,g:"nouvelles",s:"XVIIe",m:"Humanisme",gid:14420,d:"Douze nouvelles picaresques de Cervantes. Trad. domaine public.",w:"Miguel_de_Cervantes"},
+ {id:137,t:"Hamlet",a:"William Shakespeare",y:1603,g:"theatre",s:"XVIIe",m:"Humanisme",gid:1524,d:"Être ou ne pas être. Hamlet venge son père. Trad. F.-V. Hugo.",w:"William_Shakespeare"},
+ {id:138,t:"Roméo et Juliette",a:"William Shakespeare",y:1597,g:"theatre",s:"XVIe",m:"Humanisme",gid:1777,d:"Deux amants ennemis dans Vérone. Trad. F.-V. Hugo.",w:"William_Shakespeare"},
+ {id:139,t:"Histoires extraordinaires",a:"Edgar Allan Poe",y:1856,g:"nouvelles",s:"XIXe",m:"Romantisme",gid:10947,d:"Le Chat noir, La Chute de la maison Usher. Poe traduit par Baudelaire.",w:"Edgar_Allan_Poe"},
+ {id:140,t:"La Divine Comédie",a:"Dante Alighieri",y:1320,g:"poesie",s:"XIVe",m:"Moyen Âge",gid:1004,d:"L'Enfer, le Purgatoire, le Paradis. Trad. Lamennais, domaine public.",w:"Dante_Alighieri"},
+ {id:141,t:"L'Iliade",a:"Homère",y:-800,g:"poesie",s:"Antiquité",m:"Antiquité",gid:12243,d:"La guerre de Troie. La colère d'Achille. Trad. Leconte de Lisle.",w:"Homer"},
+ {id:142,t:"L'Odyssée",a:"Homère",y:-800,g:"poesie",s:"Antiquité",m:"Antiquité",gid:3160,d:"Le retour d'Ulysse. Dix ans d'aventures et de ruse. Trad. Leconte de Lisle.",w:"Homer"},
+ {id:143,t:"Anna Karénine",a:"Léon Tolstoï",y:1878,g:"roman",s:"XIXe",m:"Réalisme",gid:1399,d:"Anna quitte son mari pour Vronski. Destin et passion. Trad. domaine public.",w:"Leo_Tolstoy"},
+ {id:144,t:"Crime et Châtiment",a:"Fiodor Dostoïevski",y:1866,g:"roman",s:"XIXe",m:"Réalisme",gid:2554,d:"Raskolnikov tue une usurière. Culpabilité et rédemption. Trad. domaine public.",w:"Fyodor_Dostoevsky"},
+ {id:145,t:"Vie de Jésus",a:"Ernest Renan",y:1863,g:"philosophie",s:"XIXe",m:"Positivisme",gid:2726,d:"Jésus comme personnage historique. Le livre qui scandalisa la France.",w:"Ernest_Renan"},
+ {id:146,t:"Qu'est-ce que la propriété ?",a:"Pierre-Joseph Proudhon",y:1840,g:"philosophie",s:"XIXe",m:"Positivisme",gid:360,d:"La propriété, c'est le vol ! Le manifeste anarchiste de Proudhon.",w:"Pierre-Joseph_Proudhon"},
+ {id:147,t:"Philosophie de l'Art",a:"Hippolyte Taine",y:1865,g:"philosophie",s:"XIXe",m:"Positivisme",gid:7036,d:"L'art expliqué par le milieu et le moment. Le déterminisme esthétique.",w:"Hippolyte_Taine"},
+ {id:148,t:"Lumen",a:"Camille Flammarion",y:1872,g:"roman",s:"XIXe",m:"Positivisme",gid:9150,d:"Un mort voyage à la vitesse de la lumière. Roman scientifique visionnaire.",w:"Camille_Flammarion"},
+ {id:149,t:"La Sorcière",a:"Jules Michelet",y:1862,g:"philosophie",s:"XIXe",m:"Romantisme",gid:16590,d:"Réhabilitation de la sorcière médiévale comme figure de résistance.",w:"Jules_Michelet"},
+ {id:150,t:"Sans famille",a:"Hector Malot",y:1878,g:"roman",s:"XIXe",m:"Réalisme",gid:3700,d:"Rémi, enfant abandonné, parcourt la France avec Vitalis et ses animaux.",w:"Hector_Malot"},
+ {id:151,t:"Les Malheurs de Sophie",a:"Comtesse de Ségur",y:1858,g:"conte",s:"XIXe",m:"Réalisme",gid:3763,d:"Les bêtises et punitions de Sophie. La littérature jeunesse classique.",w:"Comtesse_de_Ségur"},
+ {id:152,t:"La Dame aux camélias",a:"Alexandre Dumas fils",y:1848,g:"roman",s:"XIXe",m:"Réalisme",gid:2611,d:"Marguerite Gautier aime Armand Duval. Inspira La Traviata.",w:"Alexandre_Dumas_fils"},
+ {id:153,t:"Le Bossu",a:"Paul Féval",y:1857,g:"roman",s:"XIXe",m:"Romantisme",gid:13842,d:"Lagardère protège la fille de son ami tué et attend pour se venger.",w:"Paul_Féval"},
+ {id:154,t:"La Légende d'Ulenspiegel",a:"Charles de Coster",y:1867,g:"roman",s:"XIXe",m:"Romantisme",gid:14154,d:"Till Ulenspiegel, esprit libre flamand, combat l'oppression espagnole.",w:"Charles_De_Coster"},
+ {id:155,t:"Les Pardaillan",a:"Michel Zévaco",y:1907,g:"roman",s:"XXe",m:"Modernisme",gid:21566,d:"Le chevalier de Pardaillan, bretteur intrépide, dans les guerres de religion.",w:"Michel_Zévaco"},
+ {id:156,t:"Un chapeau de paille d'Italie",a:"Eugène Labiche",y:1851,g:"theatre",s:"XIXe",m:"Réalisme",gid:15167,d:"Course-poursuite pour remplacer un chapeau mangé par un cheval.",w:"Eugène_Labiche"},
+ {id:157,t:"Le Disciple",a:"Paul Bourget",y:1889,g:"roman",s:"XIXe",m:"Réalisme",gid:9656,d:"Un philosophe voit son disciple commettre un crime inspiré de ses théories.",w:"Paul_Bourget"},
+ {id:158,t:"Le Cœur innombrable",a:"Anna de Noailles",y:1901,g:"poesie",s:"XXe",m:"Modernisme",gid:15498,d:"Premier recueil de la comtesse de Noailles. Poésie lyrique et sensuelle.",w:"Anna_de_Noailles"},
+ {id:159,t:"Poésies complètes",a:"Émile Nelligan",y:1903,g:"poesie",s:"XXe",m:"Symbolisme",gid:23870,d:"Le poète maudit québécois. Mélancolie romantique nordique.",w:"Émile_Nelligan"},
+ {id:160,t:"Colline",a:"Jean Giono",y:1929,g:"roman",s:"XXe",m:"Modernisme",gid:22781,d:"Dans la Haute-Provence, la nature reprend ses droits sur les hommes.",w:"Jean_Giono"},
+ {id:161,t:"Derborence",a:"Charles-Ferdinand Ramuz",y:1934,g:"roman",s:"XXe",m:"Modernisme",gid:14876,d:"Un éboulement dans les Alpes vaudoises. La puissance de la montagne.",w:"Charles-Ferdinand_Ramuz"},
+ {id:162,t:"Lais",a:"Marie de France",y:1170,g:"poesie",s:"Moyen Âge",m:"Moyen Âge",gid:11417,d:"Lais bretons du XIIe siècle. Amour courtois, fées et chevaliers.",w:"Marie_de_France"},
+ {id:163,t:"Lancelot ou le Chevalier de la charrette",a:"Chrétien de Troyes",y:1180,g:"roman",s:"Moyen Âge",m:"Moyen Âge",gid:831,d:"Lancelot sauve la reine Guenièvre. L'amour courtois absolu.",w:"Chrétien_de_Troyes"},
+ {id:164,t:"L'Affaire Lerouge",a:"Émile Gaboriau",y:1866,g:"roman",s:"XIXe",m:"Réalisme",gid:3625,d:"Premier roman policier français. Le détective Lecoq.",w:"Émile_Gaboriau"},
+ {id:165,t:"Les Soirées de Saint-Pétersbourg",a:"Joseph de Maistre",y:1821,g:"philosophie",s:"XIXe",m:"Romantisme",gid:7769,d:"Dialogues sur la Providence, le mal et l'ordre politique.",w:"Joseph_de_Maistre"},
+ {id:166,t:"Les Morticoles",a:"Léon Daudet",y:1894,g:"roman",s:"XIXe",m:"Naturalisme",gid:13948,d:"Satire féroce du monde médical. Un pays gouverné par les médecins.",w:"Léon_Daudet"},
+ {id:167,t:"Mémoires",a:"Hector Berlioz",y:1870,g:"roman",s:"XIXe",m:"Romantisme",gid:4288,d:"L'autobiographie du compositeur romantique. Musique, amours, voyages.",w:"Hector_Berlioz"},
+ {id:168,t:"De l'Angélus de l'aube à l'Angélus du soir",a:"Francis Jammes",y:1898,g:"poesie",s:"XIXe",m:"Symbolisme",gid:13047,d:"Poésie rustique et religieuse. Jammes le poète des pâturages.",w:"Francis_Jammes"},
+ {id:169,t:"Les Villes tentaculaires",a:"Émile Verhaeren",y:1895,g:"poesie",s:"XIXe",m:"Symbolisme",gid:7382,d:"La ville industrielle dévorante. Symbolisme et modernité belges.",w:"Émile_Verhaeren"},
+ {id:170,t:"Paroles de philosophes",a:"Auguste Comte",y:1844,g:"philosophie",s:"XIXe",m:"Positivisme",gid:23968,d:"Les fondements du positivisme et de la philosophie des sciences.",w:"Auguste_Comte"},
+ {id:171,t:"Cinq-Mars",a:"Alfred de Vigny",y:1826,g:"roman",s:"XIXe",m:"Romantisme",gid:26619,d:"Le complot de Cinq-Mars contre Richelieu. Premier roman historique français.",w:"Alfred_de_Vigny"},
+ {id:172,t:"Le Crime de Sylvestre Bonnard",a:"Anatole France",y:1881,g:"roman",s:"XIXe",m:"Réalisme",gid:2990,d:"Un vieux savant vole un manuscrit et enlève une jeune fille pour l'aider.",w:"Anatole_France"},
+ {id:173,t:"Mémoires",a:"Saint-Simon",y:1788,g:"roman",s:"XVIIIe",m:"Classicisme",gid:3600,d:"La cour de Louis XIV vue de l'intérieur. Portraits féroces.",w:"Louis_de_Rouvroy_de_Saint-Simon"},
+ {id:174,t:"Le Roi des montagnes",a:"Edmond About",y:1857,g:"roman",s:"XIXe",m:"Réalisme",gid:7028,d:"Un Grec brigand rançonne des touristes avec une logique impeccable.",w:"Edmond_About"},
+ {id:175,t:"Les Palais nomades",a:"Gustave Kahn",y:1887,g:"poesie",s:"XIXe",m:"Symbolisme",gid:12888,d:"Premier recueil en vers libres français. Kahn théoricien du symbolisme.",w:"Gustave_Kahn"},
 ];
 
-let CUR=null,FIL={k:'all',v:'all'},rFS=1.04,rSep=false,frFS=1.1,frSep=false;
-const PC={};
+// Déduplication titre+auteur
+const seen = new Set();
+const BOOKSCLEAN = BOOKS.filter(b=>{const k=b.t+'|'+b.a;if(seen.has(k))return false;seen.add(k);return true;});
 
-function showPg(n){
-  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
-  document.getElementById('pg-'+n).classList.add('on');
-  document.querySelectorAll('.nls a, .nls span').forEach(a=>a.classList.remove('on'));
-  const el=document.getElementById('nl-'+n);
-  if(el)el.classList.add('on');
-  window.scrollTo({top:0,behavior:'smooth'});
-  if(n==='aut')renderAut();
+// ── ÉTAT ──────────────────────────────────────────────────────────────────
+const F={genre:'all',siecle:'all',mouvement:'all'};
+let rFontSize=1.1, sepiaOn=false;
+
+// ── PATTERNS ──────────────────────────────────────────────────────────────
+const PATS=['p1','p2','p3','p4','p5','p6','p7','p8'];
+const pat=b=>PATS[(b.id-1)%8];
+
+// ── FILTRES ───────────────────────────────────────────────────────────────
+function sf(dim,val,btn){
+  F[dim]=val;
+  document.querySelectorAll(`[data-f="${dim}"]`).forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  applyAll();
+  document.getElementById('catalogue').scrollIntoView({behavior:'smooth',block:'start'});
 }
-function filShow(k,v){
-  FIL={k,v};
-  const gmap={roman:'Romans',poesie:'Poésie',theatre:'Théâtre',nouvelles:'Nouvelles',philosophie:'Philosophie',conte:'Contes'};
-  let t=k==='g'?(gmap[v]||v):v,sub='';
-  if(k==='sort'){if(v==='pop'){t='Populaires';sub='Les œuvres les plus consultées'}if(v==='rec'){t='Récents';sub='Classés par date de publication'}}
-  document.getElementById('ctit').textContent=t;
-  document.getElementById('csub').textContent=sub;
-  renderCat();showPg('cat');
-}
-function renderCat(){
-  const sort=document.getElementById('csort').value;
-  let list=[...C];const{k,v}=FIL;
-  if(k==='g')list=list.filter(b=>b.g===v);
-  else if(k==='m')list=list.filter(b=>b.m===v);
-  else if(k==='s')list=list.filter(b=>b.s===v);
-  else if(k==='a')list=list.filter(b=>b.a===v);
-  if(k==='sort'&&v==='pop')list.sort((a,b)=>b.pop-a.pop);
-  else if(k==='sort'&&v==='rec')list.sort((a,b)=>b.y-a.y);
-  else if(sort==='a')list.sort((a,b)=>a.a.localeCompare(b.a,'fr'));
-  else if(sort==='y')list.sort((a,b)=>a.y-b.y);
-  else if(sort==='pop')list.sort((a,b)=>b.pop-a.pop);
+function applyAll(){
+  const q=document.getElementById('q').value.toLowerCase().trim();
+  const sort=document.getElementById('sort').value;
+  let list=BOOKSCLEAN.filter(b=>{
+    if(F.genre!=='all'&&b.g!==F.genre)return false;
+    if(F.siecle!=='all'&&b.s!==F.siecle)return false;
+    if(F.mouvement!=='all'&&b.m!==F.mouvement)return false;
+    if(q&&!b.t.toLowerCase().includes(q)&&!b.a.toLowerCase().includes(q)&&!b.m.toLowerCase().includes(q))return false;
+    return true;
+  });
+  if(sort==='auteur')list.sort((a,b)=>a.a.localeCompare(b.a,'fr'));
+  else if(sort==='annee')list.sort((a,b)=>a.y-b.y);
+  else if(sort==='mouvement')list.sort((a,b)=>a.m.localeCompare(b.m,'fr'));
   else list.sort((a,b)=>a.t.localeCompare(b.t,'fr'));
-  document.getElementById('cgr').innerHTML=list.map(b=>bcard(b)).join('');
-  lazyC();
+  render(list);
 }
-function renderAut(){
-  const au={};
-  C.forEach(b=>{if(!au[b.a])au[b.a]={a:b.a,w:b.w,n:0};au[b.a].n++});
-  const list=Object.values(au).sort((a,b)=>b.n-a.n);
-  document.getElementById('agr').innerHTML=list.map(a=>`
-    <div class="ait" onclick="filShow('a','${a.a.replace(/'/g,"\'")}')">
-      <div class="aiav" id="aa-${a.w.replace(/[^a-zA-Z0-9]/g,'_')}">
-        <div class="aiavf">${a.a.split(' ').pop().charAt(0)}</div>
+document.getElementById('q').addEventListener('keydown',e=>{if(e.key==='Enter')applyAll();});
+
+// ── RENDU GRILLE ──────────────────────────────────────────────────────────
+function render(list){
+  document.getElementById('cnt').textContent=list.length;
+  const g=document.getElementById('grid');
+  if(!list.length){g.innerHTML='<div class="no-res">Aucune œuvre trouvée.</div>';return;}
+  g.innerHTML=list.map(b=>`
+    <article class="bcard" onclick="openBook(${b.id})" tabindex="0" role="button" aria-label="${b.t} de ${b.a}">
+      <div class="bcover">
+        <div class="cbg ${pat(b)}"></div>
+        <span class="csiecle">${b.s}</span>
+        <div class="cinn">
+          <p class="cmouv">${b.m}</p>
+          <p class="ctitle">${b.t}</p>
+          <p class="cauthor">${b.a}</p>
+        </div>
       </div>
-      <div><div class="ain">${a.a}</div><div class="aic">${a.n} œuvre${a.n>1?'s':''}</div></div>
-    </div>`).join('');
-  list.forEach(a=>loadPh(a.w,'aa-'+a.w.replace(/[^a-zA-Z0-9]/g,'_')));
+    </article>`).join('');
 }
-async function getPh(w){
-  if(PC[w]!==undefined)return PC[w];
+
+// ── PHOTO AUTEUR ─────────────────────────────────────────────────────────
+// Wikimedia Commons REST API — on récupère uniquement si domaine public confirmé
+// La Wikimedia REST summary API retourne des images dont la licence est généralement
+// en domaine public pour les portraits d'auteurs décédés avant 1928.
+// On vérifie explicitement la licence via l'API Wikimedia.
+const photoCache={};
+async function getAuthorPhoto(wikiName){
+  if(photoCache[wikiName]!==undefined)return photoCache[wikiName];
   try{
-    const r=await fetch('https://en.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(w),{signal:AbortSignal.timeout(6000)});
-    if(!r.ok){PC[w]=null;return null;}
+    // 1. Récupérer l'image via Wikimedia REST summary
+    const r=await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(wikiName)}`,{signal:AbortSignal.timeout(6000)});
+    if(!r.ok){photoCache[wikiName]=null;return null;}
     const d=await r.json();
-    if(!d.originalimage?.source){PC[w]=null;return null;}
-    const url=d.originalimage.source;
-    const fn=decodeURIComponent(url).split('/').pop();
-    const lr=await fetch('https://en.wikipedia.org/w/api.php?action=query&titles=File:'+encodeURIComponent(fn)+'&prop=imageinfo&iiprop=extmetadata&format=json&origin=*',{signal:AbortSignal.timeout(6000)});
-    if(!lr.ok){PC[w]=null;return null;}
+    if(!d.originalimage?.source){photoCache[wikiName]=null;return null;}
+    const imgUrl=d.originalimage.source;
+    // 2. Vérifier la licence via Wikimedia Action API
+    // On extrait le nom de fichier depuis l'URL
+    const fileMatch=imgUrl.match(/\/([^\/]+\.(jpg|jpeg|png|svg|webp))/i);
+    if(!fileMatch){photoCache[wikiName]=null;return null;}
+    const fileName=decodeURIComponent(fileMatch[1]);
+    const licUrl=`https://en.wikipedia.org/w/api.php?action=query&titles=File:${encodeURIComponent(fileName)}&prop=imageinfo&iiprop=extmetadata&format=json&origin=*`;
+    const lr=await fetch(licUrl,{signal:AbortSignal.timeout(6000)});
+    if(!lr.ok){photoCache[wikiName]=null;return null;}
     const ld=await lr.json();
     const pages=ld?.query?.pages;
-    if(!pages){PC[w]=null;return null;}
-    const meta=Object.values(pages)[0]?.imageinfo?.[0]?.extmetadata;
-    if(!meta){PC[w]=null;return null;}
-    const lic=((meta.LicenseShortName?.value||'')+(meta.License?.value||'')).toLowerCase();
-    if(!lic.match(/pd|public.?domain|cc0/)){PC[w]=null;return null;}
-    PC[w]=url;return url;
-  }catch{PC[w]=null;return null;}
+    if(!pages){photoCache[wikiName]=null;return null;}
+    const page=Object.values(pages)[0];
+    const meta=page?.imageinfo?.[0]?.extmetadata;
+    if(!meta){photoCache[wikiName]=null;return null;}
+    const licShort=(meta.LicenseShortName?.value||'').toLowerCase();
+    const licUrl2=(meta.License?.value||'').toLowerCase();
+    const isPD=licShort.includes('pd')||licShort.includes('public domain')||
+               licUrl2.includes('publicdomain')||licUrl2.includes('pd')||
+               licShort==='cc0'||licUrl2.includes('cc0');
+    if(!isPD){photoCache[wikiName]=null;return null;}
+    photoCache[wikiName]=imgUrl;
+    return imgUrl;
+  }catch{photoCache[wikiName]=null;return null;}
 }
-async function loadPh(w,elId){
-  const p=await getPh(w);
-  if(!p)return;
-  const el=document.getElementById(elId);
-  if(!el)return;
-  el.innerHTML='<img src="'+p+'" alt="" style="width:100%;height:100%;object-fit:cover">';
+
+// ── MODAL ─────────────────────────────────────────────────────────────────
+async function openBook(id){
+  const b=BOOKSCLEAN.find(x=>x.id===id);
+  if(!b)return;
+  document.getElementById('mm').textContent=b.m+' — '+b.s;
+  document.getElementById('mt').textContent=b.t;
+  document.getElementById('mcover-t').textContent=b.t;
+  document.getElementById('mcover-pat').className='cbg '+pat(b);
+  document.getElementById('mmeta').innerHTML=`
+    <span class="mtag">📅 ${b.y>0?b.y:Math.abs(b.y)+' av. J.-C.'}</span>
+    <span class="mtag">${b.g}</span>
+    <span class="mtag">✓ Domaine public</span>`;
+  document.getElementById('mdesc').textContent=b.d;
+  const gut=`https://www.gutenberg.org/ebooks/${b.gid}`;
+  const epub=`https://www.gutenberg.org/ebooks/${b.gid}.epub3.noimages`;
+  const txt=`https://www.gutenberg.org/cache/epub/${b.gid}/pg${b.gid}.txt`;
+  document.getElementById('mactions').innerHTML=`
+    <button class="btn btn-p" onclick="closeModal();openReader(${b.id})">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      Lire en ligne
+    </button>
+    <a class="btn btn-o" href="${epub}" target="_blank" rel="noopener">↓ EPUB</a>
+    <a class="btn btn-o" href="${txt}" target="_blank" rel="noopener">↓ TXT</a>
+    <a class="btn btn-o" href="${gut}" target="_blank" rel="noopener">Gutenberg ↗</a>`;
+  // Zone auteur — photo si disponible et licence PD uniquement
+  const zone=document.getElementById('ma-zone');
+  zone.innerHTML='<p class="ma-noimg" id="ma-loading" style="font-style:italic;color:var(--ink-mute);font-size:.8rem;margin-bottom:.6rem">Recherche photo…</p>';
+  document.getElementById('moverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  const photo=await getAuthorPhoto(b.w);
+  if(photo){
+    zone.innerHTML=`
+      <div class="ma-wrap">
+        <img class="ma-photo" src="${photo}" alt="${b.a}" loading="lazy" onerror="this.parentElement.outerHTML='<p class=ma-noimg>${b.a}</p>'">
+        <div>
+          <p class="ma-name">${b.a}</p>
+          <p class="photo-lic">Photo : Wikimedia Commons — domaine public</p>
+        </div>
+      </div>`;
+  }else{
+    zone.innerHTML=`<p class="ma-noimg">${b.a}</p>`;
+  }
 }
-function bgCls(g){return{roman:'gr',poesie:'gp',theatre:'gt',philosophie:'gph',nouvelles:'gn',conte:'gc'}[g]||'gc'}
-function bcard(b){
-  return '<div class="bc" onclick="openModal('+b.id+')">'
-    +'<div class="bco">'
-    +'<div class="bcp">'+b.t.charAt(0)+'</div>'
-    +'<div class="bov"></div>'
-    +'<img src="" id="cv-'+b.id+'" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.style.display='none'" alt="'+b.t+'">'
-    +'<div class="bca"><button class="bca-p">Lire</button><button class="bca-i"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></button></div>'
-    +'</div>'
-    +'<div class="bm"><span class="bb '+bgCls(b.g)+'">'+b.g+'</span><p class="bt">'+b.t+'</p><p class="ba">'+b.a+'</p></div>'
-    +'</div>';
+function closeModal(){
+  document.getElementById('moverlay').classList.remove('open');
+  document.body.style.overflow='';
 }
-function buildHome(){
-  const SECS=[
-    {ti:'Populaires en ce moment',f:b=>b.pop>=88,so:(a,b)=>b.pop-a.pop},
-    {ti:'Romantisme — <em>Les cœurs ardents</em>',f:b=>b.m==='Romantisme',so:(a,b)=>b.pop-a.pop},
-    {ti:'Naturalisme — <em>La vérité nue</em>',f:b=>b.m==='Naturalisme',so:(a,b)=>b.pop-a.pop},
-    {ti:'Classicisme & XVIIe siècle',f:b=>b.m==='Classicisme',so:(a,b)=>b.pop-a.pop},
-    {ti:'Les Lumières — <em>Raison et liberté</em>',f:b=>b.m==='Lumières',so:(a,b)=>b.pop-a.pop},
-    {ti:'Poésie',f:b=>b.g==='poesie',so:(a,b)=>b.pop-a.pop},
-    {ti:'Théâtre',f:b=>b.g==='theatre',so:(a,b)=>b.pop-a.pop},
-    {ti:'Symbolisme — <em>L\'invisible monde</em>',f:b=>b.m==='Symbolisme',so:(a,b)=>b.pop-a.pop},
-    {ti:'Grandes aventures',f:b=>['Jules Verne','Alexandre Dumas','Maurice Leblanc','Gaston Leroux'].includes(b.a),so:(a,b)=>b.pop-a.pop},
-    {ti:'XXe siècle — <em>Modernités</em>',f:b=>b.s==='XXe',so:(a,b)=>b.pop-a.pop},
-    {ti:'Philosophie & Essais',f:b=>b.g==='philosophie',so:(a,b)=>b.pop-a.pop},
-  ];
-  const cats=[
-    {n:'Romantisme',cl:'cro',ic:'🌹',d:'Hugo, Musset, Dumas…'},
-    {n:'Classicisme',cl:'ccl',ic:'🏛',d:'Molière, Racine, Pascal…'},
-    {n:'Réalisme',cl:'cre',ic:'🔍',d:'Balzac, Flaubert, Stendhal…'},
-    {n:'Naturalisme',cl:'cna',ic:'🌱',d:'Zola, Maupassant, Daudet…'},
-    {n:'Symbolisme',cl:'csy',ic:'✨',d:'Baudelaire, Verlaine, Rimbaud…'},
-    {n:'Lumières',cl:'clu',ic:'☀️',d:'Voltaire, Rousseau, Diderot…'},
-  ];
-  const catH='<section class="sec"><div class="sh"><h2 class="stl">Explorer par <em>mouvement</em></h2></div>'
-    +'<div class="cg">'+cats.map(c=>'<div class="cc '+c.cl+'" onclick="filShow(\'m\',\''+c.n+'\')">'
-    +'<div class="cci">'+c.ic+'</div><p class="ccn">'+C.filter(b=>b.m===c.n).length+' œuvres</p>'
-    +'<p class="cct">'+c.n+'</p><p class="ccd">'+c.d+'</p></div>').join('')+'</div></section>';
-  const rowsH=SECS.map((s,i)=>{
-    const books=C.filter(s.f).sort(s.so).slice(0,12);
-    if(!books.length)return'';
-    const tid='tr-'+i;
-    return'<section class="sec"><div class="sh"><h2 class="stl">'+s.ti+'</h2>'
-      +'<span class="sm" onclick="showSecAll('+i+')">Voir tout <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span></div>'
-      +'<div class="sr"><div class="sa l" onclick="scrollT(\''+tid+'\',-1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div>'
-      +'<div class="st" id="'+tid+'">'+books.map(b=>bcard(b)).join('')+'</div>'
-      +'<div class="sa r" onclick="scrollT(\''+tid+'\',1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div></div></section>';
-  }).join('');
-  const footH='<div style="padding:0 3rem 2.5rem"><div style="background:linear-gradient(135deg,rgba(200,169,110,.07),rgba(200,169,110,.02));border:.5px solid rgba(200,169,110,.14);border-radius:20px;padding:2.25rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.2rem"><div><h3 style="font-family:var(--sf);font-size:1.5rem;font-weight:300;color:var(--blanc);margin-bottom:.35rem">80+ œuvres du domaine public</h3><p style="font-size:.82rem;color:var(--gris)">Art. L123-1 CPI. Aucune inscription requise.</p></div><a href="mentions-legales.html" style="padding:9px 22px;border-radius:var(--rp);border:.5px solid rgba(200,169,110,.28);color:var(--or);font-size:.8rem;transition:all .18s;white-space:nowrap;display:inline-block" onmouseover="this.style.background=\'rgba(200,169,110,.09)\'" onmouseout="this.style.background=\'transparent\'">Mentions légales →</a></div></div>'
-    +'<footer><div class="ft"><div><div class="ftb">CODEX</div><p class="ftd">Bibliothèque numérique du domaine public. Textes chargés depuis le Projet Gutenberg.</p></div>'
-    +'<div><p class="fth">Explorer</p><ul class="ftl"><li><a onclick="filShow(\'g\',\'roman\')">Romans</a></li><li><a onclick="filShow(\'g\',\'poesie\')">Poésie</a></li><li><a onclick="filShow(\'g\',\'theatre\')">Théâtre</a></li><li><a onclick="filShow(\'g\',\'philosophie\')">Philosophie</a></li></ul></div>'
-    +'<div><p class="fth">Auteurs</p><ul class="ftl"><li><a onclick="filShow(\'a\',\'Victor Hugo\')">Hugo</a></li><li><a onclick="filShow(\'a\',\'Émile Zola\')">Zola</a></li><li><a onclick="filShow(\'a\',\'Honoré de Balzac\')">Balzac</a></li><li><a onclick="showPg(\'aut\')">Tous →</a></li></ul></div>'
-    +'<div><p class="fth">Légal</p><ul class="ftl"><li><a href="mentions-legales.html">Mentions légales</a></li><li><a href="https://www.gutenberg.org" target="_blank" rel="noopener">Gutenberg</a></li><li><a href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia</a></li></ul></div></div>'
-    +'<div class="ftbo"><span>© 2025 Codex — Anthropotech · Lab</span><span>Art. L123-1 CPI · Domaine public · <a href="mentions-legales.html">Légal</a></span></div></footer>';
-  document.getElementById('hsecs').innerHTML=catH+rowsH+footH;
-  document.querySelectorAll('.st').forEach(t=>{
-    let dn=false,sx=0,sl=0;
-    t.addEventListener('mousedown',e=>{dn=true;t.classList.add('g');sx=e.pageX-t.offsetLeft;sl=t.scrollLeft});
-    t.addEventListener('mouseleave',()=>{dn=false;t.classList.remove('g')});
-    t.addEventListener('mouseup',()=>{dn=false;t.classList.remove('g')});
-    t.addEventListener('mousemove',e=>{if(!dn)return;e.preventDefault();t.scrollLeft=sl-(e.pageX-t.offsetLeft-sx)*1.5});
-  });
-  lazyC();
-}
-function scrollT(id,d){const t=document.getElementById(id);if(t)t.scrollBy({left:d*580,behavior:'smooth'})}
-function showSecAll(i){
-  const m=[()=>filShow('sort','pop'),()=>filShow('m','Romantisme'),()=>filShow('m','Naturalisme'),()=>filShow('m','Classicisme'),()=>filShow('m','Lumières'),()=>filShow('g','poesie'),()=>filShow('g','theatre'),()=>filShow('m','Symbolisme'),()=>filShow('a','Jules Verne'),()=>filShow('s','XXe'),()=>filShow('g','philosophie')];
-  if(m[i])m[i]();
-}
-function lazyC(){
-  const obs=new IntersectionObserver(async entries=>{
-    for(const e of entries){
-      if(!e.isIntersecting)continue;obs.unobserve(e.target);
-      const id=e.target.id.replace('cv-','');
-      const b=C.find(x=>x.id==id);if(!b)continue;
-      const p=await getPh(b.w);if(p)e.target.src=p;
-    }
-  },{rootMargin:'200px'});
-  document.querySelectorAll('[id^="cv-"]').forEach(el=>obs.observe(el));
-}
-async function loadHero(){
-  const b=C[0];const p=await getPh(b.w);
-  const hi=document.getElementById('heri');const hp=document.getElementById('herp');
-  if(p&&hi){hi.src=p;hp.style.display='none'}else if(hi){hi.style.display='none';hp.style.display='flex'}
-}
-async function openModal(id){
-  const b=C.find(x=>x.id===id);if(!b)return;
-  CUR=b;
-  document.getElementById('ra').classList.remove('open');
-  document.getElementById('rtx').innerHTML='<div class="rld">Chargement depuis Gutenberg…</div>';
-  rFS=1.04;rSep=false;
-  document.getElementById('mmm').textContent=b.m+' — '+b.s;
-  document.getElementById('mtt').textContent=b.t;
-  document.getElementById('mal2').textContent=b.a+' — '+(b.y>0?b.y:Math.abs(b.y)+' av. J.-C.');
-  document.getElementById('mtg').innerHTML='<span>'+b.g+'</span><span>'+b.s+'</span><span>✓ Domaine public</span>';
-  document.getElementById('mds').textContent=b.d;
-  const gut='https://www.gutenberg.org/ebooks/'+b.gid;
-  const epub='https://www.gutenberg.org/ebooks/'+b.gid+'.epub3.noimages';
-  const pdf='https://www.gutenberg.org/ebooks/'+b.gid+'.pdf.noimages';
-  document.getElementById('mac').innerHTML=
-    '<button class="mbtn mbp" onclick="loadReader()"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Lire sur Codex</button>'
-    +'<a class="mbtn mbd2" href="'+epub+'" target="_blank" rel="noopener" download>↓ Télécharger EPUB</a>'
-    +'<a class="mbtn mbd2" href="'+pdf+'" target="_blank" rel="noopener">↓ Télécharger PDF</a>'
-    +'<a class="mbtn mbs" href="'+gut+'" target="_blank" rel="noopener">Gutenberg ↗</a>';
-  const ci=document.getElementById('mci');const cp=document.getElementById('mcp');
-  ci.style.display='block';cp.style.display='none';ci.src='';
-  document.getElementById('mbgi').src='';document.getElementById('mapn').textContent=b.a;
-  document.getElementById('maph').querySelector('img').src='';
-  document.getElementById('mo').classList.add('open');document.body.style.overflow='hidden';
-  const p=await getPh(b.w);
-  if(p){ci.src=p;document.getElementById('mbgi').src=p;document.getElementById('maph').querySelector('img').src=p;document.getElementById('maph').style.display=''}
-  else{ci.style.display='none';cp.style.display='flex';document.getElementById('maph').style.display='none'}
-}
-function closeModal(){document.getElementById('mo').classList.remove('open');document.body.style.overflow=''}
-async function loadReader(){
-  const b=CUR;if(!b)return;
-  const ra=document.getElementById('ra');ra.classList.add('open');
-  ra.scrollIntoView({behavior:'smooth',block:'center'});
-  document.getElementById('rpw').textContent='Chargement…';
+document.getElementById('moverlay').addEventListener('click',e=>{if(e.target===document.getElementById('moverlay'))closeModal();});
+
+// ── READER ────────────────────────────────────────────────────────────────
+async function openReader(id){
+  const b=BOOKSCLEAN.find(x=>x.id===id);
+  if(!b)return;
+  document.getElementById('rtitle').textContent=`${b.t} — ${b.a}`;
+  document.getElementById('rdl').href=`https://www.gutenberg.org/ebooks/${b.gid}.epub3.noimages`;
+  document.getElementById('rgut').href=`https://www.gutenberg.org/ebooks/${b.gid}`;
+  const rt=document.getElementById('rtext');
+  rt.innerHTML='<div class="rloading">Chargement depuis Gutenberg…</div>';
+  document.getElementById('roverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  document.getElementById('rcontent').scrollTop=0;
+  document.getElementById('rprog').style.width='0%';
   try{
-    const url='https://corsproxy.io/?'+encodeURIComponent('https://www.gutenberg.org/cache/epub/'+b.gid+'/pg'+b.gid+'.txt');
+    const url=`https://corsproxy.io/?${encodeURIComponent('https://www.gutenberg.org/cache/epub/'+b.gid+'/pg'+b.gid+'.txt')}`;
     const r=await fetch(url,{signal:AbortSignal.timeout(14000)});
     if(!r.ok)throw new Error();
     let txt=await r.text();
@@ -782,55 +683,32 @@ async function loadReader(){
     const e=txt.match(/\*\*\* ?END OF (THE|THIS) PROJECT GUTENBERG/i);
     if(s)txt=txt.slice(txt.indexOf(s[0])+s[0].length);
     if(e)txt=txt.slice(0,txt.indexOf(e[0]));
-    const lines=txt.split('\n');let st=0;
-    for(let i=0;i<Math.min(lines.length,80);i++){if(lines[i].trim()===''&&i>5){st=i;break}}
-    txt=lines.slice(st).join('\n').trim();
-    const paras=txt.split(/\n\n+/).map(p=>p.replace(/\n/g,' ').trim()).filter(p=>p.length>15).slice(0,150);
-    document.getElementById('rtx').innerHTML=paras.map(p=>'<p>'+p+'</p>').join('');
-    document.getElementById('rtx').style.fontSize=rFS+'rem';
-    document.getElementById('rpw').textContent=paras.length+' §';
-    document.getElementById('rsc').textContent='Source : gutenberg.org · id #'+b.gid+' · domaine public';
-    document.getElementById('frt2').textContent=b.t+' — '+b.a;
-    document.getElementById('frtx').innerHTML='<h2>'+b.t+'</h2>'+paras.map(p=>'<p>'+p+'</p>').join('')+'<p class="frsrc">Source : gutenberg.org · domaine public · #'+b.gid+'</p>';
-    document.getElementById('frepub').href=epub_url(b.gid);
-    document.getElementById('frpdf').href=pdf_url(b.gid);
+    const lines=txt.split('\n');
+    let start=0;
+    for(let i=0;i<Math.min(lines.length,80);i++){if(lines[i].trim()===''&&i>5){start=i;break;}}
+    txt=lines.slice(start).join('\n').trim();
+    const paras=txt.split(/\n\n+/).map(p=>p.replace(/\n/g,' ').trim()).filter(p=>p.length>15).slice(0,120);
+    rt.innerHTML=`<h2>${b.t}</h2>${paras.map(p=>`<p>${p}</p>`).join('')}<p class="rsource">Texte chargé depuis le Projet Gutenberg (gutenberg.org) — domaine public — id #${b.gid}</p>`;
   }catch{
-    document.getElementById('rtx').innerHTML='<p style="color:var(--gris);font-style:italic;margin-bottom:1rem">Chargement impossible.</p><a href="https://www.gutenberg.org/ebooks/'+b.gid+'" target="_blank" rel="noopener" style="color:var(--or);font-size:.85rem">Lire sur Gutenberg →</a>';
-    document.getElementById('rpw').textContent='Erreur';
+    rt.innerHTML=`<h2>${b.t}</h2><p style="color:var(--ink-mute);font-style:italic;margin-bottom:1.5rem">Chargement impossible (réseau ou CORS). Accédez directement au texte sur Gutenberg.</p><p><a href="https://www.gutenberg.org/ebooks/${b.gid}" target="_blank" rel="noopener" style="color:var(--ink);font-family:var(--sans);border-bottom:1px solid var(--borderc);padding-bottom:2px">Lire sur Gutenberg →</a></p>`;
   }
 }
-function epub_url(gid){return'https://www.gutenberg.org/ebooks/'+gid+'.epub3.noimages'}
-function pdf_url(gid){return'https://www.gutenberg.org/ebooks/'+gid+'.pdf.noimages'}
-function rfont(d){rFS=Math.max(.88,Math.min(1.4,rFS+d*.08));document.getElementById('rtx').style.fontSize=rFS+'rem'}
-function togSepia(){rSep=!rSep;document.getElementById('rtx').classList.toggle('sep',rSep);document.getElementById('sepb').classList.toggle('on',rSep)}
-function upMP(){const el=document.getElementById('rtx');const p=Math.min(100,(el.scrollTop/(el.scrollHeight-el.clientHeight))*100)||0;document.getElementById('rbf').style.width=p+'%';document.getElementById('rpw').textContent=Math.round(p)+'%'}
-function openFR(){document.getElementById('fr').classList.add('open');document.getElementById('frtx').style.fontSize=frFS+'rem'}
-function closeFR(){document.getElementById('fr').classList.remove('open')}
-function frFont(d){frFS=Math.max(.88,Math.min(1.5,frFS+d*.08));document.getElementById('frtx').style.fontSize=frFS+'rem'}
-function togFRS(){frSep=!frSep;document.getElementById('frtx').classList.toggle('sep',frSep);document.getElementById('frsb').classList.toggle('on',frSep)}
-function upFRP(){const el=document.getElementById('frcnt');const p=Math.min(100,(el.scrollTop/(el.scrollHeight-el.clientHeight))*100)||0;document.getElementById('frprog').style.width=p+'%'}
-function openSrch(){document.getElementById('srch').classList.add('open');document.body.style.overflow='hidden';setTimeout(()=>document.getElementById('sq').focus(),80)}
-function closeSrch(){document.getElementById('srch').classList.remove('open');document.body.style.overflow='';document.getElementById('nq').value=''}
-function onLS(v){if(v.length>1)openSrch()}
-function doSearch(q){
-  const si=document.getElementById('si'),sr=document.getElementById('sr');
-  if(!q.trim()){si.style.display='block';si.textContent='Commencez à taper pour chercher';sr.innerHTML='';return}
-  const ql=q.toLowerCase();
-  const list=C.filter(b=>b.t.toLowerCase().includes(ql)||b.a.toLowerCase().includes(ql)||b.m.toLowerCase().includes(ql)||b.g.toLowerCase().includes(ql));
-  si.style.display=list.length?'none':'block';
-  if(!list.length){si.textContent='Aucun résultat pour « '+q+' »';sr.innerHTML='';return}
-  sr.innerHTML=list.map(b=>bcard(b)).join('');lazyC();
-}
-document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){closeSrch();closeModal();closeFR()}
-  if(e.key==='/'&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){e.preventDefault();openSrch()}
-});
-window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('sc',window.scrollY>60));
-function togMob(){document.getElementById('mn').classList.toggle('open')}
-function toast(msg){const t=document.getElementById('tst');t.textContent=msg;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2800)}
-buildHome();
-loadHero();
+function closeReader(){document.getElementById('roverlay').classList.remove('open');document.body.style.overflow='';}
+function rfs(d){rFontSize=Math.max(.88,Math.min(1.5,rFontSize+d*.08));document.getElementById('rtext').style.fontSize=rFontSize+'rem';}
+function toggleSepia(){sepiaOn=!sepiaOn;const c=document.getElementById('rcontent');const b=document.getElementById('sepiabtn');c.style.background=sepiaOn?'#f4ead5':'';b.style.background=sepiaOn?'var(--ink)':'';b.style.color=sepiaOn?'#fff':'';}
+function updateProg(){const el=document.getElementById('rcontent');const p=(el.scrollTop/(el.scrollHeight-el.clientHeight))*100;document.getElementById('rprog').style.width=Math.min(100,p)+'%';}
 
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeReader();}});
+
+// ── LOADER ────────────────────────────────────────────────────────────────
+window.addEventListener('load',()=>{
+  const el=document.getElementById('lt');
+  el.innerHTML='Codex'.split('').map((c,i)=>`<span style="animation-delay:${i*90}ms">${c}</span>`).join('');
+  setTimeout(()=>{document.getElementById('loader').classList.add('hidden');setTimeout(()=>document.getElementById('loader').remove(),500);},1000);
+});
+
+// ── INIT ──────────────────────────────────────────────────────────────────
+applyAll();
 </script>
 </body>
 </html>
