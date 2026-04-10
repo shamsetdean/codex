@@ -334,26 +334,74 @@ h1 em{font-style:italic;color:var(--accent)}
   background-repeat:no-repeat;
 }
 .bcover.has-photo .cbg{display:none}
-/* Overlay dégradé sur la photo pour lisibilité du titre */
-.bcover.has-photo::after{
-  content:'';position:absolute;inset:0;
+
+/* Overlay photo — état normal */
+.bcover.has-photo::before{
+  content:'';position:absolute;inset:0;z-index:1;
   background:linear-gradient(
     to bottom,
-    rgba(0,0,0,.08) 0%,
-    rgba(0,0,0,.18) 40%,
-    rgba(0,0,0,.72) 100%
+    rgba(0,0,0,.05) 0%,
+    rgba(0,0,0,.15) 35%,
+    rgba(0,0,0,.70) 100%
   );
-  z-index:0;
+  transition:opacity .35s var(--ease);
 }
+/* Overlay hover — fond foncé qui recouvre la photo */
+.bcover.has-photo::after{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(160deg,rgba(20,15,10,.88),rgba(10,8,5,.95));
+  opacity:0;
+  transition:opacity .35s var(--ease);
+}
+.bcard:hover .bcover.has-photo::before{opacity:0}
+.bcard:hover .bcover.has-photo::after{opacity:1}
+
+/* Texte au repos sur photo */
 .bcover.has-photo .cinn{z-index:2}
 .bcover.has-photo .csiecle,.bcover.has-photo .cgenre{z-index:2}
-.bcover.has-photo .ctitle{color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.7)}
-.bcover.has-photo .cauthor{color:rgba(255,255,255,.85);text-shadow:0 1px 3px rgba(0,0,0,.6)}
-.bcover.has-photo .cmouv{color:rgba(255,255,255,.65)}
+.bcover.has-photo .ctitle{
+  color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.7);
+  transition:font-size .3s var(--ease),transform .3s var(--ease);
+}
+.bcover.has-photo .cauthor{
+  color:rgba(255,255,255,.8);text-shadow:0 1px 3px rgba(0,0,0,.6);
+  transition:opacity .3s var(--ease),transform .3s var(--ease);
+}
+.bcover.has-photo .cmouv{
+  color:rgba(255,255,255,.6);
+  transition:opacity .3s var(--ease);
+}
 .bcover.has-photo .csiecle{background:rgba(0,0,0,.45);color:#fff;border-color:rgba(255,255,255,.2)}
 .bcover.has-photo .cgenre{background:rgba(0,0,0,.45);color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.2)}
+
+/* État hover — titre et auteur mis en avant */
+.bcard:hover .bcover.has-photo .cinn{
+  padding-bottom:1.2rem;
+}
+.bcard:hover .bcover.has-photo .ctitle{
+  font-size:1rem;
+  text-shadow:0 2px 12px rgba(0,0,0,.9);
+}
+.bcard:hover .bcover.has-photo .cauthor{
+  opacity:1;
+  font-size:.78rem;
+  color:#fff;
+  text-shadow:0 1px 6px rgba(0,0,0,.8);
+}
+.bcard:hover .bcover.has-photo .cmouv{
+  opacity:.9;
+  color:rgba(255,255,255,.75);
+  letter-spacing:.14em;
+}
+
 /* Animation d'apparition douce de la photo */
-.bcover{background-size:cover;transition:box-shadow var(--dur) var(--ease),background-image .4s ease}
+.bcover{
+  background-size:cover;
+  transition:box-shadow var(--dur) var(--ease);
+}
+.cinn{
+  transition:padding .3s var(--ease);
+}
 
 .cmouv{font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:3px}
 .ctitle{font-family:var(--serif);font-size:.83rem;font-weight:600;line-height:1.2;color:var(--ink)}
