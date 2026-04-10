@@ -225,7 +225,7 @@ h1 em{font-style:italic;color:var(--accent)}
 .shelf-more:hover{color:var(--ink);background:rgba(0,0,0,.05)}
 
 .shelf-track{
-  display:flex;gap:1.1rem;overflow-x:auto;padding:0.4rem 2rem 1rem;
+  display:flex;gap:1.4rem;overflow-x:auto;padding:0.4rem 2rem 1.25rem;
   scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;
 }
 .shelf-track::-webkit-scrollbar{display:none}
@@ -1430,8 +1430,8 @@ function filterAuteur(nom){
 }
 
 /* ── SHELVES ──────────────────────────────── */
-const POPULAIRES=[1,7,12,19,29,32,42,56,76,77,85,86,117,118,125,140,141];
-const RECENTS=[155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171];
+const POPULAIRES=[1,7,12,19,29,32,42,56,76,85];
+const RECENTS=[155,156,157,158,159,160,161,162,163,164];
 
 function buildShelf(ids,trackId){
   const track=document.getElementById(trackId);
@@ -1439,7 +1439,7 @@ function buildShelf(ids,trackId){
     const b=BOOKSCLEAN.find(x=>x.id===id);
     if(!b)return'';
     return`<article class="bcard" onclick="openBook(${b.id})" tabindex="0" role="button"
-      style="flex-shrink:0;width:130px;scroll-snap-align:start"
+      style="flex-shrink:0;width:200px;scroll-snap-align:start"
       aria-label="${b.t} de ${b.a}">
       <div class="bcover" data-m="${b.m}" data-wiki="${b.w}" data-bid="${b.id}">
         <div class="cbg ${pat(b)}"></div>
