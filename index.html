@@ -327,7 +327,34 @@ h1 em{font-style:italic;color:var(--accent)}
 .bcover[data-m="Humanisme"]{background:linear-gradient(160deg,#fff0f5,#f5dde5)}
 .bcover[data-m="Parnasse"]{background:linear-gradient(160deg,#f8f0ff,#e8d8f4)}
 
-.cinn{position:relative;z-index:1;padding:.85rem}
+/* Photo auteur en fond de couverture */
+.bcover.has-photo{
+  background-size:cover;
+  background-position:center top;
+  background-repeat:no-repeat;
+}
+.bcover.has-photo .cbg{display:none}
+/* Overlay dégradé sur la photo pour lisibilité du titre */
+.bcover.has-photo::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(0,0,0,.08) 0%,
+    rgba(0,0,0,.18) 40%,
+    rgba(0,0,0,.72) 100%
+  );
+  z-index:0;
+}
+.bcover.has-photo .cinn{z-index:2}
+.bcover.has-photo .csiecle,.bcover.has-photo .cgenre{z-index:2}
+.bcover.has-photo .ctitle{color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.7)}
+.bcover.has-photo .cauthor{color:rgba(255,255,255,.85);text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.bcover.has-photo .cmouv{color:rgba(255,255,255,.65)}
+.bcover.has-photo .csiecle{background:rgba(0,0,0,.45);color:#fff;border-color:rgba(255,255,255,.2)}
+.bcover.has-photo .cgenre{background:rgba(0,0,0,.45);color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.2)}
+/* Animation d'apparition douce de la photo */
+.bcover{background-size:cover;transition:box-shadow var(--dur) var(--ease),background-image .4s ease}
+
 .cmouv{font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:3px}
 .ctitle{font-family:var(--serif);font-size:.83rem;font-weight:600;line-height:1.2;color:var(--ink)}
 .cauthor{font-size:.68rem;color:var(--ink-soft);margin-top:3px;font-style:italic}
@@ -497,27 +524,90 @@ h1 em{font-style:italic;color:var(--accent)}
 .rbtn:hover{background:var(--warm);color:var(--ink)}
 .rbtn.rc{background:var(--ink);color:#fff;border-color:var(--ink)}
 .rbtn.rc:hover{opacity:.8}
-#rcontent{flex:1;overflow-y:auto;padding:3.5rem 2rem}
+#rcontent{flex:1;overflow-y:auto;padding:4rem 2rem 6rem}
 #rtext{
-  max-width:650px;margin:0 auto;
-  font-family:var(--serif);font-size:1.08rem;line-height:1.9;color:var(--ink);
+  max-width:660px;margin:0 auto;
+  font-family:var(--serif);font-size:1.1rem;line-height:2;color:var(--ink);
 }
-#rtext h2{
-  font-family:var(--serif);font-size:1.55rem;font-weight:400;margin-bottom:2rem;
-  color:var(--ink-soft);font-style:italic;
-  border-bottom:.5px solid var(--border);padding-bottom:1rem;
+/* Titre de l'œuvre */
+#rtext .r-titre{
+  font-family:var(--serif);font-size:2rem;font-weight:400;
+  line-height:1.2;letter-spacing:-.02em;
+  color:var(--ink);margin-bottom:.35rem;
+  text-align:center;
 }
-#rtext p{margin-bottom:1em;text-align:justify;text-indent:1.5em}
-#rtext p:first-of-type{text-indent:0}
+#rtext .r-auteur{
+  font-family:var(--serif);font-size:1rem;font-style:italic;
+  color:var(--ink-mute);text-align:center;margin-bottom:2.5rem;
+}
+#rtext .r-sep{
+  width:60px;height:1px;background:var(--borderc);
+  margin:0 auto 2.5rem;border:none;
+}
+/* Chapitres */
+#rtext .r-ch{
+  font-family:var(--serif);font-size:.7rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--ink-mute);
+  text-align:center;margin:2.5rem 0 .6rem;
+}
+#rtext .r-chtitre{
+  font-family:var(--serif);font-size:1.3rem;font-weight:500;
+  line-height:1.3;color:var(--ink);
+  text-align:center;margin-bottom:1.75rem;
+  font-style:italic;
+}
+/* Paragraphes */
+#rtext p{
+  margin-bottom:0;text-align:justify;
+  text-indent:2em;hyphens:auto;
+  hanging-punctuation:first;
+}
+#rtext p + p{margin-top:.15em}
+#rtext p.r-noindent{text-indent:0}
+#rtext p.r-center{text-align:center;text-indent:0;font-style:italic;color:var(--ink-soft)}
+/* Italiques du texte brut Gutenberg (_mot_) */
+#rtext em{font-style:italic}
+/* Lettrines sur premier paragraphe après chapitre */
+#rtext p.r-first::first-letter{
+  font-family:var(--serif);font-size:3.2em;font-weight:700;
+  float:left;line-height:.82;margin:.06em .12em -.04em 0;
+  color:var(--accent);
+}
+/* Vers / poésie */
+#rtext .r-verse{
+  margin:1.5rem 0 1.5rem 2rem;
+  font-style:italic;color:var(--ink-soft);
+  text-indent:0 !important;
+  text-align:left;
+  border-left:2px solid var(--borderc);
+  padding-left:1.25rem;
+  line-height:1.85;
+}
+#rtext .r-verse p{text-indent:0;text-align:left;margin:0;line-height:1.85}
+/* Citation / dialogue */
+#rtext blockquote{
+  margin:1.25rem 0 1.25rem 1.5rem;
+  padding:.5rem 1rem;
+  border-left:3px solid var(--borderc);
+  font-style:italic;color:var(--ink-soft);
+}
+/* Source en pied */
 .rsource{
-  font-family:var(--sans);font-size:.72rem;color:var(--ink-mute);
-  text-align:center;margin-top:3rem;padding-top:1.25rem;
-  border-top:.5px solid var(--border);
+  font-family:var(--sans);font-size:.7rem;color:var(--ink-mute);
+  text-align:center;margin-top:4rem;padding-top:1.5rem;
+  border-top:.5px solid var(--border);line-height:1.7;
 }
 .rloading{
-  text-align:center;color:var(--ink-mute);
-  font-style:italic;font-family:var(--serif);padding:5rem 1rem;
+  display:flex;flex-direction:column;align-items:center;
+  gap:1rem;padding:6rem 1rem;
+  color:var(--ink-mute);font-family:var(--serif);font-style:italic;
 }
+.rloading-spinner{
+  width:28px;height:28px;border-radius:50%;
+  border:2px solid var(--border);border-top-color:var(--ink-mute);
+  animation:spin .9s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
 .rprog{
   position:fixed;top:54px;left:0;height:2px;
   background:linear-gradient(90deg,var(--accent),#c0546a);
@@ -1329,7 +1419,7 @@ function buildShelf(ids,trackId){
     return`<article class="bcard" onclick="openBook(${b.id})" tabindex="0" role="button"
       style="flex-shrink:0;width:130px;scroll-snap-align:start"
       aria-label="${b.t} de ${b.a}">
-      <div class="bcover" data-m="${b.m}">
+      <div class="bcover" data-m="${b.m}" data-wiki="${b.w}" data-bid="${b.id}">
         <div class="cbg ${pat(b)}"></div>
         <span class="csiecle">${b.s}</span>
         <div class="cinn">
@@ -1341,6 +1431,7 @@ function buildShelf(ids,trackId){
     </article>`;
   });
   track.innerHTML=cards.join('');
+  applyPhotosToCovers(track);
 }
 
 /* ── FILTRES ──────────────────────────────── */
@@ -1377,7 +1468,7 @@ function render(list){
   g.innerHTML=list.map(b=>`
     <article class="bcard" onclick="openBook(${b.id})" tabindex="0" role="button"
       aria-label="${b.t} de ${b.a}" onkeydown="if(event.key==='Enter')openBook(${b.id})">
-      <div class="bcover" data-m="${b.m}">
+      <div class="bcover" data-m="${b.m}" data-wiki="${b.w}" data-bid="${b.id}">
         <div class="cbg ${pat(b)}"></div>
         <span class="csiecle">${b.s}</span>
         <span class="cgenre">${b.g}</span>
@@ -1388,6 +1479,60 @@ function render(list){
         </div>
       </div>
     </article>`).join('');
+  applyPhotosToCovers(g);
+}
+
+/* ── APPLICATION PHOTOS SUR COUVERTURES ─── */
+/* Charge les photos domaine public et les applique sur les cartes.
+   Utilise IntersectionObserver pour ne charger que les cartes visibles.
+   Chaque auteur n'est appelé qu'une seule fois grâce au cache. */
+function applyPhotosToCovers(container){
+  const covers=container.querySelectorAll('.bcover[data-wiki]');
+  if(!covers.length)return;
+  // Regrouper les covers par auteur pour éviter les appels dupliqués
+  const byAuthor={};
+  covers.forEach(el=>{
+    const w=el.dataset.wiki;
+    if(!byAuthor[w])byAuthor[w]=[];
+    byAuthor[w].push(el);
+  });
+  // Observer: ne charge que quand la carte est visible
+  const obs=new IntersectionObserver((entries,observer)=>{
+    entries.forEach(entry=>{
+      if(!entry.isIntersecting)return;
+      const el=entry.target;
+      const w=el.dataset.wiki;
+      observer.unobserve(el);
+      // Si photo déjà en cache, appliquer immédiatement
+      if(photoCache[w]!==undefined){
+        if(photoCache[w])applyCoverPhoto(el,photoCache[w]);
+        return;
+      }
+      // Sinon charger (une seule fois par auteur)
+      if(!photoFetchInProgress[w]){
+        photoFetchInProgress[w]=true;
+        getAuthorPhoto(w).then(url=>{
+          // Appliquer à tous les covers de cet auteur dans le DOM
+          document.querySelectorAll(`.bcover[data-wiki="${CSS.escape(w)}"]`).forEach(c=>{
+            if(url)applyCoverPhoto(c,url);
+          });
+        });
+      }
+    });
+  },{rootMargin:'200px'});
+  covers.forEach(el=>obs.observe(el));
+}
+const photoFetchInProgress={};
+
+function applyCoverPhoto(el,url){
+  // Précharger l'image avant de l'afficher
+  const img=new Image();
+  img.onload=()=>{
+    el.style.backgroundImage=`url('${url}')`;
+    el.classList.add('has-photo');
+  };
+  img.onerror=()=>{};
+  img.src=url;
 }
 
 /* ── PHOTO AUTEUR ─────────────────────────── */
@@ -1529,61 +1674,125 @@ function isTextFrench(txt){
 async function openReader(id){
   const b=BOOKSCLEAN.find(x=>x.id===id);
   if(!b)return;
-  document.getElementById('rtitle').textContent=`${b.t} — ${b.a}`;
-  document.getElementById('rdl').href=`https://www.gutenberg.org/ebooks/${b.gid}.epub3.noimages`;
-  document.getElementById('rgut').href=`https://www.gutenberg.org/ebooks/${b.gid}`;
+  document.getElementById('rtitle').textContent=b.t+' — '+b.a;
+  document.getElementById('rdl').href='https://www.gutenberg.org/ebooks/'+b.gid+'.epub3.noimages';
+  document.getElementById('rgut').href='https://www.gutenberg.org/ebooks/'+b.gid;
   const rt=document.getElementById('rtext');
-  rt.innerHTML='<div class="rloading">Chargement du texte français depuis Gutenberg…</div>';
+  rt.innerHTML='<div class="rloading"><div class="rloading-spinner"></div>Chargement…</div>';
   document.getElementById('roverlay').classList.add('open');
   document.body.style.overflow='hidden';
   document.getElementById('rcontent').scrollTop=0;
   document.getElementById('rprog').style.width='0%';
   try{
-    /* Texte chargé depuis Projet Gutenberg via corsproxy.io (proxy CORS public).
-       Aucun fichier hébergé sur Codex. Conformité domaine public (art. L123-1 CPI). */
-    const url=`https://corsproxy.io/?${encodeURIComponent('https://www.gutenberg.org/cache/epub/'+b.gid+'/pg'+b.gid+'.txt')}`;
-    const r=await fetch(url,{signal:AbortSignal.timeout(14000)});
+    const url='https://corsproxy.io/?'+encodeURIComponent('https://www.gutenberg.org/cache/epub/'+b.gid+'/pg'+b.gid+'.txt');
+    const r=await fetch(url,{signal:AbortSignal.timeout(16000)});
     if(!r.ok)throw new Error('HTTP '+r.status);
-    let txt=await r.text();
-    // Vérification de la langue — si anglais détecté, avertissement
-    const headerSample=txt.slice(0,2000);
+    let raw=await r.text();
+
+    // 1. Vérification langue
+    const headerSample=raw.slice(0,2000);
     const langMatch=headerSample.match(/Language:\s*([^\r\n]+)/i);
     const declaredLang=(langMatch?langMatch[1].trim():'').toLowerCase();
     if(declaredLang&&!declaredLang.includes('french')&&!declaredLang.includes('français')){
-      rt.innerHTML=`<h2>${b.t}</h2>
-      <div style="background:#fff8f0;border:1px solid #f0d8c0;border-radius:10px;padding:1.25rem 1.5rem;margin-bottom:1.5rem">
-        <p style="font-weight:600;color:#8b4513;margin-bottom:.5rem">⚠️ Texte non disponible en français sur cet identifiant Gutenberg</p>
-        <p style="font-size:.88rem;color:var(--ink-soft);margin-bottom:.75rem">Le fichier chargé est en <strong>${langMatch?langMatch[1].trim():'langue étrangère'}</strong>. Consultez directement Gutenberg pour trouver la version française.</p>
-        <a href="https://www.gutenberg.org/ebooks/${b.gid}" target="_blank" rel="noopener" class="btn btn-o" style="font-size:.82rem">Voir sur Gutenberg ↗</a>
-      </div>`;
+      rt.innerHTML='<div class="r-titre">'+escH(b.t)+'</div>'
+        +'<div style="background:#fff8f0;border:1px solid #f0d8c0;border-radius:10px;padding:1.25rem 1.5rem;margin:1.5rem 0">'
+        +'<p style="font-weight:600;color:#8b4513;margin-bottom:.5rem">⚠️ Version française indisponible</p>'
+        +'<p style="font-size:.88rem;color:var(--ink-soft);margin-bottom:.75rem">Fichier en <strong>'+(langMatch?langMatch[1].trim():'langue étrangère')+'</strong>.</p>'
+        +'<a href="https://www.gutenberg.org/ebooks/'+b.gid+'" target="_blank" rel="noopener" class="btn btn-o">Voir sur Gutenberg ↗</a></div>';
       return;
     }
-    // Extraction du corps du texte
-    const s=txt.match(/\*\*\* ?START OF (THE|THIS) PROJECT GUTENBERG/i);
-    const e=txt.match(/\*\*\* ?END OF (THE|THIS) PROJECT GUTENBERG/i);
-    if(s)txt=txt.slice(txt.indexOf(s[0])+s[0].length);
-    if(e)txt=txt.slice(0,txt.indexOf(e[0]));
-    const lines=txt.split('\n');
-    let start=0;
-    for(let i=0;i<Math.min(lines.length,80);i++){if(lines[i].trim()===''&&i>5){start=i;break;}}
-    txt=lines.slice(start).join('\n').trim();
-    const paras=txt.split(/\n\n+/).map(p=>p.replace(/\n/g,' ').trim()).filter(p=>p.length>15).slice(0,120);
-    // Double vérification heuristique sur le corps du texte
-    if(!isTextFrench(txt)){
-      rt.innerHTML=`<h2>${b.t}</h2>
-      <div style="background:#fff8f0;border:1px solid #f0d8c0;border-radius:10px;padding:1.25rem 1.5rem;margin-bottom:1.5rem">
-        <p style="font-weight:600;color:#8b4513;margin-bottom:.5rem">⚠️ Le texte chargé ne semble pas être en français</p>
-        <p style="font-size:.88rem;color:var(--ink-soft);margin-bottom:.75rem">Recherchez la version française sur Gutenberg directement.</p>
-        <a href="https://www.gutenberg.org/ebooks/${b.gid}" target="_blank" rel="noopener" class="btn btn-o" style="font-size:.82rem">Voir sur Gutenberg ↗</a>
-      </div>`;
+
+    // 2. Extraction corps
+    const sMatch=raw.match(/\*\*\* ?START OF (THE|THIS) PROJECT GUTENBERG[^\n]*/i);
+    const eMatch=raw.match(/\*\*\* ?END OF (THE|THIS) PROJECT GUTENBERG/i);
+    let body=raw;
+    if(sMatch)body=body.slice(body.indexOf(sMatch[0])+sMatch[0].length);
+    if(eMatch)body=body.slice(0,body.indexOf(eMatch[0]));
+
+    if(!isTextFrench(body)){
+      rt.innerHTML='<div class="r-titre">'+escH(b.t)+'</div>'
+        +'<div style="background:#fff8f0;border:1px solid #f0d8c0;border-radius:10px;padding:1.25rem 1.5rem;margin:1.5rem 0">'
+        +'<p style="font-weight:600;color:#8b4513">⚠️ Texte non détecté comme français.</p>'
+        +'<a href="https://www.gutenberg.org/ebooks/'+b.gid+'" target="_blank" rel="noopener" class="btn btn-o">Voir sur Gutenberg ↗</a></div>';
       return;
     }
-    rt.innerHTML=`<h2>${b.t}</h2>${paras.map(p=>`<p>${p}</p>`).join('')}
-    <p class="rsource">Texte : Projet Gutenberg (gutenberg.org) — id #${b.gid} — domaine public (art. L123-1 CPI). Codex n'héberge aucun fichier.</p>`;
+
+    // 3. Nettoyage
+    body=body.replace(/\r\n/g,'\n').replace(/\r/g,'\n');
+    body=body.replace(/^.*(Produced by|Distributed Proofreaders|This ebook|gutenberg\.org|Unicode|charset|encoding).*$/gim,'');
+    body=body.replace(/^[-=*_]{3,}\s*$/gm,'');
+    body=body.replace(/^\s*\d+\s*$/gm,'');
+    body=body.replace(/^\n{3,}/,'');
+
+    // 4. Parseur typographique
+    function escH(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+    function fmt(s){
+      s=escH(s);
+      s=s.replace(/_((?:[^_]|__)+?)_/g,'<em>$1</em>');
+      s=s.replace(/\*([^*]+?)\*/g,'<em>$1</em>');
+      s=s.replace(/\u2018|\u2019/g,'\u2019');
+      s=s.replace(/\u201c/g,'\u00ab\u202f').replace(/\u201d/g,'\u202f\u00bb');
+      s=s.replace(/'/g,'\u2019');
+      return s;
+    }
+
+    const CHAPTER_RE=/^(chapitre|chapter|partie|acte|scène|livre|tome|épilogue|prologue|préface|introduction|avant-propos|chant)\b/i;
+    const ROMAN_RE=/^(I{1,3}|IV|VI{0,3}|IX|X{1,3}|XL|L|XC)\s*[.\-–—]?\s*$/;
+    const CAPS_RE=/^[A-ZÀ-Ÿ\u00C0-\u00FF\s\d.\-–—:«»]{6,80}$/;
+    const isPoesie=b.g==='poesie';
+
+    const blocks=body.split(/\n{2,}/);
+    const html=[];
+    html.push('<div class="r-titre">'+fmt(b.t)+'</div>');
+    html.push('<div class="r-auteur">'+fmt(b.a)+'</div>');
+    html.push('<hr class="r-sep">');
+
+    let afterCh=true;
+    let count=0;
+    const MAX=200;
+
+    for(let blk of blocks){
+      if(count>=MAX)break;
+      const t=blk.trim();
+      if(!t||t.length<2)continue;
+      const lines=t.split('\n');
+      const first=lines[0].trim();
+
+      // Titre de chapitre
+      if(CHAPTER_RE.test(first)||ROMAN_RE.test(first)||(CAPS_RE.test(first)&&first.length<70&&lines.length<=3)){
+        const num=ROMAN_RE.test(first)||/^(chapitre|partie|acte|livre|tome|chant)\s+\S+\.?$/i.test(first);
+        if(num){
+          html.push('<p class="r-ch">'+fmt(first)+'</p>');
+          if(lines.length>1){const sub=lines.slice(1).join(' ').trim();if(sub)html.push('<p class="r-chtitre">'+fmt(sub)+'</p>');}
+        } else {
+          html.push('<p class="r-chtitre">'+fmt(first)+'</p>');
+          if(lines.length>1){const sub=lines.slice(1).join(' ').trim();if(sub)html.push('<p class="r-chtitre" style="font-size:1rem">'+fmt(sub)+'</p>');}
+        }
+        afterCh=true; count++; continue;
+      }
+
+      // Poésie : lignes courtes
+      const allShort=lines.length>=2&&lines.every(l=>l.trim().length>0&&l.trim().length<75);
+      if(isPoesie&&allShort){
+        html.push('<div class="r-verse">'+lines.map(l=>'<p>'+fmt(l.trim())+'</p>').join('')+'</div>');
+        afterCh=false; count++; continue;
+      }
+
+      // Paragraphe
+      const merged=lines.map(l=>l.trim()).join(' ').replace(/\s{2,}/g,' ');
+      if(merged.length<3)continue;
+      if(afterCh){html.push('<p class="r-first r-noindent">'+fmt(merged)+'</p>');afterCh=false;}
+      else if(merged.length<55&&!/[.!?»\u00bb]$/.test(merged)){html.push('<p class="r-center">'+fmt(merged)+'</p>');}
+      else{html.push('<p>'+fmt(merged)+'</p>');}
+      count++;
+    }
+    html.push('<p class="rsource">Texte : Projet Gutenberg (gutenberg.org) — id #'+b.gid+' — domaine public (art. L123-1 CPI). Codex n\'héberge aucun fichier.</p>');
+    rt.innerHTML=html.join('\n');
+
   }catch(err){
-    rt.innerHTML=`<h2>${b.t}</h2>
-    <p style="color:var(--ink-mute);font-style:italic;margin-bottom:1.5rem">Chargement impossible (réseau ou proxy CORS). Accédez directement au texte français sur Gutenberg.</p>
-    <p><a href="https://www.gutenberg.org/ebooks/${b.gid}" target="_blank" rel="noopener" style="color:var(--ink);border-bottom:1px solid var(--borderc);padding-bottom:2px;font-family:var(--sans)">Lire sur Gutenberg →</a></p>`;
+    rt.innerHTML='<div class="r-titre">'+b.t+'</div>'
+      +'<p style="color:var(--ink-mute);font-style:italic;margin:2rem 0 1rem">Chargement impossible (réseau ou CORS).</p>'
+      +'<p><a href="https://www.gutenberg.org/ebooks/'+b.gid+'" target="_blank" rel="noopener" style="color:var(--ink);border-bottom:1px solid var(--borderc);padding-bottom:2px;font-family:var(--sans)">Lire sur Gutenberg →</a></p>';
   }
 }
 function closeReader(){document.getElementById('roverlay').classList.remove('open');document.body.style.overflow='';}
